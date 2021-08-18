@@ -4,5 +4,5 @@ import java.sql.SQLException;
 
 public interface UtilisateurDAO {
 
-	String getMotDePasse(String identifiant) throws SQLException;
+	String getMotDePasse(String identifiant) throws DALException;
 }

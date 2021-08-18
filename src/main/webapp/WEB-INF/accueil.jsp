@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 	<!-- Adresse = servlet de connexion -->
 	<a href="#">S'inscrire - Se connecter</a> 
 	<h1>Liste des enchères</h1>
-<form action="/AccueilServlet" method="POST">
+<form action="/Accueil" method="POST">
 	<label for="filtre">Filtres : </label><br />
 	<input type="search" placeholder="Le nom de l'article contient" /><br />
 	<label for="categorie">Catégorie : </label><br />

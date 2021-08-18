@@ -13,7 +13,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	
 	private String motDePasse = null;
 	@Override
-	public String getMotDePasse(String identifiant) throws SQLException {
+	public String getMotDePasse(String identifiant) throws DALException {
 		
 		// 1ère étape étape qui consiste à récupérer le mot de passe saisi par l'utilisateur en fonction du pseudo ou de l'email
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -28,7 +28,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new SQLException("erreur dans la méthode getMotDePasse");
+			throw new DALException("erreur dans la méthode getMotDePasse");
 			
 		}
 		

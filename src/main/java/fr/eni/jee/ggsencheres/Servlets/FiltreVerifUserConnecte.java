@@ -39,12 +39,23 @@ public class FiltreVerifUserConnecte implements Filter {
 				HttpServletRequest httpRequest = (HttpServletRequest) request;
 				HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-				
+		// 1 - Si jamais l'utilisateur est connecté, on laisse passer 
+		if (httpRequest.getSession().getAttribute("user") != null) {
+			//On laisse passer si l'utilisateur est présent en session
+			chain.doFilter(request, response); 
+			return; // permet de ne pas executer le reste de la fonction	
+		}
 		
-		chain.doFilter(request, response);
-		return; // pour ne pas exécuter le reste de la fonction
-	}
 
+	// 2 - Si jamais on essaye de rediriger sur la page d'erreur, onlaisse passer
+	// IMPORTANT : Ne pas utiliser le filtre sur la page sur laquelle le filtre redirige : sinon BOUCLE INFINIE
+			if (httpRequest.getServletPath().contains("erreurUtilisateurConnecte")) {
+				chain.doFilter(request, response);
+				return; // permet de ne pas executer le reste de la fonction
+			}
+			//3 - Sinon (utilisateur non connecté et on n'est pas sur la redirection), on redirige vers la page d'information
+			httpResponse.sendRedirect("./erreurUtilisateurConnecte.jsp");
+}
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */
