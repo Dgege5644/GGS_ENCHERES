@@ -2,7 +2,12 @@ package fr.eni.jee.ggsencheres.dal;
 
 import java.sql.SQLException;
 
+import fr.eni.jee.ggsencheres.bo.Utilisateur;
+
+
+
 public interface UtilisateurDAO {
 
-	String getMotDePasse(String identifiant) throws SQLException;
+	Utilisateur getInfosUtilsateur(String identifiant) throws DALException;
+	
 }

@@ -1,21 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%> 
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
 </head>
 <body>
 
+	<c:if test="${!empty erreur}">
+	<p>${erreur} </p>
+	</c:if>
+<form action="./Connexion" method="post">
 	<label for="identifiant">Identifiant: </label>
 	<input type="text" name="identifiant" id="identifiant" placeholder="Pseudo ou email"/><br />
 	
 	<label for="mdp">Mot de passe: </label>
-	<input type="text" name="mdp" id="mdp" placeholder="Mot de passe"/><br />
+	<input type="password" name="mdp" id="mdp" placeholder="Mot de passe"/><br />
 	
-	<input type="submit" id="connexion" value="Connexion" />
+	<input type="submit" value="Connexion" id="boutonConnexion"/>
 	
 	<div id="options">
 		
@@ -26,6 +33,8 @@
 		<a href="#">Mot de passe oublié</a>
 	</div>
 	
-	<a href="#" id="boutonCompte">Creer un compte</a>
+	<a href="${pageContext.request.contextPath}/Inscription" id="boutonCompte">Creer un compte</a>
+</form>
+
 </body>
 </html>
