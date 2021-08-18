@@ -8,27 +8,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AccueilServlet
+ * Servlet implementation class DeconnexionServlet
  */
-@WebServlet("/Accueil")
-public class AccueilServlet extends HttpServlet {
+@WebServlet("/Deconnexion")
+public class DeconnexionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
-     * 
+     * @see HttpServlet#HttpServlet()
      */
-    public AccueilServlet() {
+    public DeconnexionServlet() {
         super();
-       
+        // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * Renvoie vers la page d'accueil
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		//TODO detruire la session => simuler la deconnexion
+		
+		 request.getSession().invalidate();
+		
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 	}
+
 	
 
 }
