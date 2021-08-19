@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet Filter implementation class ConnectedFilter
  */
-@WebFilter("/*")
+@WebFilter("")
 public class ConnectedFilter implements Filter {
     /**
      * Default constructor. 

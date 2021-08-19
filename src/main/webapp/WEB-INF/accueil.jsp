@@ -19,6 +19,7 @@
 	</c:if>
 	<c:if test="${!empty succes}">
 		<nav>
+			<a href="${pageContext.request.contextPath}/Vendre">Vendre un article</a>
 			<a href="${pageContext.request.contextPath}/AfficherMonProfil">Mon Profil</a>
 			<a href="${pageContext.request.contextPath}/Deconnexion">Se Déconnecter</a>
 		</nav>

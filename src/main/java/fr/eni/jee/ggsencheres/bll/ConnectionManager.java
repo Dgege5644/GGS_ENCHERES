@@ -1,9 +1,5 @@
 package fr.eni.jee.ggsencheres.bll;
 
-import java.sql.SQLException;
-
-import org.apache.catalina.User;
-
 import fr.eni.jee.ggsencheres.bo.Utilisateur;
 import fr.eni.jee.ggsencheres.dal.DALException;
 import fr.eni.jee.ggsencheres.dal.DAOFactory;
