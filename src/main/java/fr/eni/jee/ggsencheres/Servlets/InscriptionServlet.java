@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.jee.ggsencheres.bll.InscriptionManager;
+
 /**
  * Servlet implementation class InscriptionServlet
  */
@@ -45,9 +47,7 @@ public class InscriptionServlet extends HttpServlet {
 		String motDePasse = request.getParameter("mot-de_passe");
 		String confirmation = request.getParameter("confirmation");
 		
-		// 
-		
-		
+		// j'applique la méthode de validation définie InscriptionManager
+		InscriptionManager im = new InscriptionManager(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 	}
-
 }

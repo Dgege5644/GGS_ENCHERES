@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet Filter implementation class ConnectedFilter
  */
-@WebFilter("/GGS_ENCHERES/*")
+@WebFilter("/*")
 public class ConnectedFilter implements Filter {
 
     /**

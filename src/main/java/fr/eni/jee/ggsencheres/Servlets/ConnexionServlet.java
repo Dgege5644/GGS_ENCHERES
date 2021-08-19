@@ -37,7 +37,7 @@ public class ConnexionServlet extends HttpServlet {
 			 identifiant = request.getParameter("identifiant");
 			 motDePasse = request.getParameter("mdp");
 			 
-			 System.out.println(identifiant + ": " + motDePasse); //Vérification récupération de l'identifiant et du mdp
+			 
 			 
 			 ConnectionManager cm = new ConnectionManager();
 			 

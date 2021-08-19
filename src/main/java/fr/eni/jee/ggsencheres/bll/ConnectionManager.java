@@ -14,7 +14,7 @@ public class ConnectionManager {
 	private Utilisateur userEnCours;
 	
 	public ConnectionManager() {
-        this.utilisateurDAO = DAOFactory.getUtilisateurDAO(); // daoArticle représente la DAL
+        this.utilisateurDAO = DAOFactory.getUtilisateurDAO(); // utilisateurDAO représente la DAL
     }
 	
 	
