@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.jee.ggsencheres.bll.BLLException;
+import fr.eni.jee.ggsencheres.bll.ConnectionManager;
 import fr.eni.jee.ggsencheres.bll.InscriptionManager;
+import fr.eni.jee.ggsencheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class InscriptionServlet
@@ -15,6 +18,7 @@ import fr.eni.jee.ggsencheres.bll.InscriptionManager;
 @WebServlet("/Inscription")
 public class InscriptionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Utilisateur userAcreer;
        
     /**
      * 
@@ -36,6 +40,7 @@ public class InscriptionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Je récupère  les infos saisies dans les champs du formulaire
+		try {
 		String pseudo = request.getParameter("pseudo");
 		String prenom = request.getParameter("prenom");
 		String nom = request.getParameter("nom");
@@ -49,5 +54,17 @@ public class InscriptionServlet extends HttpServlet {
 		
 		// j'applique la méthode de validation définie InscriptionManager
 		InscriptionManager im = new InscriptionManager(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+	
+			 
+			 userAcreer = im.validerInscription(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+			 
+			request.setAttribute("succes",true);
+			request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+			 
+		}catch(BLLException e) {
+			request.setAttribute("erreur",e.getMessages());
+			request.getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
+		
+		}
 	}
 }
