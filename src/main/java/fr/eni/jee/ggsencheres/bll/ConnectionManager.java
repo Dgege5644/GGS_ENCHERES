@@ -24,7 +24,7 @@ public class ConnectionManager {
 		//avec le mot de passe retourné par la méthode getMotDePasse qui 
 		//a pour paramètre "identifiant" 
 		try {
-			userEnCours=this.utilisateurDAO.getInfosUtilsateur(identifiant);
+			userEnCours=this.utilisateurDAO.getInfosUtilisateur(identifiant);
 			System.out.println("utilisateur = "+ userEnCours);
 			if(userEnCours==null || !userEnCours.getMotDePasse().equals(motDePasse)) {
 				
