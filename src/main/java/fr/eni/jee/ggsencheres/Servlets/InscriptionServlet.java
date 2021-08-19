@@ -52,11 +52,12 @@ public class InscriptionServlet extends HttpServlet {
 		String motDePasse = request.getParameter("mot-de_passe");
 		String confirmation = request.getParameter("confirmation");
 		
+		
 		// j'applique la méthode de validation définie InscriptionManager
 		InscriptionManager im = new InscriptionManager(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 	
 			 
-			 userAcreer = im.validerInscription(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+			 userAcreer = im.validerInfosUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 			 
 			request.setAttribute("succes",true);
 			request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);

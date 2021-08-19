@@ -1,6 +1,7 @@
 package fr.eni.jee.ggsencheres.dal;
 
-import java.sql.SQLException;
+
+import java.util.List;
 
 import fr.eni.jee.ggsencheres.bo.Utilisateur;
 
@@ -9,11 +10,17 @@ import fr.eni.jee.ggsencheres.bo.Utilisateur;
 public interface UtilisateurDAO {
 
 
-	Utilisateur getInfosUtilsateur(String identifiant) throws DALException;
+	Utilisateur getInfosUtilisateur(String identifiant) throws DALException;
+	
+	
+	List<Utilisateur> getListeUtilisateurs () throws DALException;
 	
 	void updateInfosUtilisateur(int no_utilisateur) throws DALException;
 	
 	void deleteUtilisateur(int no_utilisateur) throws DALException;
+	
+	Utilisateur addUtilisateur(String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse) throws DALException;
 	
 
 }
