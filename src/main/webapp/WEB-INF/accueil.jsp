@@ -18,8 +18,11 @@
 	<p>${erreur}</p>
 	</c:if>
 	<c:if test="${!empty succes}">
-	<a href="${pageContext.request.contextPath}/Deconnexion">Se Déconnecter</a>
-	<p>${userConnected.prenom} ${userConnected.nom} est connecté(e)</p>
+		<nav>
+			<a href="${pageContext.request.contextPath}/AfficherMonProfil">Mon Profil</a>
+			<a href="${pageContext.request.contextPath}/Deconnexion">Se Déconnecter</a>
+		</nav>
+		<p>${userConnected.prenom} ${userConnected.nom} est connecté(e)</p>
 	</c:if>  
 	<h1>Liste des enchères</h1>
 
@@ -30,7 +33,7 @@
 
 	<label for="filtre">Filtres : </label><br />
 	<input type="search" placeholder="Le nom de l'article contient" /><br />
-	<label for="categorie">Catégorie : </label><br />
+	<label for="categorie">Catégorie : </label><br/>
 	<select name="categorie" id="categorie">
 		<optgroup label ="catégories">
 			<option value ="Toutes">Toutes</option>

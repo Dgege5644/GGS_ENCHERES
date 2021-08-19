@@ -45,4 +45,11 @@ public class ConnectionManager {
 		
 	}	
 	
+	public void updateInfos(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse, int no_utilisateur) {
+		
+		
+	}
+	
+	
+	
 }
