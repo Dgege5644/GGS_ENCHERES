@@ -11,7 +11,9 @@ public interface UtilisateurDAO {
 
 	Utilisateur getInfosUtilsateur(String identifiant) throws DALException;
 	
-	void updateInfosUtilisateur(int noUtilisateur) throws DALException;
+	void updateInfosUtilisateur(int no_utilisateur) throws DALException;
+	
+	void deleteUtilisateur(int no_utilisateur) throws DALException;
 	
 
 }

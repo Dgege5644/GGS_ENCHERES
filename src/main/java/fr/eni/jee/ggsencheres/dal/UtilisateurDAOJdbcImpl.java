@@ -30,7 +30,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	// instruction SQL pour modifier les infos utilisateur
 	final static String UPDATE_INFOS_UTILISATEUR = "UPDATE UTILISATEURS set pseudo = ?, nom = ?, prenom = ?, email = ?, telephone = ?, rue = ?, code_postal = ?, ville = ?, mot_de_passe = ? WHERE no_utilisateur = ?;";
 	
-	
+	//instruction SQL pour effacer un profil utilisateur 
+	final static String DELETE_UTILISATEUR = "DELETE from UTILISATEURS WHERE no_utilisateur = ?;";
 	
 	
 	
@@ -116,7 +117,27 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 		}
 		
 	}
+
+
+
+
+
 	
+	@Override
+	public void deleteUtilisateur(int no_utilisateur) throws DALException {
+		
+		try (Connection cnx = ConnectionProvider.getConnection()){
+			
+			PreparedStatement pStmt = cnx.prepareStatement(DELETE_UTILISATEUR);
+			
+			pStmt.setInt(1, no_utilisateur);
+			
+			pStmt.executeUpdate();
+			
+	} catch (SQLException e) {
+		throw new DALException("Erreur de connexion avec la base de données. Note technique : " + e.getMessage());
+	}
 	
+	}
 
 }

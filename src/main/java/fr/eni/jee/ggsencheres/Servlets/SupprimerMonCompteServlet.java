@@ -22,8 +22,14 @@ public class SupprimerMonCompteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		request.getRequestDispatcher("/WEB-INF/supprimerMonComte.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/supprimerMonCompte.jsp").forward(request, response);
 	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+	}
+
 
 
 }
