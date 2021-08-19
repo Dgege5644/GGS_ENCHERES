@@ -20,6 +20,7 @@ public class ConnectedFilter implements Filter {
     public ConnectedFilter() {
         // TODO Auto-generated constructor stub
     }
+
     /**
      * @see Filter#destroy()
      */
@@ -50,3 +51,4 @@ public class ConnectedFilter implements Filter {
         // TODO Auto-generated method stub
     }
 }
+
