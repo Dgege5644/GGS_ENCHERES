@@ -21,7 +21,7 @@ public class ConnectionManager {
 		//a pour paramètre "identifiant" 
 		try {
 			userEnCours=this.utilisateurDAO.getInfosUtilisateur(identifiant);
-			System.out.println("utilisateur = "+ userEnCours);
+			
 			if(userEnCours==null || !userEnCours.getMotDePasse().equals(motDePasse)) {
 				
 			//prevoir les messsages d'erreurs	

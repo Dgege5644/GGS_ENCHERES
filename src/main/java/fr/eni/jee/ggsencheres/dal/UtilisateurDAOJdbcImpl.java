@@ -1,5 +1,6 @@
 package fr.eni.jee.ggsencheres.dal;
 
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,7 +52,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			String rue, String codePostal, String ville, String motDePasse) throws DALException {
 		Utilisateur nouvelUtilisateur= null;
 		
-			try (Connection cnx = ConnectionProvider.getConnection()){
+		try (Connection cnx = ConnectionProvider.getConnection()){
 			
 			PreparedStatement pStmt = cnx.prepareStatement(INSERT_INTO_UTILISATEURS);
 			
@@ -73,10 +74,15 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			
 			pStmt.executeUpdate();
 			
+			ResultSet clesGenerees = pStmt.getGeneratedKeys();
+			if (clesGenerees.next()){
+				int idGenere = clesGenerees.getInt(1);
+				nouvelUtilisateur.setNo_utilisateur(idGenere);
+			}
 		} catch (SQLException e) {
 			throw new DALException("Erreur de connexion avec la base de données. Note technique : " + e.getMessage());
 		}
-		
+			
 		return nouvelUtilisateur;
 	}
 	
@@ -168,7 +174,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	/**
 	 * Méthoque qui permet d'afficher la liste de l'ensemble des utilisateurs de la BDD
 	 */
-	public List<Utilisateur> getListeUtilisateurs() throws DALException {
+	public List<Utilisateur> selectAllUtilisateurs() throws DALException {
 		
 		List<Utilisateur> listeUtilisateurs = new ArrayList<Utilisateur>();// liste des utilisateurs à renvoyer
 		Utilisateur utilisateur;

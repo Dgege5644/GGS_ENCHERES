@@ -13,7 +13,7 @@ public interface UtilisateurDAO {
 	Utilisateur getInfosUtilisateur(String identifiant) throws DALException;
 	
 	
-	List<Utilisateur> getListeUtilisateurs () throws DALException;
+	List<Utilisateur> selectAllUtilisateurs () throws DALException;
 	
 	void updateInfosUtilisateur(int no_utilisateur) throws DALException;
 	
