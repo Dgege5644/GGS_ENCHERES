@@ -39,7 +39,9 @@ public class ConnectedFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest=(HttpServletRequest)request;
 		HttpServletResponse httpResponse=(HttpServletResponse)response;
-		
+		if(httpRequest.getServletPath().contains("Accueil")|| httpRequest.getServletPath().contains("Connexion")|| httpRequest.getServletPath().contains("Inscription")){
+			chain.doFilter(httpRequest, httpResponse);
+		}
 		if (httpRequest.getSession().getAttribute("userConnected") != null) {
 			//On laisse passer si l'utilisateur est présent en session
 			chain.doFilter(request, response); 
