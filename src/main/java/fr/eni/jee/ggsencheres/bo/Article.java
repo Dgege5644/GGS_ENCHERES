@@ -53,6 +53,19 @@ public class Article {
  		this.fichierPhotoArticle = fichierPhotoArticle;
  	}
 
+	public Article(int noUtilisateur2, String nomArticle2, String description2, int categorie,
+			String fichierPhotoArticle2, int prixInitial2, LocalDateTime debutEnchere2, LocalDateTime finEnchere2) {
+		this.noUtilisateur=noUtilisateur2;
+		this.nomArticle=nomArticle2;
+		this.description=description2;
+		this.noCategorie=categorie;
+		this.fichierPhotoArticle=fichierPhotoArticle2;
+		this.prixInitial=prixInitial2;
+		this.debutEnchere=debutEnchere2;
+		this.finEnchere=finEnchere2;
+	}
+
+
 	public int getNoArticle() {
 		return noArticle;
 	}

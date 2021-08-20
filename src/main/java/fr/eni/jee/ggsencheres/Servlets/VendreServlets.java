@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.jee.ggsencheres.bll.ArticleManager;
+import fr.eni.jee.ggsencheres.bll.BLLException;
 import fr.eni.jee.ggsencheres.bo.Article;
 import fr.eni.jee.ggsencheres.bo.Utilisateur;
 
@@ -29,10 +30,10 @@ public class VendreServlets extends HttpServlet {
        private String rue;
        private String codePostal;
        private String ville;
-       
        private Article articleAVendre;
-       private Utilisateur userConnected;
-       private int noUtilisateur = userConnected.getNo_utilisateur();
+       
+       
+      
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -52,22 +53,32 @@ public class VendreServlets extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		nomArticle = request.getParameter("article");
-		description = request.getParameter("description");
-		categorie = request.getParameter("categorie");
-		fichierPhotoArticle = request.getParameter("fichierPhotoArticle");
-		prixInitial = Integer.parseInt(request.getParameter("miseAPrix"));
-		debutEnchere =LocalDateTime.parse(request.getParameter("dateDebut"));
-		finEnchere =LocalDateTime.parse(request.getParameter("dateFin"));
-		rue = request.getParameter("rue");
-		codePostal = request.getParameter("cp");
-		ville = request.getParameter("ville");
+		Utilisateur currentUser = (Utilisateur)request.getSession().getAttribute("userConnected");
+		int noUtilisateur= currentUser.getNo_utilisateur();
+	try {
+		
+		String nomArticle = request.getParameter("article");
+		String description = request.getParameter("description");
+		int categorie = Integer.parseInt(request.getParameter("categorie"));
+		String fichierPhotoArticle = request.getParameter("fichierPhotoArticle");
+		int prixInitial = Integer.parseInt(request.getParameter("miseAPrix"));
+		LocalDateTime debutEnchere =LocalDateTime.parse(request.getParameter("dateDebut"));
+		LocalDateTime finEnchere =LocalDateTime.parse(request.getParameter("dateFin"));
+		String rue = request.getParameter("rue");
+		String codePostal = request.getParameter("cp");
+		String ville = request.getParameter("ville");
+		
 		
 		ArticleManager am = new ArticleManager();
-		
+	
 		articleAVendre = am.validerArticle(noUtilisateur,nomArticle, description, categorie, fichierPhotoArticle, prixInitial, debutEnchere, finEnchere);
 		
-		
+		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+		}catch(BLLException e) {
+			request.setAttribute("erreur",e.getMessage());
+			request.getRequestDispatcher("/WEB-INF/acceuil.jsp").forward(request, response);
+	
+		}
 		
 	}
 
