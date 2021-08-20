@@ -54,7 +54,7 @@ public class InscriptionServlet extends HttpServlet {
 		
 		
 		
-		InscriptionManager im = new InscriptionManager(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+		InscriptionManager im = new InscriptionManager();
 		// j'applique la méthode de validation définie dans InscriptionManager
 			 
 			 userAcreer = im.validerNouvelUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);

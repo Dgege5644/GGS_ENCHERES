@@ -16,7 +16,7 @@ public class InscriptionManager {
 	private List<Utilisateur> listeUtilisateurs;
 	
 	
-	public InscriptionManager(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasse) {
+	public InscriptionManager() {
         this.utilisateurDAO = DAOFactory.getUtilisateurDAO(); // utilisateurDAO représente la DAL
     }
 	
