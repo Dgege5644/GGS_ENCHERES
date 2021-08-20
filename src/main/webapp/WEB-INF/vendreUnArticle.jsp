@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,10 +23,10 @@
 	<select name="categorie" id="categorie" required="required">
 		<optgroup label ="catégories">
 			<option value ="Toutes">Toutes</option>
-			<option value ="Informatique">Informatique</option>
-			<option value ="Ameublement">Ameublement</option>
-			<option value ="Vetement">Vêtement</option>
-			<option value ="Sport&Loisirs">Sport et Loisirs</option>
+			<option name="categorie" value ="1">Informatique</option>
+			<option name="categorie" value ="2">Ameublement</option>
+			<option name="categorie" value ="3">Vêtement</option>
+			<option name="categorie" value ="4">Sport et Loisirs</option>
 		</optgroup>
 	</select><br />
 	
@@ -51,6 +53,7 @@
 		
 		<label for="ville">Ville: </label>
 		<input type="text" name="ville" id="ville" value="${userConnected.ville}"/>
+		
 	</fieldset><br />
 	
 	<input type="submit" id="enregistrerArticle" value="Enregistrer"/>

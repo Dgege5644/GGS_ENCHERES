@@ -73,11 +73,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			
 			pStmt.executeUpdate();
 			
-			ResultSet clesGenerees = pStmt.getGeneratedKeys();
-			if (clesGenerees.next()){
-				int idGenere = clesGenerees.getInt(1);
-				nouvelUtilisateur.setNo_utilisateur(idGenere);
-			}
 		} catch (SQLException e) {
 			throw new DALException("Erreur de connexion avec la base de données. Note technique : " + e.getMessage());
 		}

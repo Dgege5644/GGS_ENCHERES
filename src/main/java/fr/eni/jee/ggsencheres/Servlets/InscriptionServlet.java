@@ -47,26 +47,28 @@ public class InscriptionServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String telephone = request.getParameter("telephone");
 		String rue = request.getParameter("rue");
-		String codePostal = request.getParameter("code_postal");
+		String codePostal = request.getParameter("cp");
 		String ville = request.getParameter("ville");
-		String motDePasse = request.getParameter("mot-de_passe");
-		String confirmation = request.getParameter("confirmation");
+		String motDePasse = request.getParameter("mdpasse");
+		String confirmation = request.getParameter("repeat");
 		
-		System.out.println("ville" + ville);
+
 		
 
 		InscriptionManager im = new InscriptionManager();
+			//userAcreer = im.addSansVerif(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse)	;
+		
+		
 		// j'applique la méthode de validation définie dans InscriptionManager
-			 
-			 userAcreer = im.validerNouvelUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse );
-			 System.out.println("utilisateur à créer" + userAcreer.getCodePostal());
-			 
+			userAcreer = im.creerNouvelUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, confirmation );
+		
 			request.setAttribute("succes",true);
-			request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
-			 
-		}catch(Exception e) {
-			request.setAttribute("erreur","erreur");
 			request.getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
+			
+			 
+		}catch(BLLException e) {
+			request.setAttribute("erreur",e.getMessage());
+			request.getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
 		
 		}
 	}

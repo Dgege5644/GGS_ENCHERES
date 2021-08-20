@@ -15,6 +15,10 @@
 	<c:if test="${!empty erreur}">
 	<p>${erreur} </p>
 	</c:if>
+	<c:if test="${!empty succes}">
+	<p>Votre profil a bien été créé. Bienvenue ! Vous pouvez vous connecter</p>
+	</c:if>
+	
 <form action="./Connexion" method="post">
 	<label for="identifiant">Identifiant: </label>
 	<input type="text" name="identifiant" id="identifiant" placeholder="Pseudo ou email"/><br />
