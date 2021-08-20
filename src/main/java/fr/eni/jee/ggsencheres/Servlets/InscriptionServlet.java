@@ -52,19 +52,20 @@ public class InscriptionServlet extends HttpServlet {
 		String motDePasse = request.getParameter("mot-de_passe");
 		String confirmation = request.getParameter("confirmation");
 		
+		System.out.println("ville" + ville);
 		
-		
+
 		InscriptionManager im = new InscriptionManager();
 		// j'applique la méthode de validation définie dans InscriptionManager
 			 
-			 userAcreer = im.validerNouvelUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
-			 System.out.println("utilisateur à créer" + userAcreer);
+			 userAcreer = im.validerNouvelUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse );
+			 System.out.println("utilisateur à créer" + userAcreer.getCodePostal());
 			 
 			request.setAttribute("succes",true);
 			request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 			 
-		}catch(BLLException e) {
-			request.setAttribute("erreur",e.getMessages());
+		}catch(Exception e) {
+			request.setAttribute("erreur","erreur");
 			request.getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
 		
 		}

@@ -13,6 +13,7 @@ public class InscriptionManager {
 	private UtilisateurDAO utilisateurDAO;
 	private Utilisateur userAcreer;
 	private boolean validation;
+	private boolean validationNom;
 	private List<Utilisateur> listeUtilisateurs;
 	
 	
@@ -33,9 +34,9 @@ public class InscriptionManager {
 		try {
 			// Si toutes les méthodes appelées retournent true...
 		// appelle la méthode qui valide le pseudo
-			if (this.validerPseudo(pseudo) && 		
+			if (this.validerPseudo(pseudo)&& 		
 		// appelle la méthode qui valide le nom
-			this.validerNom(nom) &&
+			validationNom == true &&
 		
 		// appelle la méthode qui valide le prenom
 			this.validerPrenom(prenom) &&
@@ -99,14 +100,14 @@ public class InscriptionManager {
 	
 	private boolean validerNom(String nom) throws BLLException {
 		try {
-			if (nom!= null && nom.matches("[A-Za-z0-9]+")) {
-				validation = true;
+			if (nom!= null && nom.matches("[A-Za-z]")) {
+				validationNom = true;
 			}
 		} catch (Exception e) {
-				validation = false;
-				throw new BLLException(e.getMessage());
+				validationNom = false;
+				throw new BLLException("erreurNom"+ e.getMessage());
 	
-		} return validation;
+		} return validationNom;
 	}
 	
 	private boolean validerPrenom(String prenom) throws BLLException {
