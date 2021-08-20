@@ -15,11 +15,10 @@ public class ConnectionManager {
 	
 	
 	public Utilisateur validerConnexion(String identifiant, String motDePasse) throws BLLException {
-		
-		// Comparer le couple mot de passe/identifiant récupéré dans la Servlet 
-		//avec le mot de passe retourné par la méthode getMotDePasse qui 
-		//a pour paramètre "identifiant" 
+		 
 		try {
+			
+			//
 			userEnCours=this.utilisateurDAO.getInfosUtilisateur(identifiant);
 			
 			if(userEnCours==null || !userEnCours.getMotDePasse().equals(motDePasse)) {

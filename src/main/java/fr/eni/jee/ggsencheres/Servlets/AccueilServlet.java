@@ -14,16 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 public class AccueilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * 
-     */
     public AccueilServlet() {
-        super();
-       
+        super(); 
     }
 
 	/**
-	 * Renvoie vers la page d'accueil
+	 * La Servlet envoie l'utilisateur vers la page d'accueil
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
