@@ -41,7 +41,7 @@
 	<input type="password" name="mdpasse" id="mdpasse"/>
 	
 	<label for="repeat">Confirmation: </label>
-	<input type="repeat" name="repeat" id="repeat"/><br />
+	<input type="password" name="repeat" id="repeat"/><br />
 	
 	<input type="submit" value="Créer"/>
 	<a href="${pageContext.request.contextPath}/Accueil">Annuler</a>

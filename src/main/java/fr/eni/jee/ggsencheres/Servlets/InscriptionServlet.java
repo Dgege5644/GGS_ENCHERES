@@ -53,11 +53,12 @@ public class InscriptionServlet extends HttpServlet {
 		String confirmation = request.getParameter("confirmation");
 		
 		
-		// j'applique la méthode de validation définie dans InscriptionManager
+		
 		InscriptionManager im = new InscriptionManager(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
-	
+		// j'applique la méthode de validation définie dans InscriptionManager
 			 
 			 userAcreer = im.validerNouvelUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+			 System.out.println("utilisateur à créer" + userAcreer);
 			 
 			request.setAttribute("succes",true);
 			request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
