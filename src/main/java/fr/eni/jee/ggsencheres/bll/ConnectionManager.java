@@ -47,5 +47,7 @@ public class ConnectionManager {
 	}
 	
 	
-	
+	public void deleteUtilisateur(int no_utilisateur) {
+		// On peut supprimer un utilisateur s'il n'a pas de vente en cours ou programmées et s'il ne participe pas à une enchère en utilisant son no_utilisateur.
+	}
 }
