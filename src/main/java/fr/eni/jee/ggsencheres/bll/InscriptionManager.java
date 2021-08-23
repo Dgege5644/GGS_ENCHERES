@@ -23,7 +23,7 @@ public class InscriptionManager {
         this.utilisateurDAO = DAOFactory.getUtilisateurDAO(); // utilisateurDAO représente la DAL
     }
 	
-	
+
 	private void validerInfosUtilisateur (String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, String confirmation) throws BLLException {
 	

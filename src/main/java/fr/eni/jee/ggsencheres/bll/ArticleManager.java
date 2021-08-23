@@ -20,7 +20,7 @@ public class ArticleManager {
 
 
 
-	public void validerArticle(int noUtilisateur, String nomArticle, String description, int categorie,
+	private void validerArticle(int noUtilisateur, String nomArticle, String description, int categorie,
 			String fichierPhotoArticle, int prixInitial, LocalDateTime debutEnchere, LocalDateTime finEnchere)throws BLLException {
 		exceptions= new BLLException();
 		if(nomArticle == null || nomArticle.equalsIgnoreCase("")) {
@@ -29,14 +29,17 @@ public class ArticleManager {
 		if(description == null || description.equalsIgnoreCase("")) {
 			exceptions.addMessage("Erreur dans la description de l'article");
 		}
-//		if(articleAVendre.getNoCategorie()==null) {
-//			throw new BLLException("Erreur dans le numero de categorie de l'article");
-//		}
+		if(categorie==0) {
+			exceptions.addMessage("Erreur dans le numero de categorie de l'article");
+		}
 		if(debutEnchere == null && debutEnchere.compareTo(finEnchere)> 0  && debutEnchere.compareTo(LocalDateTime.now())<0) {
 			exceptions.addMessage("Erreur dans le debut de l'enchere de l'article");
 		}
 		if(finEnchere == null) {
 			exceptions.addMessage("Erreur dans la fin de l'enchere de l'article");
+		}
+		if(!exceptions.isEmpty()) {
+			throw exceptions;
 		}
 		
 	}
@@ -50,7 +53,8 @@ public class ArticleManager {
 			articleDAO.addArticle(articleAVendre);
 			
 		}catch(DALException e) {
-			throw new BLLException(e.getMessage());
+			exceptions.addMessage(e.getMessage());
+			throw exceptions;
 		}
 		
 		return articleAVendre;
