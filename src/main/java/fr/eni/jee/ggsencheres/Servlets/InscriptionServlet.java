@@ -67,7 +67,7 @@ public class InscriptionServlet extends HttpServlet {
 			
 			 
 		}catch(BLLException e) {
-			request.setAttribute("erreur",e.getMessage());
+			request.setAttribute("erreurs",e.getMessages());
 			request.getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
 		
 		}

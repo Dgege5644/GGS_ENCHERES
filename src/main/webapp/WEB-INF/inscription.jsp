@@ -43,6 +43,15 @@
 	<label for="repeat">Confirmation: </label>
 	<input type="password" name="repeat" id="repeat" required="required"/><br />
 	
+	<!-- S'il y a des erreurs à afficher, on parcours les messages -->
+	<c:if test="${!empty erreurs}">
+		<ul style="color: red;">
+			<c:forEach var="erreur" items="${erreurs}">
+				<li>${erreur }</li>
+			</c:forEach>
+		</ul>
+	</c:if>
+	
 	<input type="submit" value="Créer"/>
 	<a href="${pageContext.request.contextPath}/Accueil">Annuler</a>
 	

@@ -11,7 +11,7 @@ import fr.eni.jee.ggsencheres.dal.UtilisateurDAO;
 public class InscriptionManager {
 	
 	private UtilisateurDAO utilisateurDAO;
-		
+	private BLLException exceptions;	
 	
 	
 	
@@ -24,45 +24,35 @@ public class InscriptionManager {
     }
 	
 	
-	public Utilisateur addSansVerif (String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse) throws BLLException {
-		Utilisateur userNonVerifie = null;
-		try {
-			userNonVerifie = this.utilisateurDAO.addUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return userNonVerifie;
-	}
-
 	private void validerInfosUtilisateur (String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, String confirmation) throws BLLException {
-		
-		try {
+	
+			//au début du scénario, on initialise le conteneur des erreurs (il est donc vide à ce moment là)
+			exceptions = new BLLException();
 			// Si un des méthodes appelées retourne false ..
-			if (validerPseudo(pseudo) == false){  
-					
+			if (validerPseudo(pseudo) == false){  	
 				// on lève une BLLException
-				throw new BLLException("il y a une erreur dans la saisie du pseudo");
+				exceptions.addMessage("il y a une erreur dans la saisie du pseudo");
 			}
 								
 			if (validerEmail(email) == false) {
 				// on lève une BLLException
-				throw new BLLException("il y a une erreur dans la saisie de l'email");
+				exceptions.addMessage("il y a une erreur dans la saisie de l'email");
 			}
 				
 			if (validerMotDePasse(motDePasse, confirmation) == false) {
 				// on lève une BLLException
-				throw new BLLException("il y a une erreur dans la saisie du mot de passe");
-			}
-				
-		} catch (BLLException e) {
-				throw new BLLException(e.getMessage());
+				exceptions.addMessage("il y a une erreur dans la saisie du mot de passe");
 			}
 			
+			// si la liste d'exceptions n'est pas vide (= s'il y a eu des erreurs) on affiche 
+			//la liste des execptions
+			if (!exceptions.isEmpty()) {
+				//on remonte les erreurs à la servlet. Le scénario en cours s'arrete !
+				throw exceptions;
+			}			
+		
 	}
-	
 	
 	
 	/**
@@ -84,9 +74,13 @@ public class InscriptionManager {
 			
 			
 		} catch (DALException e) {
-			throw new BLLException(e.getMessage());
+			//en cas d'erreur sur la maniulation des données persistantes, 
+			//le manager inclue ce message dans le conteneur des erreurs
+			//puis propage le tout à la servlet
+			exceptions.addMessage(e.getMessage());
+			throw exceptions;
 		}
-		// Quoi qu'il en soit on retourne l'userAcreer (qui est soit null soit créé avec les infos entrées en paramètres)
+		// si tout s'est bien passé on retourne l'userAcreer
 		return userAcreer;
 	}
 
@@ -111,7 +105,7 @@ public class InscriptionManager {
 				
 				//TODO vérifier que c'est en alphanumérique
 				if (pseudo == null || u != null||  !pseudo.matches("^[a-zA-Z0-9]+$")){
-					throw new BLLException("le pseudo n'est pas valide");
+					exceptions.addMessage("il y a une erreur dans la saisie du pseudo");
 			}
 				validationPseudo = true;
 		} catch (Exception e){
@@ -128,7 +122,7 @@ public class InscriptionManager {
 		try {
 			Utilisateur u = utilisateurDAO.getInfosUtilisateur(email);
 			if (email== null || u!=null)/* || !email.matches("\\b[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b"))*/ {
-				throw new BLLException("le nom n'est pas valide");
+				exceptions.addMessage("il y a une erreur dans la saisie de l'email");
 				
 			} validationEmail = true;
 		} catch (Exception e) {
@@ -146,7 +140,7 @@ public class InscriptionManager {
 		try {
 					
 			if (motDePasse== null || !motDePasse.equals(confirmation)) {
-					throw new BLLException("le mot de passe n'est pas valide");
+				exceptions.addMessage("il y a une erreur dans la saisie du mot de passe");
 					
 			} validationMotDePasse = true;
 		} catch (Exception e) {
