@@ -12,11 +12,7 @@ public class UtilisateurManager {
 	
 	private UtilisateurDAO utilisateurDAO;
 	private BLLException exceptions;	
-	
-	
-	
-	 
-	private List<Utilisateur> listeUtilisateurs;
+
 	
 	
 	public UtilisateurManager() {
@@ -24,23 +20,23 @@ public class UtilisateurManager {
     }
 	
 
-	private void validerInfosUtilisateur (String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse, String confirmation) throws BLLException {
+	private void validerInfosUtilisateur (int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse, String newMotDePasse, String confirmation) throws BLLException {
 	
 			//on initialise le conteneur des erreurs (il est donc vide à ce moment là)
 			exceptions = new BLLException();
 			// Si la méthode appelée retourne false ...
-			if (validerPseudo(pseudo) == false){  	
+			if (validerPseudo(noUtilisateur, pseudo) == false){  	
 				// on lève une BLLException
 				exceptions.addMessage("il y a une erreur dans la saisie du pseudo");
 			}
 			//Si la méthode appelée retourne false ...	
-			if (validerEmail(email) == false) {
+			if (validerEmail(noUtilisateur, email) == false) {
 				// on lève une BLLException
 				exceptions.addMessage("il y a une erreur dans la saisie de l'email");
 			}
 			//Si la méthode appelée retourne false ...		
-			if (validerMotDePasse(motDePasse, confirmation) == false) {
+			if (validerMotDePasse(motDePasse, newMotDePasse, confirmation) == false) {
 				// on lève une BLLException
 				exceptions.addMessage("il y a une erreur dans la saisie du mot de passe");
 			}
@@ -66,9 +62,9 @@ public class UtilisateurManager {
 		Utilisateur userAcreer = null;
 		try {
 			// on appelle la méthode validerInfosUtilisateur
-				this.validerInfosUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, confirmation);
+			this.validerInfosUtilisateur(0, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, null, confirmation);
 			
-			// Sinon on ajoute le userAcreer en BDD avec les paramètres récupérés du formulaire de saisie
+			// si la méthode valide, on ajoute le userAcreer en BDD avec les paramètres récupérés du formulaire de saisie
 			userAcreer=this.utilisateurDAO.addUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 			
 			
@@ -83,8 +79,22 @@ public class UtilisateurManager {
 		return userAcreer;
 	}
 
-	public Utilisateur modifierUtilisateur() {
-	 return null;
+	public void modifierUtilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse, String newMotDePasse, String confirmation) throws BLLException {
+	 
+	 	try {
+	 		// on appelle la méthode validerInfosUtilisateur
+	 		this.validerInfosUtilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, newMotDePasse, confirmation);
+	 		
+	 		// si la méthode valide, on modifie dans la BDD, l'utilisateur dont le noUtilisateur est remonté en 
+	 		//paramètre, avec les paramètres récupérés du formulaire de saisie
+	 		this.utilisateurDAO.updateInfosUtilisateur(noUtilisateur);
+	 		
+		} catch (DALException e) {
+			exceptions.addMessage(e.getMessage());
+	 		throw exceptions;
+	 	}
+	 
 	}
 	
 	
@@ -94,19 +104,28 @@ public class UtilisateurManager {
 	 * @return
 	 * @throws BLLException
 	 */
-	public boolean validerPseudo(String pseudo) throws BLLException {
+	public boolean validerPseudo(int noUtilisateur, String pseudo) throws BLLException {
 		boolean validationPseudo=false;
 		try {
-			
-			//Pour valider le 1er point (n'existe pas déjà en base), il faut parcourir 
-			//les pseudos de toute la base de données ==> boucle forEach
-			//for (Utilisateur u : this.listeUtilisateurs)
+			//On cherche si un utilisateur de la BDD esxiste avec ce pseudo
 				Utilisateur u = utilisateurDAO.getInfosUtilisateur(pseudo);
-				//le pseudo ne peut etre validé si :
+				// on crée une variable de type boolean pour savoir si la modf est possible ou non
+				boolean modifPossible = true;
+				// conditions pour que la modif soit impossible en UPDATE:
+				// un utilisateur existe avec ce pseudo ET son noUtilisateur n'est pas celui récupéré en paramètre
+				if (!(noUtilisateur!=0 && u !=null && noUtilisateur == u.getNo_utilisateur())) {
+					modifPossible = false;
+				}
+				// conditions pour que la modif soit impossible en INSERT:
+				// un utilisateur existe avec cet email ET l'utilisateur n'existe pas encore (cad noUtilisateur ==0)
+				if (noUtilisateur == 0 && u!= null) {
+					modifPossible= false;
+				}
+				//le pseudo ne peut pas etre validé si :
 				//1- il est nul 
-				//2- ou n'est pas déjà présent dans la base de données parmi l'ensemble des utilisateurs
-				//3- ou n'est pa alphanumérique
-				if (pseudo == null || u != null||  !pseudo.matches("^[a-zA-Z0-9]+$")){
+				//2- ou la modif n'est pas possible
+				//3- ou n'est pas alphanumérique
+				if (pseudo == null || !modifPossible||  !pseudo.matches("^[a-zA-Z0-9]+$")){
 					exceptions.addMessage("il y a une erreur dans la saisie du pseudo");
 			}
 				validationPseudo = true;
@@ -116,13 +135,27 @@ public class UtilisateurManager {
 			return validationPseudo;
 	}
 	
-	public boolean validerEmail(String email)throws BLLException {
-		// c'est OK si non nul, et non déjà présente en base de données 
+	public boolean validerEmail(int noUtilisateur, String email)throws BLLException {
+		
 		boolean validationEmail = false;
 		
 		try {
+			//On cherche si un utilisateur de la BDD esxiste avec cet email
 			Utilisateur u = utilisateurDAO.getInfosUtilisateur(email);
-			if (email== null || u!=null) {
+			// on crée une variable de type boolean pour savoir si la modf est possible ou non
+			boolean modifPossible = true;
+			// conditions pour que la modif soit impossible en UPDATE:
+			// un utilisateur existe avec cet email ET son noUtilisateur n'est pas celui récupéré en paramètre
+			if (!(noUtilisateur!=0 && u !=null && noUtilisateur == u.getNo_utilisateur())) {
+				modifPossible = false;
+			}
+			// conditions pour que la modif soit impossible en INSERT:
+			// un utilisateur existe avec cet email ET l'utilisateur n'existe pas encore (cad noUtilisateur ==0)
+			if (noUtilisateur == 0 && u!= null) {
+				modifPossible= false;
+			}
+			
+			if (email== null || !modifPossible) {
 				exceptions.addMessage("il y a une erreur dans la saisie de l'email");
 				
 			} validationEmail = true;
@@ -134,12 +167,21 @@ public class UtilisateurManager {
 		} return validationEmail;
 	}
 	
-	public boolean validerMotDePasse(String motDePasse, String confirmation)throws BLLException {
-		// c'est OK si motDePasse est bien le même que confirmation
-		
+	public boolean validerMotDePasse(String motDePasse, String newMotDePasse, String confirmation)throws BLLException {
+
 		boolean validationMotDePasse;
 		try {
-					
+			
+			// on crée une variable de type boolean pour savoir si la modf est possible ou non
+			boolean modifPossible = true;
+			// conditions pour que la modif soit impossible en UPDATE:
+			// newMotDePasse différent de confirmation
+			if (!newMotDePasse.equals(confirmation)) {
+				exceptions.addMessage("il y a une erreur dans la saisie du mot de passe");
+			}
+			
+			// conditions pour que la modif soit impossible en INSERT:
+			// motDePasse est nul ou motDePasse non égal à confirmation
 			if (motDePasse== null || !motDePasse.equals(confirmation)) {
 				exceptions.addMessage("il y a une erreur dans la saisie du mot de passe");
 					

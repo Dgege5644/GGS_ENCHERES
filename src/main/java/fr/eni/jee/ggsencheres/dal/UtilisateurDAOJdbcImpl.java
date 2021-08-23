@@ -162,7 +162,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			
 		} catch (SQLException e) {
 			throw new DALException("Erreur de connexion avec la base de données. Note technique : " + e.getMessage());
-		}	
+		} 
 	}
 
 
