@@ -23,18 +23,6 @@ public class InscriptionManager {
         this.utilisateurDAO = DAOFactory.getUtilisateurDAO(); // utilisateurDAO représente la DAL
     }
 	
-	
-	public Utilisateur addSansVerif (String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse) throws BLLException {
-		Utilisateur userNonVerifie = null;
-		try {
-			userNonVerifie = this.utilisateurDAO.addUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return userNonVerifie;
-	}
 
 	private void validerInfosUtilisateur (String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, String confirmation) throws BLLException {
