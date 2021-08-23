@@ -48,17 +48,18 @@ public class ModifierMonProfilServlet extends HttpServlet {
 			String ville = request.getParameter("ville");
 			String motDePasse = request.getParameter("mdpasse");
 			String newMotDePasse = request.getParameter("newmdpasse");
-			String confirmation = request.getParameter("confirmation2");
+			String confirmation = request.getParameter("confirmationnewmdp");
 			
 			//Création d'une variable de type Utilisateur manager pour pouvoir appeler les méthodes et 
 			// transmètre les infos récupérées de l'IHM en paramètres
 			UtilisateurManager um = new UtilisateurManager();
 			
 			// j'affecte à ma variable userAmodifier ce que je récupère avec la méthode modifierUtilisateur du manager
-			um.modifierUtilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, newMotDePasse, confirmation);
+			um.modifierUtilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, newMotDePasse, confirmation);
 		
-			request.getRequestDispatcher("/WEB-INF/afficherMonProfil.jsp").forward(request, response);
-			request.setAttribute("succes", "Voici les informations mises à jour dans votre profil");
+			request.setAttribute("succesModifProfil", true);
+			request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+			
 			
 		}catch(BLLException e) {
 			request.setAttribute("erreurs",e.getMessages());

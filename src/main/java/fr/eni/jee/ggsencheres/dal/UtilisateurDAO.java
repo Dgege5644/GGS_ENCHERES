@@ -15,12 +15,16 @@ public interface UtilisateurDAO {
 	
 	List<Utilisateur> selectAllUtilisateurs () throws DALException;
 	
-	void updateInfosUtilisateur(int no_utilisateur) throws DALException;
+	void updateInfosUtilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse) throws DALException;
 	
 	void deleteUtilisateur(int no_utilisateur) throws DALException;
 	
 	Utilisateur addUtilisateur(String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse) throws DALException;
+
+
+	
 	
 
 }
