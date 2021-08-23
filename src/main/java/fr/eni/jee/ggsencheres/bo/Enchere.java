@@ -1,64 +1,64 @@
 package fr.eni.jee.ggsencheres.bo;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Enchere {
-
-	int noUtilisateur;
-	int noArticle;
-	LocalDateTime dateEnchere;
+	
+	// Se référer aux constituants de la table de jointure(Les 2 clés primaires) pour créer la classe
+	
+	Utilisateur utilisateur;
+	Article article;
+	LocalDate dateEnchere;
+	LocalTime heureEnchere;
 	int montantEnchere;
 	
-	
-	public Enchere(int noUtilisateur, int noArticle, LocalDateTime dateEnchere, int montantEnchere) {
+	public Enchere(Utilisateur utilisateur, Article article, LocalDate dateEnchere, LocalTime heureEnchere,
+			int montantEnchere) {
 		super();
-		this.noUtilisateur = noUtilisateur;
-		this.noArticle = noArticle;
+		this.utilisateur = utilisateur;
+		this.article = article;
 		this.dateEnchere = dateEnchere;
+		this.heureEnchere = heureEnchere;
 		this.montantEnchere = montantEnchere;
+		
 	}
 
-
-	public int getNoUtilisateur() {
-		return noUtilisateur;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-
-	public int getNoArticle() {
-		return noArticle;
+	public Article getArticle() {
+		return article;
 	}
 
-
-	public LocalDateTime getDateEnchere() {
+	public LocalDate getDateEnchere() {
 		return dateEnchere;
 	}
 
+	public LocalTime getHeureEnchere() {
+		return heureEnchere;
+	}
 
 	public int getMontantEnchere() {
 		return montantEnchere;
 	}
 
-
-	public void setNoUtilisateur(int noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
-
-	public void setNoArticle(int noArticle) {
-		this.noArticle = noArticle;
-	}
-
-
-	public void setDateEnchere(LocalDateTime dateEnchere) {
+	public void setDateEnchere(LocalDate dateEnchere) {
 		this.dateEnchere = dateEnchere;
 	}
 
+	public void setHeureEnchere(LocalTime heureEnchere) {
+		this.heureEnchere = heureEnchere;
+	}
 
 	public void setMontantEnchere(int montantEnchere) {
 		this.montantEnchere = montantEnchere;
 	}
-	
-	
-	
+
 	
 }
