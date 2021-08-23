@@ -54,16 +54,16 @@
 		<c:forEach items ="${listeEncheres}" var ="enchere"> <!-- pour chaque enchère présente dans la liste des enchères   -->
 			<ul>
 				<li>
-					${enchere.article.nomArticle} <!-- Mettre le nom de l'article sur une ligne   -->
+					${enchere.article.nomArticle} <!-- Mettre le nom de l'article sur une ligne, puis transformer en un lien qui conduira vers le détail de l'enchère lorsque l'utilisateur acheteur sera connecté--> 
 				</li>
 				<li>
-					${enchere.article.priInitial} <!-- TODO : Mettre la plus haute enchère en cours sinon le prix initial sur une autre ligne -->
+					${enchere.article.montantEnchere} <!-- TODO : Mettre la plus haute enchère en cours sinon le prix initial sur une autre ligne -->
 				</li>
 				<li>
 					${enchere.article.finEnchere} <!-- Mettre la date et l'heure de fin d'enchère sur une autre ligne  -->
 				</li>
 				<li>
-					${enchere.utilisateur.nom} <!-- et mettre sur une ligne le nom du propriétaire   -->
+					${enchere.utilisateur.nom} <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
 				</li>
 			</ul>
 		</c:forEach>
@@ -71,7 +71,7 @@
 	
 	<c:if test="${empty listeEncheres}"> <!-- Si la liste créée des (articles mis en vente) est vide, ...   -->
 	
-		<p>Aucune enchère en cours, Revenez ultérieurement</p> <!-- Afficher ce message   -->
+		<p>Aucune enchère en cours, Revenez ultérieurement!</p> <!-- Afficher ce message   -->
 		
 	</c:if>
 
