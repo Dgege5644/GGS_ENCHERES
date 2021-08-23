@@ -48,7 +48,7 @@ public class ModifierMonProfilServlet extends HttpServlet {
 			String ville = request.getParameter("ville");
 			String motDePasse = request.getParameter("mdpasse");
 			String newMotDePasse = request.getParameter("newmdpasse");
-			String confirmation = request.getParameter("newmdpasse");
+			String confirmation = request.getParameter("confirmation2");
 			
 			//Création d'une variable de type Utilisateur manager pour pouvoir appeler les méthodes et 
 			// transmètre les infos récupérées de l'IHM en paramètres

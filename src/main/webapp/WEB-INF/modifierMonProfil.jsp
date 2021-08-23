@@ -45,7 +45,7 @@
 		<input type="password" name="newmdpasse" id="newmdpasse"/>
 		
 		<label for="repeat">Confirmation: </label>
-		<input type="password" name="repeat" id="repeat"/><br />
+		<input type="password" name="confirmation2" id="confirmation2"/><br />
 		
 		<label for="credit">Crédit: </label>
 		<input type="number" name="credit" id="credit" readonly="readonly" value="${userConnected.credit}"/>
