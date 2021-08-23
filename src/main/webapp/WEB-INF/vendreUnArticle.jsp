@@ -14,13 +14,13 @@
 <form action="${pageContext.request.contextPath}/Vendre" method="post">
 
 	<label for="article">Article: </label>
-	<input type="text" name="article" placeholder="nom de l'article" required="required"/><br />
+	<input type="text" name="article" placeholder="nom de l'article" /><br />
 	
 	<label for="description">Description: </label>
-	<textarea name="description" id="descriptionArticle" cols="30" rows="5" required="required">description de l'article</textarea><br />
+	<textarea name="description" id="descriptionArticle" cols="30" rows="5"  placeholder="description de l'article"></textarea><br />
 	
 	<label for="categorie">Catégorie: </label>
-	<select name="categorie" id="categorie" required="required">
+	<select name="categorie" id="categorie" >
 		<optgroup label ="catégories">
 			<option value ="Toutes">Toutes</option>
 			<option name="categorie" value ="1">Informatique</option>
@@ -55,7 +55,7 @@
 		<input type="text" name="ville" id="ville" value="${userConnected.ville}"/>
 		
 	</fieldset><br />
-	
+	<c:if test="${!empty erreur}">${erreur}</c:if>
 	<input type="submit" id="enregistrerArticle" value="Enregistrer"/>
 	<a href="${pageContext.request.contextPath}/Accueil" id="boutonAnnuler">Annuler</a>
 	
