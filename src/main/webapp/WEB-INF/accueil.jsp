@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
+
+	<c:if test="${!empty succesModifProfil}"> Les modifications ont bien été enregistrées dans votre profil</c:if>
 	<!-- Adresse = servlet de connexion -->
 	<c:if test="${empty succes}"> <!-- l'utilsateur arrive à l'accueil pour la première fois   -->
 		<a href="${pageContext.request.contextPath}/Connexion">S'inscrire - Se connecter</a>

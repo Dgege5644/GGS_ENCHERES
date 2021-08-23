@@ -5,24 +5,24 @@ body{
 input{
 	background-color: #fcd697;
 	border-radius: 10px;
-	color:white ;
+	color:black ;
 }
 select{
 	background-color: #fcd697;
 	border-radius: 10px;
-	color:white;
+	color:black;
 }
 label{
 	font-weight: bold;
 	color:white;
 }
 placeholder{
-	color:white;
+	color:black;
 }
 h1{
 	font-weight:bold;
 	color:white;
 }
 a{
-	color:white;
+	color:black;
 }

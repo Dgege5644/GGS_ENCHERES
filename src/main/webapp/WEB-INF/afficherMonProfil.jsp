@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
+	
+	
 	<form action="./AfficherMonProfil" method="get">
 	
 		<label for="pseudo">Pseudo: </label>
@@ -36,8 +38,18 @@
 		<label for="ville">Ville: </label>
 		<input type="text" name="ville" id="ville" readonly="readonly" value="${userConnected.ville}"/><br />
 		
+		<!-- S'il y a des erreurs à afficher, on parcours les messages -->
+		<c:if test="${!empty erreurs}">
+			<ul style="color: red;">
+				<c:forEach var="erreur" items="${erreurs}">
+					<li>${erreur }</li>
+				</c:forEach>
+			</ul>
+		</c:if>
+		
 		<button><a href="${pageContext.request.contextPath}/ModifierMonProfil">Modifier</a></button>
 	</form>
+	
 	
 </body>
 </html>

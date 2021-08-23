@@ -20,23 +20,23 @@ public class UtilisateurManager {
     }
 	
 
-	private void validerInfosUtilisateur (int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse, String newMotDePasse, String confirmation, String confirmation2) throws BLLException {
+	private void validerInfosCreationUtilisateur (String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse, String confirmation) throws BLLException {
 	
 			//on initialise le conteneur des erreurs (il est donc vide à ce moment là)
 			exceptions = new BLLException();
 			// Si la méthode appelée retourne false ...
-			if (validerPseudo(noUtilisateur, pseudo) == false){  	
+			if (validerCreationPseudo(pseudo) == false){  	
 				// on lève une BLLException
 				exceptions.addMessage("il y a une erreur dans la saisie du pseudo");
 			}
 			//Si la méthode appelée retourne false ...	
-			if (validerEmail(noUtilisateur, email) == false) {
+			if (validerCreationEmail(email) == false) {
 				// on lève une BLLException
 				exceptions.addMessage("il y a une erreur dans la saisie de l'email");
 			}
 			//Si la méthode appelée retourne false ...		
-			if (validerMotDePasse(motDePasse, newMotDePasse, confirmation, confirmation2) == false) {
+			if (validerCreationMotDePasse(motDePasse, confirmation) == false) {
 				// on lève une BLLException
 				exceptions.addMessage("il y a une erreur dans la saisie du mot de passe");
 			}
@@ -51,18 +51,19 @@ public class UtilisateurManager {
 	
 	
 	/**
-	* méthode qui crée un nouvel utilisateur en utilisant une méthode de validation par champ et 
-	* qui renvoie un utilisateur ou qui lève une BLLException qui s'affiche sur l'écran 
-	* utilisateur avec l'ensemble des erreurs générées par chaque méthode
-	 * @throws DALException 
-	*/
-	
+	 * méthode qui crée un nouvel utilisateur en utilisant la méthode de validation 
+	 * ci- dessus (nommée validerInfosCreationUtilisateur) qui valide la création
+	 * des champs (pseudo, email et motDePasse) ou qui lève des BLLException
+	 * qui s'affichent en liste sur inscription.jsp
+	 * @return userAcreer de type Utilisateur
+	 * @throws BLLException 
+	 */
 	public Utilisateur creerNouvelUtilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, String confirmation) throws BLLException {
 		Utilisateur userAcreer = null;
 		try {
 			// on appelle la méthode validerInfosUtilisateur
-			this.validerInfosUtilisateur(0, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, null, confirmation, null);
+			this.validerInfosCreationUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, confirmation);
 			
 			// si la méthode valide, on ajoute le userAcreer en BDD avec les paramètres récupérés du formulaire de saisie
 			userAcreer=this.utilisateurDAO.addUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
@@ -79,16 +80,61 @@ public class UtilisateurManager {
 		return userAcreer;
 	}
 
+	/**
+	 * méthode qui valide la modification possible d'un profil en appelant les 
+	 * méthodes de validation sur chacun des champs à controler (pseudo, email, 
+	 * mot de passe) ou qui lève des BLLException qui s'afficheront en liste 
+	 * sur afficherMonProfil.jsp
+	 * @return rien
+	 * @throws BLLException 
+	 */
+	private void validerInfosModifUtilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String newMotDePasse, String confirmation2) throws BLLException {
+	
+			//on initialise le conteneur des erreurs (il est donc vide à ce moment là)
+			exceptions = new BLLException();
+			// Si la méthode appelée retourne false ...
+			if (validerModifPseudo(noUtilisateur, pseudo) == false){  	
+				// on lève une BLLException
+				exceptions.addMessage("il y a une erreur dans la saisie du pseudo");
+			}
+			//Si la méthode appelée retourne false ...	
+			if (validerModifEmail(noUtilisateur, email) == false) {
+				// on lève une BLLException
+				exceptions.addMessage("il y a une erreur dans la saisie de l'email");
+			}
+			//Si la méthode appelée retourne false ...		
+			if (validerModifMotDePasse(newMotDePasse, confirmation2) == false) {
+				// on lève une BLLException
+				exceptions.addMessage("il y a une erreur dans la saisie du mot de passe");
+			}
+			
+			// si la liste d'exceptions n'est pas vide (= s'il y a eu des erreurs) on affiche 
+			//la liste des execptions
+			if (!exceptions.isEmpty()) {
+				//on remonte les erreurs à la servlet. Le scénario en cours s'arrete !
+				throw exceptions;
+			}			
+	}
+
+	/**
+	 * méthode qui modifie un utilisateur en utilisant la méthode de validation 
+	 * ci- dessus (nommée validerInfosModifUtilisateur) qui valide la création
+	 * des champs (pseudo, email et motDePasse) ou qui lève des BLLException
+	 * qui s'affichent en liste sur inscription.jsp
+	 * @return userAcreer de type Utilisateur
+	 * @throws BLLException 
+	 */
 	public void modifierUtilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse, String newMotDePasse, String confirmation2) throws BLLException {
+			String codePostal, String ville, String newMotDePasse, String confirmation2) throws BLLException {
 	 
 	 	try {
 	 		// on appelle la méthode validerInfosUtilisateur
-	 		this.validerInfosUtilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, null, newMotDePasse, confirmation2);
+	 		this.validerInfosModifUtilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, newMotDePasse, confirmation2);
 	 		
 	 		// si la méthode valide, on modifie dans la BDD, l'utilisateur dont le noUtilisateur est remonté en 
 	 		//paramètre, avec les paramètres récupérés du formulaire de saisie
-	 		this.utilisateurDAO.updateInfosUtilisateur(noUtilisateur);
+	 		this.utilisateurDAO.updateInfosUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, newMotDePasse);
 	 		
 		} catch (DALException e) {
 			exceptions.addMessage(e.getMessage());
@@ -96,15 +142,88 @@ public class UtilisateurManager {
 	 	}
 	 
 	}
-	
-	
 	/**
-	 * Méthode qui valide le pseudo ou renvoie une BLLException
+	 * Méthode qui valide la création du pseudo ou renvoie une BLLException
 	 * @param pseudo
-	 * @return
+	 * @return validationPseudo
 	 * @throws BLLException
 	 */
-	public boolean validerPseudo(int noUtilisateur, String pseudo) throws BLLException {
+	public boolean validerCreationPseudo(String pseudo) throws BLLException {
+		boolean validationPseudo=false;
+		try {
+			//On cherche si un utilisateur de la BDD esxiste avec ce pseudo
+				Utilisateur u = utilisateurDAO.getInfosUtilisateur(pseudo);
+				
+				//le pseudo ne peut pas etre validé si :
+				//1- il est nul 
+				//2- ou la modif n'est pas possible
+				//3- ou n'est pas alphanumérique
+				if (pseudo == null || u!=null||  !pseudo.matches("^[a-zA-Z0-9]+$")){
+					exceptions.addMessage("il y a une erreur dans la saisie du pseudo");
+			}
+				validationPseudo = true;
+		} catch (Exception e){
+			throw new BLLException(e.getMessage());
+		}
+			return validationPseudo;
+	}
+	
+	/**
+	 * Méthode qui valide la création de l'email ou renvoie une BLLException
+	 * @param email
+	 * @return validationEmail
+	 * @throws BLLException
+	 */
+	public boolean validerCreationEmail(String email)throws BLLException {
+		
+		boolean validationEmail = false;
+		
+		try {
+			//On cherche si un utilisateur de la BDD esxiste avec cet email
+			Utilisateur u = utilisateurDAO.getInfosUtilisateur(email);
+			
+			if (email== null || u!=null) {
+				exceptions.addMessage("il y a une erreur dans la saisie de l'email");
+				
+			} validationEmail = true;
+		} catch (Exception e) {
+			
+			
+			throw new BLLException(e.getMessage());
+
+		} return validationEmail;
+	}
+	/**
+	 * Méthode qui valide la création du mot de passe ou renvoie une BLLException
+	 * @param motDePasse et confirmation
+	 * @return validationMotDePasse
+	 * @throws BLLException
+	 */
+	public boolean validerCreationMotDePasse(String motDePasse,String confirmation)throws BLLException {
+
+		boolean validationMotDePasse;
+		try {
+			
+			// conditions pour que la création soit impossible lors de l'inscription:
+			// motDePasse est nul ou motDePasse non égal à confirmation
+			if (motDePasse== null || !motDePasse.equals(confirmation)) {
+				exceptions.addMessage("il y a une erreur dans la saisie du mot de passe");
+					
+			} validationMotDePasse = true;
+		} catch (Exception e) {
+			
+			throw new BLLException(e.getMessage());
+
+		} return validationMotDePasse;
+	}
+	
+	/**
+	 * Méthode qui valide la modif du pseudo ou renvoie une BLLException
+	 * @param noUtilisateur et pseudo
+	 * @return validationPseudo
+	 * @throws BLLException
+	 */
+	public boolean validerModifPseudo(int noUtilisateur, String pseudo) throws BLLException {
 		boolean validationPseudo=false;
 		try {
 			//On cherche si un utilisateur de la BDD esxiste avec ce pseudo
@@ -134,8 +253,13 @@ public class UtilisateurManager {
 		}
 			return validationPseudo;
 	}
-	
-	public boolean validerEmail(int noUtilisateur, String email)throws BLLException {
+	/**
+	 * Méthode qui valide la modif de l'email ou renvoie une BLLException
+	 * @param noUtilisateur et email
+	 * @return validationEmail
+	 * @throws BLLException
+	 */
+	public boolean validerModifEmail(int noUtilisateur, String email)throws BLLException {
 		
 		boolean validationEmail = false;
 		
@@ -167,23 +291,21 @@ public class UtilisateurManager {
 		} return validationEmail;
 	}
 	
-	public boolean validerMotDePasse(String motDePasse, String newMotDePasse, String confirmation, String confirmation2)throws BLLException {
-
+	
+	/**
+	 * Méthode qui valide la modif de l'email ou renvoie une BLLException
+	 * @param noUtilisateur et email
+	 * @return validationEmail
+	 * @throws BLLException
+	 */
+	private boolean validerModifMotDePasse(String newMotDePasse, String confirmationNewMdp) throws BLLException {
 		boolean validationMotDePasse;
 		try {
 			
-			// on crée une variable de type boolean pour savoir si la modf est possible ou non
-			boolean modifPossible = true;
-			// conditions pour que la modif soit impossible en UPDATE:
-			// newMotDePasse différent de confirmation
-			if (!newMotDePasse.equals(confirmation2)) {
-				exceptions.addMessage("il y a une erreur dans la saisie du mot de passe");
-			}
-			
-			// conditions pour que la modif soit impossible en INSERT:
+			// conditions pour que la création soit impossible lors de l'inscription:
 			// motDePasse est nul ou motDePasse non égal à confirmation
-			if (motDePasse== null || !motDePasse.equals(confirmation)) {
-				exceptions.addMessage("il y a une erreur dans la saisie du mot de passe");
+			if (newMotDePasse !=null && !newMotDePasse.equals(confirmationNewMdp)) {
+				exceptions.addMessage("il y a une erreur dans la saisie du nouveau mot de passe");
 					
 			} validationMotDePasse = true;
 		} catch (Exception e) {
@@ -193,39 +315,13 @@ public class UtilisateurManager {
 		} return validationMotDePasse;
 	}
 	
-	public boolean validerNom(String nom) throws BLLException {
-		boolean validationNom = false;
-		
-		try {
-			if (nom == null || !nom.matches("^[a-zA-Z0-9]+$")) {
-				exceptions.addMessage("le nom n'est pas valide");
-				
-			}validationNom = true;
-			
-		} catch (Exception e) {
-				
-				throw new BLLException("erreurNom"+ e.getMessage());
 	
-		} return validationNom;
-	}
+	// 2 autres méthodes de validation sur téléphone et code postal, non utilisées
+	// car non demandées par le client
 	
-	public boolean validerPrenom(String prenom) throws BLLException {
-		boolean validationPrenom = false;
-		try {
-			
-			if (prenom == null || !prenom.matches("^[a-zA-Z0-9]+$")) {
-				exceptions.addMessage("le nom n'est pas valide");
-				
-			} validationPrenom = true;
-			
-		} catch (Exception e) {
-			throw new BLLException(e.getMessage());
-
-		} return validationPrenom;
-		
-	}
-	
-	
+	/*
+	 * Méthode de validation du téléphone
+	 */
 	public boolean validerTelephone(String telephone)throws BLLException {
 		// c'est OK si c'est nul ou si ce sont des chiffres
 		
@@ -242,22 +338,9 @@ public class UtilisateurManager {
 		} return validationTelephone;
 	}
 	
-	public boolean validerRue(String rue) throws BLLException {
-		// C'est OK si c'est non nul et alphanumérique + espaces
-		
-		boolean validationRue = false;
-		try {
-			if (rue == null || rue.matches("^[a-zA-Z0-9]+$")) {
-				exceptions.addMessage("la rue n'est pas valide");
-				
-			} validationRue = true;
-		} catch (Exception e) {
-			
-			throw new BLLException(e.getMessage());
-
-		} return validationRue;
-	}
-	
+	/*
+	 * Méthode de validation du téléphone
+	 */
 	public boolean validerCodePostal(String codePostal)throws BLLException {
 		// C'est Ok si c'est non nul,  que ce sont des chiffres et que la taille fait 5
 		boolean validationCodePostal = false;
@@ -272,25 +355,5 @@ public class UtilisateurManager {
 			throw new BLLException(e.getMessage());
 
 		} return validationCodePostal;
-	}
-	
-	public boolean validerVille(String ville)throws BLLException {
-		// c'est OK si c'est non nul et en alphanumérique
-		boolean validationVille = false;
-		
-		try {
-			if (ville == null || !ville.matches("^[a-zA-Z0-9]+$")) {
-				exceptions.addMessage("la ville n'est pas valide");
-				
-			} validationVille = true;
-		} catch (Exception e) {
-			
-			throw new BLLException(e.getMessage());
-
-		} return validationVille;
-	}
-	
-	
-	
-	
+	}	
 }

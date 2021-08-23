@@ -39,11 +39,7 @@ public class InscriptionServlet extends HttpServlet {
 	 * 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			// je récupère les infos de l'utilisateur en cours
-		Utilisateur currentUser = (Utilisateur)request.getSession().getAttribute("userConnected");
-			// j'affecte le no-utilisateur associé à ma variable currentUser
-		int noUtilisateur= currentUser.getNo_utilisateur();
-		
+			
 		try {
 			// Je récupère  les infos saisies dans les champs du formulaire
 		String pseudo = request.getParameter("pseudo");
