@@ -1,8 +1,11 @@
 package fr.eni.jee.ggsencheres.bll;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import fr.eni.jee.ggsencheres.bo.Article;
+import fr.eni.jee.ggsencheres.bo.Enchere;
 import fr.eni.jee.ggsencheres.dal.ArticleDAO;
 import fr.eni.jee.ggsencheres.dal.DALException;
 import fr.eni.jee.ggsencheres.dal.DAOFactory;
@@ -69,4 +72,17 @@ public class ArticleManager {
 		return articleAVendre;
 	}
 	
+	public List<Enchere> afficherEncheres(int noUtilisateur, int noArticle, LocalDate dateEnchere, int montantEnchere) throws BLLException{
+		
+		List<Enchere> listeEncheres = null;
+		
+		try {
+			listeEncheres = this.articleDAO.selectAllEncheres();
+			
+		} catch (DALException e) {
+			
+			throw new BLLException("Erreur dans la méthode afficherEnchères. Note technique:" + e.getMessage());
+		}
+		return listeEncheres;
+	}
 }
