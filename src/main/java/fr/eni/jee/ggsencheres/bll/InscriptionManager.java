@@ -11,11 +11,7 @@ import fr.eni.jee.ggsencheres.dal.UtilisateurDAO;
 public class InscriptionManager {
 	
 	private UtilisateurDAO utilisateurDAO;
-	private Utilisateur userAcreer;
-	
-	
-	
-	
+		
 	
 	
 	
@@ -40,8 +36,37 @@ public class InscriptionManager {
 		return userNonVerifie;
 	}
 
+	private void validerInfosUtilisateur (String pseudo, String nom, String prenom, String email, String telephone, String rue,
+			String codePostal, String ville, String motDePasse, String confirmation) throws BLLException {
+		
+		try {
+			// Si un des méthodes appelées retourne false ..
+			if (validerPseudo(pseudo) == false){  
+					
+				// on lève une BLLException
+				throw new BLLException("il y a une erreur dans la saisie du pseudo");
+			}
+								
+			if (validerEmail(email) == false) {
+				// on lève une BLLException
+				throw new BLLException("il y a une erreur dans la saisie de l'email");
+			}
+				
+			if (validerMotDePasse(motDePasse, confirmation) == false) {
+				// on lève une BLLException
+				throw new BLLException("il y a une erreur dans la saisie du mot de passe");
+			}
+				
+		} catch (BLLException e) {
+				throw new BLLException(e.getMessage());
+			}
+			
+	}
+	
+	
+	
 	/**
-	* méthode qui valide l'inscription en utilisant une méthode de validation par champ et 
+	* méthode qui crée un nouvel utilisateur en utilisant une méthode de validation par champ et 
 	* qui renvoie un utilisateur ou qui lève une BLLException qui s'affiche sur l'écran 
 	* utilisateur avec l'ensemble des erreurs générées par chaque méthode
 	 * @throws DALException 
@@ -49,16 +74,14 @@ public class InscriptionManager {
 	
 	public Utilisateur creerNouvelUtilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse, String confirmation) throws BLLException {
+		Utilisateur userAcreer = null;
 		try {
-			// Si un des méthodes appelées retourne false ..
-			if (validerPseudo(pseudo) == false || validerEmail(email) == false || validerMotDePasse(motDePasse, confirmation) == false) {
-					
-				// on lève une BLLException
-				throw new BLLException("il y a une erreur dans un des champs saisis");
-			}
+			// on appelle la méthode validerInfosUtilisateur
+				this.validerInfosUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, confirmation);
+			
 			// Sinon on ajoute le userAcreer en BDD avec les paramètres récupérés du formulaire de saisie
 			userAcreer=this.utilisateurDAO.addUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
-				
+			
 			
 		} catch (DALException e) {
 			throw new BLLException(e.getMessage());
