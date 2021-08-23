@@ -14,6 +14,9 @@ public class Article {
      private int noCategorie;
      private String etatVente;
      private String fichierPhotoArticle;
+     private String rue;
+     private String codePostal;
+     private String ville;
      
      
      
@@ -64,12 +67,71 @@ public class Article {
 		this.debutEnchere=debutEnchere2;
 		this.finEnchere=finEnchere2;
 	}
+	
+
+	public Article(int noArticle, String nomArticle, String description, LocalDateTime debutEnchere,
+			LocalDateTime finEnchere, int prixInitial, int prixVente, int noUtilisateur, int noCategorie,
+			String etatVente, String fichierPhotoArticle, String rue, String codePostal, String ville) {
+		super();
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.debutEnchere = debutEnchere;
+		this.finEnchere = finEnchere;
+		this.prixInitial = prixInitial;
+		this.prixVente = prixVente;
+		this.noUtilisateur = noUtilisateur;
+		this.noCategorie = noCategorie;
+		this.etatVente = etatVente;
+		this.fichierPhotoArticle = fichierPhotoArticle;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+	}
+
+	
+	public Article(int noUtilisateur, String nomArticle, String description, int categorie,
+			String fichierPhotoArticle, int prixInitial, LocalDateTime debutEnchere, LocalDateTime finEnchere,
+			String rue, String codePostal, String ville) {
+		this.noUtilisateur=noUtilisateur;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.debutEnchere = debutEnchere;
+		this.finEnchere = finEnchere;
+		this.prixInitial = prixInitial;
+		this.noUtilisateur = noUtilisateur;
+		this.noCategorie = categorie;
+		this.fichierPhotoArticle = fichierPhotoArticle;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+	}
+
+
+	public String getRue() {
+		return rue;
+	}
+
+
+	public String getCodePostal() {
+		return codePostal;
+	}
+
+
+	public String getVille() {
+		return ville;
+	}
 
 
 	public int getNoArticle() {
 		return noArticle;
 	}
 
+	
+
+	public void setNoArticle(int noArticle) {
+		this.noArticle = noArticle;
+	}
 
 
 	public String getNomArticle() {

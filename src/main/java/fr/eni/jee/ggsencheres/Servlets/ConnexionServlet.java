@@ -20,12 +20,13 @@ public class ConnexionServlet extends HttpServlet {
 	private String identifiant;
 	private String motDePasse;
 	private Utilisateur userConnected;
+	
     public ConnexionServlet() {
         super();
        
     }
 
-	
+	//Cliquer sur "s'incrire - se connecter" envoie vers la page de connexion
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
 	}
@@ -42,8 +43,6 @@ public class ConnexionServlet extends HttpServlet {
 			 ConnectionManager cm = new ConnectionManager();
 			 
 			 userConnected = cm.validerConnexion(identifiant, motDePasse);
-			 //TODO placer le user dans le contexte de session
-			// 2 - On va ajouter un utilisateur à la session à partir du prenom/nom
 			
 				request.getSession().setAttribute("userConnected", userConnected);//request.setAttribute("userConnected", userConnected);
 				request.getSession().setAttribute("succes", true);//request.setAttribute("succes",true);

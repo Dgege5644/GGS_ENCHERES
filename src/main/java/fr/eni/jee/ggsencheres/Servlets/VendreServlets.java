@@ -71,7 +71,7 @@ public class VendreServlets extends HttpServlet {
 		System.out.println(ville);
 		ArticleManager am = new ArticleManager();
 	
-		articleAVendre = am.creerAticleAVendre(noUtilisateur,nomArticle, description, categorie, fichierPhotoArticle, prixInitial, debutEnchere, finEnchere);
+		articleAVendre = am.creerAticleAVendre(noUtilisateur,nomArticle, description, categorie, fichierPhotoArticle, prixInitial, debutEnchere, finEnchere,rue,codePostal,ville);
 		
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 		}catch(BLLException e) {
