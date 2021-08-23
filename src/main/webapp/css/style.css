@@ -1,1 +1,28 @@
-@charset "ISO-8859-1";
+body{
+	background-color: #83A697;
+	font-family: "Comic Sans MS";
+}
+input{
+	background-color: #fcd697;
+	border-radius: 10px;
+	color:white ;
+}
+select{
+	background-color: #fcd697;
+	border-radius: 10px;
+	color:white;
+}
+label{
+	font-weight: bold;
+	color:white;
+}
+placeholder{
+	color:white;
+}
+h1{
+	font-weight:bold;
+	color:white;
+}
+a{
+	color:white;
+}

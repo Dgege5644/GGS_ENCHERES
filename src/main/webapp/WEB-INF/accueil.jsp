@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Accueil GGS Enchères</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
 	<!-- Adresse = servlet de connexion -->

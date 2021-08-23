@@ -7,7 +7,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>vendre un artcile</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
 <h1>Nouvelle vente</h1>
@@ -46,13 +46,13 @@
 		<legend>Retrait</legend>
 		
 		<label for="rue">Rue: </label>
-		<input type="text" name="rue" id="rue" value="${userConnected.rue}"/><br />
+		<input type="text" name="rue" id="rue" value="${userConnected.rue}" required="required"/><br />
 		
 		<label for="cp">Code postal: </label>
-		<input type="text" name="cp" id="cp" value="${userConnected.codePostal}"/><br />
+		<input type="text" name="cp" id="cp" value="${userConnected.codePostal}" required="required"/><br />
 		
 		<label for="ville">Ville: </label>
-		<input type="text" name="ville" id="ville" value="${userConnected.ville}"/>
+		<input type="text" name="ville" id="ville" value="${userConnected.ville}" required="required"/>
 		
 	</fieldset><br />
 	<!-- S'il y a des erreurs à afficher, on parcours les messages -->

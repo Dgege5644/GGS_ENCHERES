@@ -6,7 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Inscription</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
 
