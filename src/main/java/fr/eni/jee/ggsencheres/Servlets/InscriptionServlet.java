@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.jee.ggsencheres.bll.BLLException;
 import fr.eni.jee.ggsencheres.bll.ConnectionManager;
-import fr.eni.jee.ggsencheres.bll.InscriptionManager;
+import fr.eni.jee.ggsencheres.bll.UtilisateurManager;
 import fr.eni.jee.ggsencheres.bo.Utilisateur;
 
 /**
@@ -55,7 +55,7 @@ public class InscriptionServlet extends HttpServlet {
 
 		
 
-		InscriptionManager im = new InscriptionManager();
+		UtilisateurManager im = new UtilisateurManager();
 			//userAcreer = im.addSansVerif(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse)	;
 		
 		
@@ -67,7 +67,7 @@ public class InscriptionServlet extends HttpServlet {
 			
 			 
 		}catch(BLLException e) {
-			request.setAttribute("erreur",e.getMessage());
+			request.setAttribute("erreurs",e.getMessages());
 			request.getRequestDispatcher("/WEB-INF/inscription.jsp").forward(request, response);
 		
 		}

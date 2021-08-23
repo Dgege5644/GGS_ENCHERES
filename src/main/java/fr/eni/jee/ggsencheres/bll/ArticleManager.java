@@ -13,7 +13,7 @@ import fr.eni.jee.ggsencheres.dal.DAOFactory;
 
 public class ArticleManager {
 	private ArticleDAO articleDAO;
-	
+	private BLLException exceptions;
 	
 	
 	
@@ -23,31 +23,41 @@ public class ArticleManager {
 
 
 
-	public Article validerArticle(int noUtilisateur, String nomArticle, String description, int categorie,
+	private void validerArticle(int noUtilisateur, String nomArticle, String description, int categorie,
 			String fichierPhotoArticle, int prixInitial, LocalDateTime debutEnchere, LocalDateTime finEnchere)throws BLLException {
-		
+		exceptions= new BLLException();
 		if(nomArticle == null || nomArticle.equalsIgnoreCase("")) {
-			throw new BLLException("Erreur dans le nom de l'article");
+			exceptions.addMessage("Erreur dans le nom de l'article");
 		}
 		if(description == null || description.equalsIgnoreCase("")) {
-			throw new BLLException("Erreur dans la description de l'article");
+			exceptions.addMessage("Erreur dans la description de l'article");
 		}
-//		if(articleAVendre.getNoCategorie()==null) {
-//			throw new BLLException("Erreur dans le numero de categorie de l'article");
-//		}
-		if(debutEnchere == null) {
-			throw new BLLException("Erreur dans le debut de l'enchere de l'article");
+		if(categorie==0) {
+			exceptions.addMessage("Erreur dans le numero de categorie de l'article");
+		}
+		if(debutEnchere == null && debutEnchere.compareTo(finEnchere)> 0  && debutEnchere.compareTo(LocalDateTime.now())<0) {
+			exceptions.addMessage("Erreur dans le debut de l'enchere de l'article");
 		}
 		if(finEnchere == null) {
-			throw new BLLException("Erreur dans la fin de l'enchere de l'article");
+			exceptions.addMessage("Erreur dans la fin de l'enchere de l'article");
 		}
-		Article articleAVendre = new Article(noUtilisateur, nomArticle,description,categorie,fichierPhotoArticle,prixInitial,debutEnchere,finEnchere);
+		if(!exceptions.isEmpty()) {
+			throw exceptions;
+		}
 		
+	}
+	
+	public Article creerAticleAVendre(int noUtilisateur, String nomArticle, String description, int categorie,
+			String fichierPhotoArticle, int prixInitial, LocalDateTime debutEnchere, LocalDateTime finEnchere)throws BLLException {
+		Article articleAVendre = new Article(noUtilisateur, nomArticle,description,categorie,fichierPhotoArticle,prixInitial,debutEnchere,finEnchere);
 		try {
+			this.validerArticle(noUtilisateur, nomArticle, description, categorie, fichierPhotoArticle, prixInitial, debutEnchere, finEnchere);
+			
 			articleDAO.addArticle(articleAVendre);
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+		}catch(DALException e) {
+			exceptions.addMessage(e.getMessage());
+			throw exceptions;
 		}
 		
 		return articleAVendre;
