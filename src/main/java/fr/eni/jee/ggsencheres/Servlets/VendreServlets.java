@@ -68,15 +68,15 @@ public class VendreServlets extends HttpServlet {
 		String codePostal = request.getParameter("cp");
 		String ville = request.getParameter("ville");
 		
-		
+		System.out.println(ville);
 		ArticleManager am = new ArticleManager();
 	
-		articleAVendre = am.validerArticle(noUtilisateur,nomArticle, description, categorie, fichierPhotoArticle, prixInitial, debutEnchere, finEnchere);
+		articleAVendre = am.creerAticleAVendre(noUtilisateur,nomArticle, description, categorie, fichierPhotoArticle, prixInitial, debutEnchere, finEnchere);
 		
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 		}catch(BLLException e) {
-			request.setAttribute("erreur",e.getMessage());
-			request.getRequestDispatcher("/WEB-INF/acceuil.jsp").forward(request, response);
+			request.setAttribute("erreurs",e.getMessages());
+			request.getRequestDispatcher("/WEB-INF/vendreUnArticle.jsp").forward(request, response);
 	
 		}
 		
