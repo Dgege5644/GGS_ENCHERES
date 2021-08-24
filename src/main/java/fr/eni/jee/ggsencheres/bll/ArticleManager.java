@@ -77,7 +77,7 @@ public class ArticleManager {
 		List<Enchere> listeEncheres = null;
 		
 		try {
-			listeEncheres = this.articleDAO.selectAllEncheres();
+			listeEncheres = this.articleDAO.selectEncheresEC();
 			
 		} catch (DALException e) {
 			
