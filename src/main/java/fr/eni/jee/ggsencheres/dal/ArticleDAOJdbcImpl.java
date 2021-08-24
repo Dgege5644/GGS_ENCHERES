@@ -98,7 +98,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	}
 
 	@Override
-	public List<Enchere> selectEncheresEC() throws DALException {
+	public List<Enchere> selectEncheresEC() throws DALException { //TODO AJOUTER LES PARAM JAVA dans la méthode
 		Enchere enchere = null;
 		List<Enchere> listeEncheres = new ArrayList<>();
 		Utilisateur utilisateur = null;

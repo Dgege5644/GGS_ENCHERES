@@ -32,7 +32,7 @@ public class AccueilServlet extends HttpServlet {
 		List<Enchere> listeEnchere = null;
 	
 		
-
+		// TODO Ecrire
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 	}
 	
