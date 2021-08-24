@@ -88,18 +88,19 @@ public class UtilisateurManager {
 	 * @return rien
 	 * @throws BLLException 
 	 */
-	private void validerInfosModifUtilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasseActuel, String newMotDePasse, String confirmation2) throws BLLException {
+	private void validerInfosModifUtilisateur(int noUtilisateur, String pseudo, String pseudoActuel, String nom, String prenom, String email, 
+			String emailActuel, String telephone, String rue, String codePostal, String ville, String motDePasseActuel, 
+			String newMotDePasse, String confirmation2) throws BLLException {
 	
 			//on initialise le conteneur des erreurs (il est donc vide à ce moment là)
 			exceptions = new BLLException();
 			// Si la méthode appelée retourne false ...
-			if (validerModifPseudo(noUtilisateur, pseudo) == false){  	
+			if (validerModifPseudo(noUtilisateur, pseudo, pseudoActuel) == false){  	
 				// on lève une BLLException
 				exceptions.addMessage("il y a une erreur dans la saisie du pseudo");
 			}
 			//Si la méthode appelée retourne false ...	
-			if (validerModifEmail(noUtilisateur, email) == false) {
+			if (validerModifEmail(noUtilisateur, email, emailActuel) == false) {
 				// on lève une BLLException
 				exceptions.addMessage("il y a une erreur dans la saisie de l'email");
 			}
@@ -125,12 +126,12 @@ public class UtilisateurManager {
 	 * @return userAcreer de type Utilisateur
 	 * @throws BLLException 
 	 */
-	public void modifierUtilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
+	public void modifierUtilisateur(int noUtilisateur, String pseudo, String pseudoActuel, String nom, String prenom, String email, String emailActuel, String telephone, String rue,
 			String codePostal, String ville, String motDePasseActuel, String newMotDePasse, String confirmationNewMdp) throws BLLException {
 	 
 	 	try {
 	 		// on appelle la méthode validerInfosUtilisateur
-	 		this.validerInfosModifUtilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasseActuel, newMotDePasse, confirmationNewMdp);
+	 		this.validerInfosModifUtilisateur(noUtilisateur, pseudo, pseudoActuel, nom, prenom, email, emailActuel, telephone, rue, codePostal, ville, motDePasseActuel, newMotDePasse, confirmationNewMdp);
 	 		
 	 		// si la méthode valide, on modifie dans la BDD, l'utilisateur dont le noUtilisateur est remonté en 
 	 		//paramètre, avec les paramètres récupérés du formulaire de saisie
@@ -223,11 +224,11 @@ public class UtilisateurManager {
 	 * @return validationPseudo
 	 * @throws BLLException
 	 */
-	public boolean validerModifPseudo(int noUtilisateur, String pseudo) throws BLLException {
+	public boolean validerModifPseudo(int noUtilisateur, String pseudo, String pseudoActuel) throws BLLException {
 		boolean validationPseudo=false;
 		try {
 			//On cherche si un utilisateur de la BDD esxiste avec ce pseudo
-				Utilisateur u = utilisateurDAO.getInfosUtilisateur(pseudo);
+				Utilisateur u = utilisateurDAO.getInfosUtilisateur(pseudoActuel);
 				// on crée une variable de type boolean pour savoir si la modf est possible ou non
 				boolean modifPossible = true;
 				// conditions pour que la modif soit impossible en UPDATE:
@@ -259,13 +260,13 @@ public class UtilisateurManager {
 	 * @return validationEmail
 	 * @throws BLLException
 	 */
-	public boolean validerModifEmail(int noUtilisateur, String email)throws BLLException {
+	public boolean validerModifEmail(int noUtilisateur, String email, String emailActuel)throws BLLException {
 		
 		boolean validationEmail = false;
 		
 		try {
 			//On cherche si un utilisateur de la BDD esxiste avec cet email
-			Utilisateur u = utilisateurDAO.getInfosUtilisateur(email);
+			Utilisateur u = utilisateurDAO.getInfosUtilisateur(emailActuel);
 			// on crée une variable de type boolean pour savoir si la modf est possible ou non
 			boolean modifPossible = true;
 			// conditions pour que la modif soit impossible en UPDATE:
@@ -273,12 +274,12 @@ public class UtilisateurManager {
 			if (!(noUtilisateur!=0 && u !=null && noUtilisateur == u.getNo_utilisateur())) {
 				modifPossible = false;
 			}
-			// conditions pour que la modif soit impossible en INSERT:
-			// un utilisateur existe avec cet email ET l'utilisateur n'existe pas encore (cad noUtilisateur ==0)
-			if (noUtilisateur == 0 && u!= null) {
-				modifPossible= false;
-			}
-			
+//			// conditions pour que la modif soit impossible en INSERT:
+//			// un utilisateur existe avec cet email ET l'utilisateur n'existe pas encore (cad noUtilisateur ==0)
+//			if (noUtilisateur == 0 && u!= null) {
+//				modifPossible= false;
+//			}
+//			
 			if (email== null || !modifPossible) {
 				exceptions.addMessage("il y a une erreur dans la saisie de l'email");
 				

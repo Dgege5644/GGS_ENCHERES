@@ -19,13 +19,13 @@ public class AfficherMonProfilServlet extends HttpServlet {
      */
     public AfficherMonProfilServlet() {
         super();
-        // TODO Auto-generated constructor stub
-    }
+      }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		
 		request.getRequestDispatcher("/WEB-INF/afficherMonProfil.jsp").forward(request, response);
 	}
