@@ -57,10 +57,10 @@ public class InscriptionServlet extends HttpServlet {
 		
 
 		UtilisateurManager im = new UtilisateurManager();
-			//userAcreer = im.addSansVerif(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse)	;
+			
 		
 		
-		// j'applique la méthode de validation définie dans InscriptionManager
+		// j'applique la méthode de création d'un utilisateur définie dans InscriptionManager
 			userAcreer = im.creerNouvelUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, confirmation );
 		
 			request.setAttribute("succes",true);
