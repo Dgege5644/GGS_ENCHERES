@@ -135,7 +135,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	 * Méthode qui modifie les infos d'un utilisateur selon son no_utilisateur
 	 */
 	public void updateInfosUtilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String motDePasse) throws DALException {
+			String codePostal, String ville, String motDePasse, String newMotDePasse) throws DALException {
 		
 		try (Connection cnx = ConnectionProvider.getConnection()){
 			
@@ -154,7 +154,11 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			pStmt.setString(6, rue);
 			pStmt.setString(7, codePostal);
 			pStmt.setString(8, ville);
-			pStmt.setString(9, motDePasse);
+			if (newMotDePasse == null ) {
+				pStmt.setString(9, motDePasse);
+			} else {
+				pStmt.setString(9, newMotDePasse);
+			}
 			pStmt.setInt(10, no_utilisateur);
 			
 			pStmt.executeUpdate();

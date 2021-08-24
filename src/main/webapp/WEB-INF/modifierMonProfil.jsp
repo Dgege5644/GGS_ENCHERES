@@ -51,15 +51,15 @@
 		<input type="password" name="mdpasse" id="mdpasse" value="${userConnected.motDePasse}"/><br />
 		
 		<label for="newmdpasse">Nouveau mot de passe: </label>
-		<input type="password" name="newmdpasse" id="newmdpasse"/>
+		<input type="password" name="newmdpasse" id="newmdpasse" value="${userConnected.motDePasse}"/>
 		
 		<label for="repeat">Confirmation: </label>
-		<input type="password" name="confirmationnewmdp" id="confirmationnewmdp"/><br />
+		<input type="password" name="confirmationnewmdp" id="confirmationnewmdp" value="${userConnected.motDePasse}"/><br />
 		
 		<label for="credit">Crédit: </label>
-		<input type="number" name="credit" id="credit" readonly="readonly" value="${userConnected.credit}"/>
+		<input type="number" name="credit" id="credit" readonly="readonly" value="${userConnected.credit}"/><br />
 			
-		<input type="reset" value="annuler les modifications"/>
+		<button><a href="${pageContext.request.contextPath}/Accueil">Annuler les modifications</a></button>
 		<input type="submit" value="Enregistrer"/>
 		<button><a href="${pageContext.request.contextPath}/SupprimerMonCompte">Supprimer Mon compte</a></button>
 		
