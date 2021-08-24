@@ -59,7 +59,9 @@
 		<label for="credit">Crédit: </label>
 		<input type="number" name="credit" id="credit" readonly="readonly" value="${userConnected.credit}"/><br />
 			
+
 		<button><a href="${pageContext.request.contextPath}/Accueil">Annuler les modifications</a></button>
+
 		<input type="submit" value="Enregistrer"/>
 		<button><a href="${pageContext.request.contextPath}/SupprimerMonCompte">Supprimer Mon compte</a></button>
 		

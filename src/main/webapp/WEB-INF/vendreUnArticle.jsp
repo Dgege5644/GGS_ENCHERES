@@ -34,7 +34,7 @@
 	<input type="file" id="fichierPhotoArticle" name="fichierPhotoArticle" accept="image/png, image/jpeg"/> <br />
 	
 	<label for="miseAPrix">Mise à prix: </label>
-	<input type="number" name="miseAPrix" id="miseAPrix" min="0" step="1" /><br />
+	<input type="number" name="miseAPrix" id="miseAPrix" min="0" step="1" required="required"/><br />
 	
 	<label for="dateDebut">Début de l'enchère: </label>
 	<input type="datetime-local" name="dateDebut" id="dateDebut" required="required"/><br />
