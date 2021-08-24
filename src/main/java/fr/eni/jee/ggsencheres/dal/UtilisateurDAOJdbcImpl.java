@@ -59,7 +59,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			pStmt.setString(2, nom);
 			pStmt.setString(3, prenom);
 			pStmt.setString(4, email);
-			if (telephone.length() == 0) {
+			if (telephone == null || telephone.length() == 0) {
 				pStmt.setNull(5, Types.VARCHAR);
             } else {
             	pStmt.setString(5, telephone);
@@ -146,7 +146,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			pStmt.setString(3, prenom);
 			pStmt.setString(4, email);
 			//pStmt.setString(5, telephone);
-			if (telephone.length() == 0) {
+			if (telephone == null || telephone.length() == 0) {
 				pStmt.setNull(5, Types.VARCHAR);
             } else {
             	pStmt.setString(5, telephone);
@@ -154,11 +154,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			pStmt.setString(6, rue);
 			pStmt.setString(7, codePostal);
 			pStmt.setString(8, ville);
-			if (newMotDePasse == null ) {
-				pStmt.setString(9, motDePasse);
-			} else {
-				pStmt.setString(9, newMotDePasse);
-			}
+			pStmt.setString(9, newMotDePasse);
 			pStmt.setInt(10, no_utilisateur);
 			
 			pStmt.executeUpdate();

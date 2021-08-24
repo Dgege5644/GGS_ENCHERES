@@ -42,7 +42,8 @@ public class AccueilServlet extends HttpServlet {
 		
 	}catch(BLLException e) {
 		
-		e.printStackTrace();
+		e.printStackTrace(); //Indispensable pour obtenir les erreurs au lancement de l'application...
+	
 	}
 	
 		
