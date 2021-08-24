@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 
 	//Préciser les colonnes permet d'éviter la redondance de certaines informations notamment les clés étrangères(colonnes)
-	private static final String SELECT_ENCHERES_EC = "SELECT ARTICLES_VENDUS.no_article, nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, etat_vente, libelle, date_enchere, montant_enchere, CATEGORIES.no_categorie, CATEGORIES.libelle, UTILISATEURS.no_utilisateur, prenom, nom, email, telephone, UTILISATEURS.rue, UTILISATEURS.code_postal, UTILISATEURS.ville, UTILISATEURS.mot_de_passe, UTILISATEURS.credit, UTILISATEURS.administrateur, RETRAITS.rue, RETRAITS.code_postal, RETRAITS.ville "
+	private static final String SELECT_ENCHERES_EC = "SELECT ARTICLES_VENDUS.no_article as no_article, nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, etat_vente, image, libelle, date_enchere, montant_enchere, CATEGORIES.no_categorie as no_categorie, CATEGORIES.libelle as libelle, UTILISATEURS.no_utilisateur as no_utilisateur, prenom, nom, pseudo, email, telephone, UTILISATEURS.rue as rue, UTILISATEURS.code_postal as code_postal, UTILISATEURS.ville as ville, mot_de_passe, credit, administrateur, RETRAITS.rue as retrue, RETRAITS.code_postal as retcode_postal, RETRAITS.ville as retville "
 													+ "FROM ARTICLES_VENDUS "
 													+ "LEFT OUTER JOIN ENCHERES ON ENCHERES.no_article = ARTICLES_VENDUS.no_article "
 													+ "INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur "
@@ -28,7 +30,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 													+ "INNER JOIN RETRAITS ON ARTICLES_VENDUS.no_article = RETRAITS.no_article "
 													+ "WHERE ARTICLES_VENDUS.date_debut_enchere <= GETDATE() AND ARTICLES_VENDUS.date_fin_enchere > GETDATE();";
 	
-	private static final String SELECT_ENCHERES_CR = "SELECT ARTICLES_VENDUS.no_article, nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, etat_vente, libelle, date_enchere, montant_enchere, CATEGORIES.no_categorie, CATEGORIES.libelle, UTILISATEURS.no_utilisateur, prenom, nom, email, telephone, UTILISATEURS.rue, UTILISATEURS.code_postal, UTILISATEURS.ville, UTILISATEURS.mot_de_passe, UTILISATEURS.credit, UTILISATEURS.administrateur, RETRAITS.rue, RETRAITS.code_postal, RETRAITS.ville "
+	private static final String SELECT_ENCHERES_CR = "SELECT ARTICLES_VENDUS.no_article, nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, etat_vente, image, libelle, date_enchere, montant_enchere, CATEGORIES.no_categorie, CATEGORIES.libelle, UTILISATEURS.no_utilisateur, prenom, nom, pseudo, email, telephone, UTILISATEURS.rue, UTILISATEURS.code_postal, UTILISATEURS.ville, UTILISATEURS.mot_de_passe, UTILISATEURS.credit, UTILISATEURS.administrateur, RETRAITS.rue, RETRAITS.code_postal, RETRAITS.ville "
 													+ "FROM ARTICLES_VENDUS "
 													+ "LEFT OUTER JOIN ENCHERES ON ENCHERES.no_article = ARTICLES_VENDUS.no_article "
 													+ "INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur "
@@ -36,7 +38,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 													+ "INNER JOIN RETRAITS ON ARTICLES_VENDUS.no_article = RETRAITS.no_article "
 													+ "WHERE ARTICLES_VENDUS.date_debut_enchere < GETDATE();";
 	
-	private static final String SELECT_ENCHERES_VD = "SELECT ARTICLES_VENDUS.no_article, nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, etat_vente, libelle, date_enchere, montant_enchere, CATEGORIES.no_categorie, CATEGORIES.libelle, UTILISATEURS.no_utilisateur, prenom, nom, email, telephone, UTILISATEURS.rue, UTILISATEURS.code_postal, UTILISATEURS.ville, UTILISATEURS.mot_de_passe, UTILISATEURS.credit, UTILISATEURS.administrateur, RETRAITS.rue, RETRAITS.code_postal, RETRAITS.ville "
+	private static final String SELECT_ENCHERES_VD = "SELECT ARTICLES_VENDUS.no_article, nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, etat_vente, image, libelle, date_enchere, montant_enchere, CATEGORIES.no_categorie, CATEGORIES.libelle, UTILISATEURS.no_utilisateur, prenom, nom, pseudo, email, telephone, UTILISATEURS.rue, UTILISATEURS.code_postal, UTILISATEURS.ville, UTILISATEURS.mot_de_passe, UTILISATEURS.credit, UTILISATEURS.administrateur, RETRAITS.rue, RETRAITS.code_postal, RETRAITS.ville "
 													+ "FROM ARTICLES_VENDUS "
 													+ "LEFT OUTER JOIN ENCHERES ON ENCHERES.no_article = ARTICLES_VENDUS.no_article "
 													+ "INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur "
@@ -99,10 +101,10 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	@Override
 	public List<Enchere> selectEncheresEC() throws DALException { //TODO AJOUTER LES PARAM JAVA dans la méthode
-		Enchere enchere = null;
-		List<Enchere> listeEncheres = new ArrayList<>();
-		Utilisateur utilisateur = null;
-		Article article = null;
+			Enchere enchere = null;
+			List<Enchere> listeEncheres = new ArrayList<>();
+			Utilisateur utilisateur = null;
+			Article article = null;
 		
 		
 		try (Connection cnx = ConnectionProvider.getConnection()){
@@ -130,7 +132,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 					String motDePasse			= rs.getString("mot_de_passe");
 					int credit					= rs.getInt("credit");
 					boolean administrateur		= rs.getBoolean("administrateur");
-					
+					System.out.println("noUtilisateur:" + noUtilisateur);
 				// TABLE ARTICLES_VENDUS
 					int noArticle 					= rs.getInt("no_article");
 					String nomArticle				= rs.getString("nom_article");
@@ -141,22 +143,28 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				    int prixVente					= rs.getInt("prix_vente");
 				    String etatVente				= rs.getString("etat_vente");
 				    String fichierPhotoArticle		= rs.getString("image");
-				    
+				    System.out.println("noArticle:" + noArticle);
 				 // TABLE CATEGORIES
 				    int noCategorie					= rs.getInt("no_categorie");
 				    String libelle					= rs.getString("libelle");
-				    
+				    System.out.println("libelle:" + libelle);
 				 // TABLE RETRAITS 
-				    String rueRetrait				= rs.getString("RETRAITS.rue");
-				    String codePostalRetrait		= rs.getString("RETRAITS.code_postal");
-				    String villeRetrait				= rs.getString("RETRAIT.ville");
+				    String rueRetrait				= rs.getString("retrue");
+				    String codePostalRetrait		= rs.getString("retcode_postal");
+				    String villeRetrait				= rs.getString("retville");
 				    
 				 // TABLE ENCHERES   
-					int montantEnchere 				= rs.getInt("ENCHERES.montant_enchere");  
+					int montantEnchere 				= rs.getInt("montant_enchere");  
 					LocalDateTime dateEnchere 		= LocalDateTime.of((rs.getDate("date_enchere").toLocalDate()),rs.getTime("date_enchere").toLocalTime());
-								
-					//TO DO créer article, utilisateur puis enchere
-					listeEncheres.add(enchere);
+							
+					
+					Utilisateur userEncherisseur 	= new Utilisateur(nomArticle, prenom, pseudo, email, telephone, rueRetrait, codePostalRetrait, villeRetrait, motDePasse, credit, administrateur);
+					
+					Article articleEC 			= new Article(nomArticle, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, noUtilisateur, noCategorie, etatVente, fichierPhotoArticle);
+					
+					Enchere enchereEC			= new Enchere(userEncherisseur, articleEC, dateEnchere, montantEnchere);
+					
+					listeEncheres.add(enchereEC);
 			}
 			
 		}catch(SQLException e) {			
