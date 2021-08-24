@@ -1,6 +1,7 @@
 package fr.eni.jee.ggsencheres.Servlets;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,7 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.jee.ggsencheres.bll.ArticleManager;
+import fr.eni.jee.ggsencheres.bll.BLLException;
+import fr.eni.jee.ggsencheres.bo.Article;
 import fr.eni.jee.ggsencheres.bo.Enchere;
+import fr.eni.jee.ggsencheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class AccueilServlet
@@ -28,12 +32,22 @@ public class AccueilServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArticleManager am = new ArticleManager();
-		List<Enchere> listeEnchere = null;
+	ArticleManager am = new ArticleManager();
+		
+	List<Enchere> listeEncheres;
+	
+	try {
+		
+		listeEncheres = am.afficherEncheres();
+		
+	}catch(BLLException e) {
+		
+		e.printStackTrace();
+	}
 	
 		
-		// TODO Ecrire
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+		
 	}
 	
 

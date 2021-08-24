@@ -73,8 +73,9 @@ public class ArticleManager {
 		
 		return articleAVendre;
 	}
-	// TODO A vérifier
-	public List<Enchere> afficherEncheres(Utilisateur utilisateur, Article article, LocalDate dateEnchere, LocalTime heure, int montantEnchere) throws BLLException{
+	
+	
+	public List<Enchere> afficherEncheres() throws BLLException{
 		
 		List<Enchere> listeEncheres = null;
 		

@@ -1,6 +1,7 @@
 package fr.eni.jee.ggsencheres.bo;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class Enchere {
@@ -9,17 +10,14 @@ public class Enchere {
 	
 	Utilisateur utilisateur;
 	Article article;
-	LocalDate dateEnchere;
-	LocalTime heureEnchere;
+	LocalDateTime dateEnchere;
 	int montantEnchere;
 	
-	public Enchere(Utilisateur utilisateur, Article article, LocalDate dateEnchere, LocalTime heureEnchere,
-			int montantEnchere) {
+	public Enchere(Utilisateur utilisateur, Article article, LocalDateTime dateEnchere, int montantEnchere) {
 		super();
 		this.utilisateur = utilisateur;
 		this.article = article;
 		this.dateEnchere = dateEnchere;
-		this.heureEnchere = heureEnchere;
 		this.montantEnchere = montantEnchere;
 		
 	}
@@ -32,13 +30,10 @@ public class Enchere {
 		return article;
 	}
 
-	public LocalDate getDateEnchere() {
+	public LocalDateTime getDateEnchere() {
 		return dateEnchere;
 	}
 
-	public LocalTime getHeureEnchere() {
-		return heureEnchere;
-	}
 
 	public int getMontantEnchere() {
 		return montantEnchere;
@@ -48,12 +43,8 @@ public class Enchere {
 		this.utilisateur = utilisateur;
 	}
 
-	public void setDateEnchere(LocalDate dateEnchere) {
+	public void setDateEnchere(LocalDateTime dateEnchere) {
 		this.dateEnchere = dateEnchere;
-	}
-
-	public void setHeureEnchere(LocalTime heureEnchere) {
-		this.heureEnchere = heureEnchere;
 	}
 
 	public void setMontantEnchere(int montantEnchere) {
