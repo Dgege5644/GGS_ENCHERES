@@ -145,12 +145,12 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 			pStmt.setString(2, nom);
 			pStmt.setString(3, prenom);
 			pStmt.setString(4, email);
-			pStmt.setString(5, telephone);
-//			if (telephone.length() == 0) {
-//				pStmt.setNull(5, Types.VARCHAR);
-//            } else {
-//            	pStmt.setString(5, telephone);
-//            }
+			//pStmt.setString(5, telephone);
+			if (telephone.length() == 0) {
+				pStmt.setNull(5, Types.VARCHAR);
+            } else {
+            	pStmt.setString(5, telephone);
+            }
 			pStmt.setString(6, rue);
 			pStmt.setString(7, codePostal);
 			pStmt.setString(8, ville);

@@ -151,12 +151,12 @@ public class UtilisateurManager {
 	public boolean validerCreationPseudo(String pseudo) throws BLLException {
 		boolean validationPseudo=false;
 		try {
-			//On cherche si un utilisateur de la BDD esxiste avec ce pseudo
+			//On cherche si un utilisateur de la BDD existe avec ce pseudo
 				Utilisateur u = utilisateurDAO.getInfosUtilisateur(pseudo);
 				
 				//le pseudo ne peut pas etre validé si :
 				//1- il est nul 
-				//2- ou la modif n'est pas possible
+				//2- un utilisateur existe avec ce pseudo
 				//3- ou n'est pas alphanumérique
 				if (pseudo == null || u!=null||  !pseudo.matches("^[a-zA-Z0-9]+$")){
 					exceptions.addMessage("il y a une erreur dans la saisie du pseudo");
@@ -235,11 +235,11 @@ public class UtilisateurManager {
 				if (!(noUtilisateur!=0 && u !=null && noUtilisateur == u.getNo_utilisateur())) {
 					modifPossible = false;
 				}
-				// conditions pour que la modif soit impossible en INSERT:
-				// un utilisateur existe avec cet email ET l'utilisateur n'existe pas encore (cad noUtilisateur ==0)
-				if (noUtilisateur == 0 && u!= null) {
-					modifPossible= false;
-				}
+//				// conditions pour que la modif soit impossible en INSERT:
+//				// un utilisateur existe avec cet email ET l'utilisateur n'existe pas encore (cad noUtilisateur ==0)
+//				if (noUtilisateur == 0 && u!= null) {
+//					modifPossible= false;
+//				}
 				//le pseudo ne peut pas etre validé si :
 				//1- il est nul 
 				//2- ou la modif n'est pas possible
