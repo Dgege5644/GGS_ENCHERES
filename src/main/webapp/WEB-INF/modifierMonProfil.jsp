@@ -12,6 +12,15 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
+
+<!-- S'il y a des erreurs à afficher, on parcours les messages -->
+	<c:if test="${!empty erreurs}">
+		<ul style="color: red;">
+			<c:forEach var="erreur" items="${erreurs}">
+				<li>${erreur }</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 	<form action="${pageContext.request.contextPath}/ModifierMonProfil" method="post">
 	
 		<label for="pseudo">Pseudo: </label>
