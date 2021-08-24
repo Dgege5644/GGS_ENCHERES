@@ -89,7 +89,7 @@ public class UtilisateurManager {
 	 * @throws BLLException 
 	 */
 	private void validerInfosModifUtilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String newMotDePasse, String confirmation2) throws BLLException {
+			String codePostal, String ville, String motDePasseActuel, String newMotDePasse, String confirmation2) throws BLLException {
 	
 			//on initialise le conteneur des erreurs (il est donc vide à ce moment là)
 			exceptions = new BLLException();
@@ -104,7 +104,7 @@ public class UtilisateurManager {
 				exceptions.addMessage("il y a une erreur dans la saisie de l'email");
 			}
 			//Si la méthode appelée retourne false ...		
-			if (validerModifMotDePasse(newMotDePasse, confirmation2) == false) {
+			if (validerModifMotDePasse(motDePasseActuel, newMotDePasse, confirmation2) == false) {
 				// on lève une BLLException
 				exceptions.addMessage("il y a une erreur dans la saisie du mot de passe");
 			}
@@ -126,15 +126,15 @@ public class UtilisateurManager {
 	 * @throws BLLException 
 	 */
 	public void modifierUtilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue,
-			String codePostal, String ville, String newMotDePasse, String confirmation2) throws BLLException {
+			String codePostal, String ville, String motDePasseActuel, String newMotDePasse, String confirmationNewMdp) throws BLLException {
 	 
 	 	try {
 	 		// on appelle la méthode validerInfosUtilisateur
-	 		this.validerInfosModifUtilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, newMotDePasse, confirmation2);
+	 		this.validerInfosModifUtilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasseActuel, newMotDePasse, confirmationNewMdp);
 	 		
 	 		// si la méthode valide, on modifie dans la BDD, l'utilisateur dont le noUtilisateur est remonté en 
 	 		//paramètre, avec les paramètres récupérés du formulaire de saisie
-	 		this.utilisateurDAO.updateInfosUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, newMotDePasse);
+	 		this.utilisateurDAO.updateInfosUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasseActuel, newMotDePasse);
 	 		
 		} catch (DALException e) {
 			exceptions.addMessage(e.getMessage());
@@ -298,13 +298,13 @@ public class UtilisateurManager {
 	 * @return validationEmail
 	 * @throws BLLException
 	 */
-	private boolean validerModifMotDePasse(String newMotDePasse, String confirmationNewMdp) throws BLLException {
+	private boolean validerModifMotDePasse(String motDePasseActuel, String newMotDePasse, String confirmationNewMdp) throws BLLException {
 		boolean validationMotDePasse;
 		try {
 			
-			// conditions pour que la création soit impossible lors de l'inscription:
+			// conditions pour que la modification soit impossible :
 			// motDePasse est nul ou motDePasse non égal à confirmation
-			if (newMotDePasse !=null && !newMotDePasse.equals(confirmationNewMdp)) {
+			if (motDePasseActuel == null && !newMotDePasse.equals(confirmationNewMdp)) {
 				exceptions.addMessage("il y a une erreur dans la saisie du nouveau mot de passe");
 					
 			} validationMotDePasse = true;

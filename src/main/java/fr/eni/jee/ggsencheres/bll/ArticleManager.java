@@ -52,6 +52,9 @@ public class ArticleManager {
 		if(ville == null || ville.equalsIgnoreCase("")) {
 			exceptions.addMessage("Erreur dans l'adresse de l'article");
 		}
+		if(prixInitial < 0) {
+			exceptions.addMessage("Vous devez fixer un prix superieur ou égal à 0");
+		}
 		if(!exceptions.isEmpty()) {
 			throw exceptions;
 		}
@@ -87,5 +90,12 @@ public class ArticleManager {
 			throw new BLLException("Erreur dans la méthode afficherEnchères. Note technique:" + e.getMessage());
 		}
 		return listeEncheres;
+	}
+
+
+
+	public void enregistrerEnchere(String pseudoEncherisseur, int montantEnchere, int prixInitial, int creditEncherisseur) {
+		
+		
 	}
 }

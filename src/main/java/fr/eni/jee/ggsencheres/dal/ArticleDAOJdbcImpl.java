@@ -175,6 +175,12 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		
 	}
 	
+	public Article selectById() {
+		
+		
+		return null;
+	}
+	
 
 }
 	
