@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
-	<c:if test="${!empty succesVendreUnArticle}"> L'article à bien été ajouté a vos articles à vendre!</c:if>
+	<c:if test="${!empty succesVendreUnArticle}"> L'article a bien été ajouté à vos articles à vendre!</c:if>
 	<c:if test="${!empty succesModifProfil}"> Les modifications ont bien été enregistrées dans votre profil</c:if>
 	<!-- Adresse = servlet de connexion -->
 	<c:if test="${empty succes}"> <!-- l'utilsateur arrive à l'accueil pour la première fois   -->
@@ -48,6 +48,20 @@
 				<option value ="Sport&Loisirs">Sport et Loisirs</option>
 			</optgroup>
 		</select>
+		<c:if test="${!empty succes}">
+	<div>
+		<input type="radio" name="historique"/>Achats<br /> <!-- TODO créer des JRadioButton -->
+		<input type="checkbox" name="encheresouvertes"/>enchères ouvertes<br /><!-- TODO créer des JCheckbox -->
+		<input type="checkbox" name="mesencheres"/>mes enchères<br />
+		<input type="checkbox" name="mesencheresremportees"/>mes enchères remportées<br />
+	</div>
+	<div>
+		<input type="radio" name="historique"/>Mes ventes<br />
+		<input type="checkbox" name="mesventesencours"/>mes ventes en cours<br />
+		<input type="checkbox" name="ventesnondebutees"/>ventes non débutées<br />
+		<input type="checkbox" name="ventesterminees"/>ventes terminées<br />
+	</div>
+</c:if>
 		<input type="submit" value="Rechercher"/>
 
 	</form>
@@ -81,7 +95,7 @@
 				</li>
 			<c:if test="${!empty succes}">
 				<li>
-					Vendeur: <a href="#">${enchereEC.userEncherisseur.nom}</a> <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
+					Vendeur: <a href="${pageContext.request.contextPath}/AfficherProfilVendeur">${enchereEC.userEncherisseur.nom}</a> <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
 				</li>
 			</c:if>
 			<c:if test="${empty succes}">

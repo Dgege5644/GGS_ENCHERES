@@ -114,4 +114,6 @@ public class ArticleManager {
 		
 		return enchereEC;
 	}
+	
+	
 }

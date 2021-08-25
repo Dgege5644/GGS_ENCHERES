@@ -343,6 +343,7 @@ public class UtilisateurManager {
 	 * Méthode de validation du téléphone
 	 */
 	public boolean validerCodePostal(String codePostal)throws BLLException {
+
 		// C'est Ok si c'est non nul,  que ce sont des chiffres et que la taille fait 5
 		boolean validationCodePostal = false;
 		
@@ -357,4 +358,22 @@ public class UtilisateurManager {
 
 		} return validationCodePostal;
 	}	
+	
+	public Utilisateur afficherInfosVendeur(int no_utilisateur) throws BLLException{
+		Utilisateur userVendeur = null;
+		
+		try {
+			
+			userVendeur = utilisateurDAO.selectUserByID(no_utilisateur);
+			
+		}catch(DALException e) {
+			throw new BLLException("Erreur dans la méthode afficherEnchères. Note technique:" + e.getMessage()); 
+		}
+		return userVendeur;
+	}
+	
+	
+	
 }
+
+

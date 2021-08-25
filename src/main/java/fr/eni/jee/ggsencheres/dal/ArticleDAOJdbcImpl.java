@@ -58,7 +58,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	private static final String INSERT_INTO_ARTICLES_VENDUS = "INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, no_utilisateur, no_categorie, etat_vente, image)VALUES(?,?,?,?,?,?,?,?,?,?);";
 
-
+	private static final String SELECT_INFOS_USER = "SELECT * FROM UTILISATEURS WHERE no_utilisateur = ?;";
+													
+	
 	@Override
 	public void addArticle(Article articleAVendre) throws DALException {
 		
@@ -163,16 +165,16 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				    
 				 // TABLE ENCHERES   
 					int montantEnchere 				= rs.getInt("prix_initial"); //TODO Mettre le prix_initial? Si oui quelles conséquences pour les futures enchères?
-					System.out.println("montant_enchere/Mise en ligne de l'article:" + montantEnchere);
+					
 					LocalDateTime dateEnchere 		= LocalDateTime.of((rs.getDate("date_debut_enchere").toLocalDate()),rs.getTime("date_debut_enchere").toLocalTime());
-					System.out.println("dateEnchere/Mise en ligne de l'article:" + dateDebutEnchere);	
+						
 					
 					userEncherisseur 	= new Utilisateur(noUtilisateur, nomArticle, prenom, pseudo, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
-					System.out.println("....:" + userEncherisseur.getCodePostal());
-					articleEC 			= new Article(noArticle, nomArticle, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, noUtilisateur, noCategorie, etatVente, fichierPhotoArticle, rueRetrait, codePostalRetrait, villeRetrait);
 					
+					articleEC 			= new Article(noArticle, nomArticle, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, noUtilisateur, noCategorie, etatVente, fichierPhotoArticle, rueRetrait, codePostalRetrait, villeRetrait);
+					System.out.println("TestRecup:" + articleEC.getNoUtilisateur());
 					enchereEC			= new Enchere(userEncherisseur, articleEC, dateEnchere, montantEnchere);
-					System.out.println("....:" + enchereEC.getUserEncherisseur().getCodePostal());
+					
 					
 					listeEncheres.add(enchereEC);
 			}
@@ -251,7 +253,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		}
 		return enchereEC;
 	}
-	
 	
 }
 	

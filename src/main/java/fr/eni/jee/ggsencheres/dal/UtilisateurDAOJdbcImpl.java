@@ -42,6 +42,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	// instruction SQL pour récupérer l'ensemble des utilisateurs de la BDD
 	private static final String SELECT_ALL = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from UTILISATEURS;";
 
+	final static String SELECT_INFOS_UTILISATEUR_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from UTILISATEURS WHERE no_utilisateur=?;";
 	
 	@Override
 	/**
@@ -227,4 +228,41 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO{
 	
 	}
 
+	@Override
+	public Utilisateur selectUserByID(int no_utilisateur) throws  DALException {
+
+		Utilisateur userVendeur = null;
+		
+		
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pStmt = cnx.prepareStatement(SELECT_INFOS_UTILISATEUR_BY_ID);
+			
+			pStmt.setInt(1, no_utilisateur);
+
+			ResultSet rs = pStmt.executeQuery();
+			
+			if(rs.next()) {
+				 
+				no_utilisateur = rs.getInt("no_utilisateur");
+				pseudo = rs.getString("pseudo");
+				nom = rs.getString("nom");
+				prenom = rs.getString("prenom");
+				email = rs.getString("email");
+				telephone = rs.getString("telephone");
+				rue = rs.getString("rue");
+				codePostal = rs.getString("code_postal");
+				ville = rs.getString("ville");
+				motDePasse = rs.getString("mot_de_passe");
+				credit = rs.getInt("credit");
+				administrateur = rs.getBoolean("administrateur");
+				
+				userVendeur = new Utilisateur(no_utilisateur,pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse,credit,administrateur);
+			}
+			
+		} catch (SQLException e) {
+			throw new DALException("Erreur de connexion avec la base de données. Note technique : " + e.getMessage());
+		}
+		
+		return userVendeur; 
+	}
 }
