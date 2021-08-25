@@ -16,7 +16,7 @@
 	<textarea name="description" id="description" cols="30" rows="10">"${article.description}"</textarea>
 	
 	<label for="categorie">Catégorie :</label>
-	<p>${article.noCategorie.libelle}</p>
+	
 	
 	<label for="enchereActuelle">Meilleure offre : </label>
 	<p>${article.enchere.montantEnchere} pts par ${article.enchere.utilisateur.pseudo}</p>
@@ -52,6 +52,7 @@
 		
 		
 		<input type="submit" name="encherir" value="Enchérir"/>
+		<!-- <input type="hidden" value=""/> -->
 	</form>
 	<c:if test="${!empty succesEnchere}">
 		Votre enchère a bien été prise en compte

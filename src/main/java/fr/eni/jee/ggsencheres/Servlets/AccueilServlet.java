@@ -19,6 +19,8 @@ import fr.eni.jee.ggsencheres.bo.Enchere;
  */
 @WebServlet("/Accueil")
 public class AccueilServlet extends HttpServlet {
+	
+
 	private static final long serialVersionUID = 1L;
        
     public AccueilServlet() {
@@ -55,5 +57,9 @@ public class AccueilServlet extends HttpServlet {
 		
 	}
 	
-
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
+		
+	}
 }
