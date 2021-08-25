@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.jee.ggsencheres.bll.ArticleManager;
+import fr.eni.jee.ggsencheres.bll.BLLException;
 import fr.eni.jee.ggsencheres.bo.Article;
 import fr.eni.jee.ggsencheres.bo.Enchere;
 import fr.eni.jee.ggsencheres.bo.Utilisateur;
@@ -27,28 +28,38 @@ public class EncherirServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//TODO reccuperer num article en cliquand sur le lien nom de l'article sur la page accueil
-		//int noArticle = Integer.parseInt(request.getParameter("noArticle"));
+		Enchere enchereEC=null;
+		int noArticle=Integer.parseInt(request.getParameter("noArticle"));
+		ArticleManager am = new ArticleManager();
+		try {
+			enchereEC=am.selectArticleById(noArticle);
+			request.setAttribute("enchereEC", enchereEC);
+		} catch (BLLException e) {
+			request.setAttribute("erreurEnchere", "enchere impossible");
+			e.printStackTrace();
+		}
 		
 		request.getRequestDispatcher("/WEB-INF/encherir.jsp").forward(request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		Article articleAuxEncheres=null;
-//		// je récupère la session de l'utilisateur en cours
-//		Utilisateur userEncherisseur = (Utilisateur)request.getSession().getAttribute("userConnected");
-//		// je récupère le no_utilisateur affecté à ce currentUser et laffecte à ma variable
-//		String pseudoEncherisseur= userEncherisseur.getPseudo();
-//		int creditEncherisseur = userEncherisseur.getCredit();
-//	
-//		Enchere enchereArticle;
-//		int montantEnchere= Integer.parseInt(request.getParameter("proposition"));
-//		
-//		ArticleManager am = new ArticleManager();
-//		am.enregistrerEnchere(pseudoEncherisseur,montantEnchere,creditEncherisseur);
-//		request.setAttribute("succesEnchere", true);
-//		request.getRequestDispatcher("/WEB-INF/encherir.jsp").forward(request, response);
+		
+		
+		
+		// je récupère la session de l'utilisateur en cours
+		Utilisateur userEncherisseur = (Utilisateur)request.getSession().getAttribute("userConnected");
+		// je récupère le no_utilisateur affecté à ce currentUser et laffecte à ma variable
+		String pseudoEncherisseur= userEncherisseur.getPseudo();
+		int creditEncherisseur = userEncherisseur.getCredit();
+	
+		Enchere enchereArticle;
+		int montantEnchere= Integer.parseInt(request.getParameter("proposition"));
+		
+		
+		//am.enregistrerEnchere(pseudoEncherisseur,montantEnchere,creditEncherisseur);
+		request.setAttribute("succesEnchere", true);
+		request.getRequestDispatcher("/WEB-INF/encherir.jsp").forward(request, response);
 	}
 
 }

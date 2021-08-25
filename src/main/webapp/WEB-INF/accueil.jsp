@@ -63,7 +63,7 @@
 			
 			<c:if test="${!empty succes}">
 				<li>
-					<a href="${pageContext.request.contextPath}/Encherir">${enchereEC.articleEC.nomArticle}</a>  <!-- Mettre le  lien qui conduira vers le détail de l'enchère lorsque l'utilisateur acheteur sera connecté-->
+					<a href="${pageContext.request.contextPath}/Encherir?noArticle=${enchereEC.articleEC.noArticle}">${enchereEC.articleEC.nomArticle}</a>  <!-- Mettre le  lien qui conduira vers le détail de l'enchère lorsque l'utilisateur acheteur sera connecté-->
 				</li>
 			</c:if>
 			

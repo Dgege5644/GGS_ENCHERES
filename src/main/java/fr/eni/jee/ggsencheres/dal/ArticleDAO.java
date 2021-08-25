@@ -10,6 +10,7 @@ public interface ArticleDAO {
 	void addArticle(Article articleAVendre)throws DALException;
 	void addRetrait(Article articleAVendre)throws DALException;
 	List<Enchere> selectEncheresEC() throws DALException;
+	Enchere selectArticleById(int noArticle)throws DALException;
 
 
 }

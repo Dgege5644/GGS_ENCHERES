@@ -99,4 +99,19 @@ public class ArticleManager {
 		
 		
 	}
+
+
+
+	public Enchere selectArticleById(int noArticle) throws BLLException {
+		Enchere enchereEC=null;
+		try {
+			enchereEC = this.articleDAO.selectArticleById(noArticle);
+		} catch (DALException e) {
+			e.printStackTrace();
+			throw new BLLException("erreur dans la recuperation de l'article");
+			
+		}
+		
+		return enchereEC;
+	}
 }
