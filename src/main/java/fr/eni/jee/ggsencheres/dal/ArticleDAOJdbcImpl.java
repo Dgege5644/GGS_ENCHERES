@@ -18,6 +18,11 @@ import fr.eni.jee.ggsencheres.bo.Utilisateur;
 public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	
+	private static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET montant_enchere=?,UTILISATEURS.pseudo=?,UTILISATEURS.credit=? "
+			+ "INNER JOIN UTILISATEURS ON ENCHERES.no_utilisateur= UTILISATEURS.no_utilisateur "
+			+ "WHERE ENCHERES.no_article = ?";
+
+
 	private static final String SELECT_ARTICLE_BY_ID = "SELECT ARTICLES_VENDUS.no_article as no_article, nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, etat_vente, image, libelle, date_enchere, montant_enchere, CATEGORIES.no_categorie as no_categorie, CATEGORIES.libelle as libelle, UTILISATEURS.no_utilisateur as no_utilisateur, prenom, nom, pseudo, email, telephone, UTILISATEURS.rue as rue, UTILISATEURS.code_postal as code_postal, UTILISATEURS.ville as ville, mot_de_passe, credit, administrateur, RETRAITS.rue as retrue, RETRAITS.code_postal as retcode_postal, RETRAITS.ville as retville "
 														+ "FROM ARTICLES_VENDUS "
 														+ "LEFT OUTER JOIN ENCHERES ON ENCHERES.no_article = ARTICLES_VENDUS.no_article  "
@@ -252,6 +257,19 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		return enchereEC;
 	}
 	
-	
+	public Enchere updateEnchereEC(int montantEnchere, int noArticle, String pseudoEncherisseur, int creditEncherisseur) throws DALException {
+		Enchere enchereUpdated=null;
+		try(Connection cnx = ConnectionProvider.getConnection()){
+			PreparedStatement pSt= cnx.prepareStatement(UPDATE_ENCHERE);
+			pSt.setInt(1, montantEnchere);
+			pSt.setString(2, pseudoEncherisseur);
+			pSt.setInt(3, creditEncherisseur);
+			pSt.setInt(4, noArticle);
+			pSt.executeUpdate();
+		}catch(SQLException e) {
+			throw new DALException("erreur de l'update de l'enchere");
+		}
+		return enchereUpdated;
+	}
 }
 	

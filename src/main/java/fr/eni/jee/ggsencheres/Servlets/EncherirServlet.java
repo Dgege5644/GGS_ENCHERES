@@ -45,16 +45,25 @@ public class EncherirServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		
 		// je récupère la session de l'utilisateur en cours
 		Utilisateur userEncherisseur = (Utilisateur)request.getSession().getAttribute("userConnected");
 		// je récupère le no_utilisateur affecté à ce currentUser et laffecte à ma variable
+		Enchere enchereEC=null;
 		String pseudoEncherisseur= userEncherisseur.getPseudo();
 		int creditEncherisseur = userEncherisseur.getCredit();
-	
-		Enchere enchereArticle;
 		int montantEnchere= Integer.parseInt(request.getParameter("proposition"));
+		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
+		ArticleManager am = new ArticleManager();
+		try {
+			enchereEC=am.selectArticleById(noArticle);
+			
+			enchereEC = am.validerEnchere(montantEnchere,noArticle,pseudoEncherisseur,creditEncherisseur);
+			request.setAttribute("enchereEC", enchereEC);
+			
+		} catch (BLLException e) {
+			request.setAttribute("erreurEnchere", "enchere impossible");
+			e.printStackTrace();
+		}
 		
 		
 		//am.enregistrerEnchere(pseudoEncherisseur,montantEnchere,creditEncherisseur);

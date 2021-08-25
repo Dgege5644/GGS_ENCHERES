@@ -11,6 +11,7 @@ public interface ArticleDAO {
 	void addRetrait(Article articleAVendre)throws DALException;
 	List<Enchere> selectEncheresEC() throws DALException;
 	Enchere selectArticleById(int noArticle)throws DALException;
+	Enchere updateEnchereEC(int montantEnchere, int noArticle, String pseudoEncherisseur, int creditEncherisseur) throws DALException;
 
 
 }

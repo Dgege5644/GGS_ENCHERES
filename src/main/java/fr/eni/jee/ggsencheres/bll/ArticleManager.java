@@ -95,10 +95,7 @@ public class ArticleManager {
 
 
 
-	public void enregistrerEnchere(String pseudoEncherisseur, int montantEnchere, int prixInitial, int creditEncherisseur) {
-		
-		
-	}
+
 
 
 
@@ -113,5 +110,21 @@ public class ArticleManager {
 		}
 		
 		return enchereEC;
+	}
+
+
+
+	public Enchere validerEnchere(int montantEnchere, int noArticle, String pseudoEncherisseur, int creditEncherisseur) throws BLLException {
+		Enchere enchereValidee=null;
+		if(montantEnchere>creditEncherisseur) {
+			throw new BLLException("credit insuffisant, désolé!");
+		}
+		try {
+			enchereValidee=this.articleDAO.updateEnchereEC(montantEnchere,noArticle,pseudoEncherisseur,creditEncherisseur);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return enchereValidee;
 	}
 }
