@@ -24,8 +24,13 @@ public class ArticleManager {
 		this.articleDAO = DAOFactory.getArticleDAO();
 	}
 
-
-
+	/**
+	 * Méthode qui permet de valider qu'un article peut être créé
+	 * @param noUtilisateur @param nomArticle @param description @param categorie
+	 * @param fichierPhotoArticle @param prixInitial @param debutEnchere @param finEnchere
+	 * @param rue @param codePostal @param ville
+	 * @throws BLLException
+	 */
 	private void validerArticle(int noUtilisateur, String nomArticle, String description, int categorie,
 			String fichierPhotoArticle, int prixInitial, LocalDateTime debutEnchere, LocalDateTime finEnchere,String rue, String codePostal, String ville)throws BLLException {
 		exceptions= new BLLException();
@@ -59,9 +64,24 @@ public class ArticleManager {
 		if(!exceptions.isEmpty()) {
 			throw exceptions;
 		}
-		
 	}
 	
+	/**
+	 * 
+	 * @param noUtilisateur
+	 * @param nomArticle
+	 * @param description
+	 * @param categorie
+	 * @param fichierPhotoArticle
+	 * @param prixInitial
+	 * @param debutEnchere
+	 * @param finEnchere
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 * @return
+	 * @throws BLLException
+	 */
 	public Article creerAticleAVendre(int noUtilisateur, String nomArticle, String description, int categorie,
 			String fichierPhotoArticle, int prixInitial, LocalDateTime debutEnchere, LocalDateTime finEnchere, String rue, String codePostal, String ville)throws BLLException {
 		Article articleAVendre = new Article(noUtilisateur, nomArticle,description,categorie,fichierPhotoArticle,prixInitial,debutEnchere,finEnchere,rue,codePostal,ville);
@@ -78,7 +98,11 @@ public class ArticleManager {
 		return articleAVendre;
 	}
 	
-	
+	/**
+	 * Méthode qui permet d'afficher l'ensemble des enchères en cours
+	 * @return
+	 * @throws BLLException
+	 */
 	public List<Enchere> afficherEncheres() throws BLLException{
 		
 		List<Enchere> listeEncheres = new ArrayList<>();
@@ -93,12 +117,12 @@ public class ArticleManager {
 		return listeEncheres;
 	}
 
-
-
-
-
-
-
+	/**
+	 * Méthode qui permet de sélectionner un article à partir de son noArticle
+	 * @param noArticle
+	 * @return enchereEC de type Enchere
+	 * @throws BLLException
+	 */
 	public Enchere selectArticleById(int noArticle) throws BLLException {
 		Enchere enchereEC=null;
 		try {
@@ -108,22 +132,30 @@ public class ArticleManager {
 			throw new BLLException("erreur dans la recuperation de l'article");
 			
 		}
-		
 		return enchereEC;
 	}
 
-
-
+	/**
+	 * Méthode qui permet de valider que l'enchère peut être acceptée
+	 * @param montantEnchere
+	 * @param noArticle
+	 * @param pseudoEncherisseur
+	 * @param creditEncherisseur
+	 * @return
+	 * @throws BLLException
+	 */
 	public Enchere validerEnchere(int montantEnchere, int noArticle, String pseudoEncherisseur, int creditEncherisseur) throws BLLException {
 		Enchere enchereValidee=null;
+		// l'enchère ne peut être acceptée si elle est > au crédit de l'userEncherisseur
 		if(montantEnchere>creditEncherisseur) {
 			throw new BLLException("credit insuffisant, désolé!");
 		}
 		try {
+			// Si l'enchère est validée, on modifie les données renseignées en paramètres
 			enchereValidee=this.articleDAO.updateEnchereEC(montantEnchere,noArticle,pseudoEncherisseur,creditEncherisseur);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new BLLException("erreur dans la validation de l'enchère");
 		}
 		return enchereValidee;
 	}

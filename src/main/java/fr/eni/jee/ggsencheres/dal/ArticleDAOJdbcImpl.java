@@ -189,7 +189,13 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		
 		
 	}
-	
+	/**
+	 * Méthode qui permet de sélectionner toutes les infos concernant un article 
+	 * mis aux enchères selon son noArticle (en utilsant les liens entre les
+	 * différentes tables de la BDD
+	 * Ellle prend un noArticle (récupéré dans la jsp) en paramètre et retourne
+	 * une enchereEC de type Enchere qui sera utilisée dans la jsp
+	 */
 	public Enchere selectArticleById(int noArticle) throws DALException {
 		Article articleEC = null;
 		Enchere enchereEC = null;
@@ -216,8 +222,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				String motDePasse			= rs.getString("mot_de_passe");
 				int credit					= rs.getInt("credit");
 				boolean administrateur		= rs.getBoolean("administrateur");
-			//TABLE ARTICLES_VENDUS
-				
+				//TABLE ARTICLES_VENDUS
 				String nomArticle				= rs.getString("nom_article");
 			    String description				= rs.getString("description");
 			    LocalDateTime dateDebutEnchere 	= LocalDateTime.of((rs.getDate("date_debut_enchere").toLocalDate()),rs.getTime("date_debut_enchere").toLocalTime()); //Le type DateTime (SQL) est converti en 2 variables: LocalDate et LocalTime
@@ -227,11 +232,11 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			    String etatVente				= rs.getString("etat_vente");
 			    String fichierPhotoArticle		= rs.getString("image");
 			    System.out.println("noArticle:" + noArticle);
-			 // TABLE CATEGORIES
+			    // TABLE CATEGORIES
 			    int noCategorie					= rs.getInt("no_categorie");
 			    String libelle					= rs.getString("libelle");
 			    System.out.println("libelle:" + libelle);
-			 // TABLE RETRAITS 
+			    // TABLE RETRAITS 
 			    String rueRetrait				= rs.getString("retrue");
 			    String codePostalRetrait		= rs.getString("retcode_postal");
 			    String villeRetrait				= rs.getString("retville");
@@ -241,22 +246,29 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				LocalDateTime dateEnchere 		= LocalDateTime.of((rs.getDate("date_debut_enchere").toLocalDate()),rs.getTime("date_debut_enchere").toLocalTime());
 				System.out.println("dateEnchere/Mise en ligne de l'article:" + dateDebutEnchere);	
 				
+				// On affecte à une variable userEncherisseur de type Utilisateur l'ensemble des infos dont on aura besoin en jsp
 				userEncherisseur 	= new Utilisateur(noUtilisateur, nomArticle, prenom, pseudo, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
-				System.out.println("....:" + userEncherisseur.getCodePostal());
+				
+				// On affecte à une variable articleEC de type Article l'ensemble des infos dont on aura besoin en jsp
+				// le noArticle est récupéré dans le paramètres de la méthode (il arrive de la jsp)
 				articleEC 			= new Article(noArticle, nomArticle, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, noUtilisateur, noCategorie, etatVente, fichierPhotoArticle, rueRetrait, codePostalRetrait, villeRetrait);
 				
+				// On affecte à une variable enchereEC de type Enchere l'ensemble des infos dont on aura besoin en jsp
+				// elle reprend en paramètre les 2 objets créés précéndemment en plus de dateEnchere et montantEnchere
 				enchereEC			= new Enchere(userEncherisseur, articleEC, dateEnchere, montantEnchere);
-				System.out.println("....:" + enchereEC.getUserEncherisseur().getCodePostal());
-				
-				
-			
 			}
+			
 		}catch(SQLException e) {
-			throw new DALException("");
+			throw new DALException("erreur dans la récupération d'une enchère en fonction du noArticle");
 		}
 		return enchereEC;
 	}
 	
+	/**
+	 * Méthode qui modifie les colonnes concernées avec ce qu'elle utilise en paramètre
+	 * Et qui retourne une enchereUpdated de type Enchere ????? 
+	 * TODO passer la méthode en void ?????
+	 */
 	public Enchere updateEnchereEC(int montantEnchere, int noArticle, String pseudoEncherisseur, int creditEncherisseur) throws DALException {
 		Enchere enchereUpdated=null;
 		try(Connection cnx = ConnectionProvider.getConnection()){

@@ -63,5 +63,9 @@
 		<p>Votre enchère a bien été prise en compte.</p>
 		<p>L'article sera à vous si personne ne surenchérit sur votre proposition avant la fin de l'enchère.</p>
 	</c:if>
+	
+	<c:if test ="${!empty erreurEnchere}">
+		${erreurEnchere}
+	</c:if>
 </body>
 </html>
