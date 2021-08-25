@@ -56,13 +56,23 @@
 	
 	<c:if test="${!empty listeEncheres}"> <!-- Si la liste créée des (articles mis en vente) n'est pas vide,...   -->
 	
-	<p>Il y a ${listeEncheres.size()} enchères en cours</p> <!-- Affiche la taille de la variable "listeEncheres" -->
+	<p>Il y a ${listeEncheres.size()} enchères en cours, Bonne chance!</p> <!-- Affiche la taille de la variable "listeEncheres" -->
 	
  		<c:forEach var="enchereEC" items ="${listeEncheres}"> <!-- pour chaque enchère présente dans la liste des enchères   -->
 			<ul>
+			
+			<c:if test="${!empty succes}">
 				<li>
-					<a href="${pageContext.request.contextPath}/Encherir">${enchereEC.articleEC.nomArticle}</a> <!-- Mettre le nom de l'article sur une ligne, puis transformer en un lien qui conduira vers le détail de l'enchère lorsque l'utilisateur acheteur sera connecté--> 
+					<a href="${pageContext.request.contextPath}/Encherir">${enchereEC.articleEC.nomArticle}</a>  <!-- Mettre le  lien qui conduira vers le détail de l'enchère lorsque l'utilisateur acheteur sera connecté-->
 				</li>
+			</c:if>
+			
+			<c:if test="${empty succes}">
+				<li>
+					${enchereEC.articleEC.nomArticle} <!-- Mettre le nom de l'article sur une ligne, puis transformer en un lien qui conduira vers le détail de l'enchère lorsque l'utilisateur acheteur sera connecté--> 
+				</li>
+			</c:if>
+			
 				<li>
 					${enchereEC.montantEnchere} <!-- TODO : Mettre la plus haute enchère en cours sinon le prix initial sur une autre ligne -->
 				</li>
@@ -70,7 +80,7 @@
 					${enchereEC.dateEnchere} <!-- Mettre la date et l'heure de fin d'enchère sur une autre ligne  -->
 				</li>
 				<li>
-					${enchereEC.userEncherisseur.nom} <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
+					<a href="#">${enchereEC.userEncherisseur.nom}</a> <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
 				</li>
 			</ul>
 		</c:forEach> 
