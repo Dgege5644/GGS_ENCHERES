@@ -15,6 +15,7 @@
 	<form action="./AfficherMonProfil" method="get">
 	
 		<label for="pseudo">Pseudo: </label>
+		
 		<input type="text" name="pseudo" id="pseudo" readonly="readonly" value="${userConnected.pseudo}"/><br />
 		
 		<label for="nom">Nom: </label>

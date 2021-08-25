@@ -25,7 +25,7 @@
 	
 		<label for="pseudo">Pseudo: </label>
 		<input type="text" name="pseudo" id="pseudo" value="${userConnected.pseudo}"/>
-		
+		<input type="hidden" name ="pseudoActuel" value ="${userConnected.pseudo}">
 		<label for="nom">Nom: </label>
 		<input type="text" name="nom" id="nom" value="${userConnected.nom}"/><br />
 		
@@ -34,7 +34,7 @@
 		
 		<label for="email">Email: </label>
 		<input type="email" name="email" id="email" value="${userConnected.email}"/><br />
-		
+		<input type="hidden" name ="emailActuel" value ="${userConnected.email}">
 		<label for="telephone">Téléphone: </label>
 		<input type="text" name="telephone" id="telephone" value="${userConnected.telephone}"/>
 		
