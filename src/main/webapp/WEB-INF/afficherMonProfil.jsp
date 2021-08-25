@@ -49,6 +49,8 @@
 		</c:if>
 		
 		<button><a href="${pageContext.request.contextPath}/ModifierMonProfil">Modifier</a></button>
+		<a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a>
+		<a href="${pageContext.request.contextPath}/SupprimerMonCompte">Supprimer mon compte</a>
 	</form>
 	
 	
