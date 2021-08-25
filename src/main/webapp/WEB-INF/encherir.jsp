@@ -22,6 +22,8 @@
 	
 	
 	<label for="enchereActuelle">Meilleure offre : </label>
+	<!-- TODO Attention, ${enchereEC.userEncherisseur.pseudo} renvoie le 
+	nomArticle à l'affichage -->
 	<p>${enchereEC.montantEnchere} pts par ${enchereEC.userEncherisseur.pseudo}</p>
 	
 	<label for="prixInitial">Mise à prix :</label>
@@ -34,6 +36,8 @@
 	 <p>${enchereEC.articleEC.codePostal} ${enchereEC.articleEC.ville}</p>
 	 
 	 <label for="vendeur">Vendeur : </label>
+	 <!-- TODO Attention, ${enchereEC.userEncherisseur.pseudo} renvoie le 
+	 nomArticle à l'affichage -->
 	 <p>${enchereEC.userEncherisseur.pseudo}</p>
 	 
 	 
