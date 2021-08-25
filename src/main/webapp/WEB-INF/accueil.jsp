@@ -52,30 +52,38 @@
 
 	</form>
 	
+	
+	
 	<c:if test="${!empty listeEncheres}"> <!-- Si la liste créée des (articles mis en vente) n'est pas vide,...   -->
 	
-		<c:forEach items ="${listeEncheres}" var ="enchereEC"> <!-- pour chaque enchère présente dans la liste des enchères   -->
+	<p>Il y a ${listeEncheres.size()} enchères en cours</p> <!-- Affiche la taille de la variable "listeEncheres" -->
+	
+ 		<c:forEach var="enchereEC" items ="${listeEncheres}"> <!-- pour chaque enchère présente dans la liste des enchères   -->
 			<ul>
 				<li>
-					${enchereEC.article.nomArticle} <!-- Mettre le nom de l'article sur une ligne, puis transformer en un lien qui conduira vers le détail de l'enchère lorsque l'utilisateur acheteur sera connecté--> 
+					<a href="${pageContext.request.contextPath}/Encherir">${enchereEC.articleEC.nomArticle}</a> <!-- Mettre le nom de l'article sur une ligne, puis transformer en un lien qui conduira vers le détail de l'enchère lorsque l'utilisateur acheteur sera connecté--> 
 				</li>
 				<li>
-					${enchereEC.article.montantEnchere} <!-- TODO : Mettre la plus haute enchère en cours sinon le prix initial sur une autre ligne -->
+					${enchereEC.montantEnchere} <!-- TODO : Mettre la plus haute enchère en cours sinon le prix initial sur une autre ligne -->
 				</li>
 				<li>
-					${enchereEC.article.dateEnchere} <!-- Mettre la date et l'heure de fin d'enchère sur une autre ligne  -->
+					${enchereEC.dateEnchere} <!-- Mettre la date et l'heure de fin d'enchère sur une autre ligne  -->
 				</li>
 				<li>
 					${enchereEC.userEncherisseur.nom} <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
 				</li>
 			</ul>
-		</c:forEach>
+		</c:forEach> 
 	</c:if>
 	
-	<c:if test="${empty listeEncheres}"> <!-- Si la liste créée des (articles mis en vente) est vide, ...   -->
+	<c:if test="${!empty listeEncheresNulle}"> <!-- Si la liste créée des (articles mis en vente) est vide, ...   -->
 	
-		<p>Aucune enchère en cours, Revenez ultérieurement!</p> <!-- Afficher ce message   -->
+		${listeEncheresNulle} <!-- Affiche le message défini dans la servlet "Aucune enchère en cours, Revenez ultérieurement!"   -->
 		
+	</c:if>
+	
+	<c:if test="${!empty erreurListeEncheres}">
+			${erreurListeEncheres} <!-- Affiche le message défini dans la servlet "Erreur lors de l'affichage de la liste"   -->
 	</c:if>
 
 

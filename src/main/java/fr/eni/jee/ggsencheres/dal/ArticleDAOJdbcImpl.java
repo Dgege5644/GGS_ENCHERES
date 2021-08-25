@@ -101,10 +101,10 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 	@Override
 	public List<Enchere> selectEncheresEC() throws DALException { //TODO AJOUTER LES PARAM JAVA dans la méthode
-			Enchere enchere = null;
-			List<Enchere> listeEncheres = new ArrayList<>();
-			Utilisateur utilisateur = null;
-			Article article = null;
+			Enchere enchereEC = null;
+			List<Enchere> listeEncheres = new ArrayList<Enchere>();
+			Utilisateur userEncherisseur = null;
+			Article articleEC = null;
 		
 		
 		try (Connection cnx = ConnectionProvider.getConnection()){
@@ -154,15 +154,17 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				    String villeRetrait				= rs.getString("retville");
 				    
 				 // TABLE ENCHERES   
-					int montantEnchere 				= rs.getInt("montant_enchere");  
-					LocalDateTime dateEnchere 		= LocalDateTime.of((rs.getDate("date_enchere").toLocalDate()),rs.getTime("date_enchere").toLocalTime());
-							
+					int montantEnchere 				= rs.getInt("prix_initial"); //TODO Mettre le prix_initial? Si oui quelles conséquences pour les futures enchères?
+					System.out.println("montant_enchere/Mise en ligne de l'article:" + montantEnchere);
+					LocalDateTime dateEnchere 		= LocalDateTime.of((rs.getDate("date_debut_enchere").toLocalDate()),rs.getTime("date_debut_enchere").toLocalTime());
+					System.out.println("dateEnchere/Mise en ligne de l'article:" + dateDebutEnchere);	
 					
-					Utilisateur userEncherisseur 	= new Utilisateur(nomArticle, prenom, pseudo, email, telephone, rueRetrait, codePostalRetrait, villeRetrait, motDePasse, credit, administrateur);
+					userEncherisseur 	= new Utilisateur(noUtilisateur, nomArticle, prenom, pseudo, email, telephone, rueRetrait, codePostalRetrait, villeRetrait, motDePasse, credit, administrateur);
+					System.out.println("....:" + userEncherisseur.getCodePostal());
+					articleEC 			= new Article(nomArticle, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, noUtilisateur, noCategorie, etatVente, fichierPhotoArticle);
 					
-					Article articleEC 			= new Article(nomArticle, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, noUtilisateur, noCategorie, etatVente, fichierPhotoArticle);
-					
-					Enchere enchereEC			= new Enchere(userEncherisseur, articleEC, dateEnchere, montantEnchere);
+					enchereEC			= new Enchere(userEncherisseur, articleEC, dateEnchere, montantEnchere);
+					System.out.println("....:" + enchereEC.getUserEncherisseur().getCodePostal());
 					
 					listeEncheres.add(enchereEC);
 			}

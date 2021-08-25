@@ -8,48 +8,45 @@ public class Enchere {
 	
 	// Se référer aux constituants de la table de jointure(Les 2 clés primaires) pour créer la classe
 	
-	Utilisateur utilisateur;
-	Article article;
+	Utilisateur userEncherisseur;
+	Article articleEC;
 	LocalDateTime dateEnchere;
 	int montantEnchere;
-	
-	public Enchere(Utilisateur utilisateur, Article article, LocalDateTime dateEnchere, int montantEnchere) {
+	public Enchere(Utilisateur userEncherisseur, Article articleEC, LocalDateTime dateEnchere, int montantEnchere) {
 		super();
-		this.utilisateur = utilisateur;
-		this.article = article;
+		this.userEncherisseur = userEncherisseur;
+		this.articleEC = articleEC;
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
-		
 	}
-
-	public Utilisateur getUtilisateur() {
-		return utilisateur;
+	public Utilisateur getUserEncherisseur() {
+		return userEncherisseur;
 	}
-
-	public Article getArticle() {
-		return article;
+	public void setUserEncherisseur(Utilisateur userEncherisseur) {
+		this.userEncherisseur = userEncherisseur;
 	}
-
+	public Article getArticleEC() {
+		return articleEC;
+	}
+	public void setArticleEC(Article articleEC) {
+		this.articleEC = articleEC;
+	}
 	public LocalDateTime getDateEnchere() {
 		return dateEnchere;
 	}
-
-
-	public int getMontantEnchere() {
-		return montantEnchere;
-	}
-
-	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
-	}
-
 	public void setDateEnchere(LocalDateTime dateEnchere) {
 		this.dateEnchere = dateEnchere;
 	}
-
+	public int getMontantEnchere() {
+		return montantEnchere;
+	}
 	public void setMontantEnchere(int montantEnchere) {
 		this.montantEnchere = montantEnchere;
 	}
+	
+	
+	
+	
 
 	
 }

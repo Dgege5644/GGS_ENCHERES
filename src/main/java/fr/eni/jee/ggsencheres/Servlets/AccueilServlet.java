@@ -1,7 +1,7 @@
 package fr.eni.jee.ggsencheres.Servlets;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.jee.ggsencheres.bll.ArticleManager;
 import fr.eni.jee.ggsencheres.bll.BLLException;
-import fr.eni.jee.ggsencheres.bo.Article;
 import fr.eni.jee.ggsencheres.bo.Enchere;
-import fr.eni.jee.ggsencheres.bo.Utilisateur;
 
 /**
  * Servlet implementation class AccueilServlet
@@ -34,16 +32,22 @@ public class AccueilServlet extends HttpServlet {
 		
 	ArticleManager am = new ArticleManager();
 		
-	List<Enchere> listeEncheres;
+	List<Enchere> listeEncheres=null;
+	
 	
 	try {
 		
 		listeEncheres = am.afficherEncheres();
 		
+		if(listeEncheres==null) {
+			request.setAttribute("listeEncheresNulle", "Aucune enchère en cours, Revenez ultérieurement!");	
+		}else {
+			request.setAttribute("listeEncheres", listeEncheres);	
+		}
 	}catch(BLLException e) {
 		
 		e.printStackTrace(); //Indispensable pour obtenir les erreurs au lancement de l'application...
-	
+		request.setAttribute("erreurListeEncheres", "Erreur lors de l'affichage de la liste");
 	}
 	
 		
