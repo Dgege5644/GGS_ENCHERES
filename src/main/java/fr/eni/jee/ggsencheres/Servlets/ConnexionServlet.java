@@ -48,7 +48,7 @@ public class ConnexionServlet extends HttpServlet {
 				request.getSession().setAttribute("succes", true);//request.setAttribute("succes",true);
 			 
 			 
-			 request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+			 request.getRequestDispatcher("${pageContext.request.contextPath}/Accueil").forward(request, response);
 			 
 		}catch(BLLException e) {
 			request.setAttribute("erreur",e.getMessage());
