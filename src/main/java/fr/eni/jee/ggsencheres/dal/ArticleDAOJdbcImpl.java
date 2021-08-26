@@ -283,7 +283,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				
 				// On affecte à une variable articleEC de type Article l'ensemble des infos dont on aura besoin en jsp
 				// le noArticle est récupéré dans le paramètres de la méthode (il arrive de la jsp)
-				articleEC 		= new Article(noArticle, nomArticle, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, noVendeur, noCategorie,libelle, etatVente, fichierPhotoArticle, rueRetrait, codePostalRetrait, villeRetrait);
+				articleEC 		= new Article(noArticle, nomArticle, description, noCategorie, libelle, prixInitial, prixVente, dateDebutEnchere, dateFinEnchere, etatVente, fichierPhotoArticle, rueRetrait, codePostalRetrait, villeRetrait, enchereEC);
 				
 				
 			}
