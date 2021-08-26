@@ -53,7 +53,6 @@ public class ConnexionServlet extends HttpServlet {
 		}catch(BLLException e) {
 			request.setAttribute("erreur",e.getMessage());
 			request.getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
-		
 		}
 		
 	}

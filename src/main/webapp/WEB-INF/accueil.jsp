@@ -106,7 +106,7 @@
 				</li>
 			<c:if test="${!empty succes}">
 				<li>
-					Vendeur: <a href="${pageContext.request.contextPath}/AfficherProfilVendeur?no_utilisateur=${enchereEC.userEncherisseur.no_utilisateur}">${enchereEC.userEncherisseur.nom}</a> <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
+					Vendeur: <a href="${pageContext.request.contextPath}/AfficherProfilVendeur?no_utilisateur=${enchereEC.userEncherisseur.no_utilisateur}">${enchereEC.userEncherisseur.pseudo}</a> <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
 				</li>
 			</c:if>
 			<c:if test="${empty succes}">

@@ -15,9 +15,9 @@
 	
 		<h2>Valider la suppression de votre compte?</h2>
 		
+		<input type="hidden" name="no_utilisateur" id="no_utilisateur" value="${userConnected.no_utilisateur}"><br />
 		
 		<input type="submit" value="Valider"/>
-		
 		<button><a href="${pageContext.request.contextPath}/Accueil">Annuler</a></button>
 		
 	</form>
