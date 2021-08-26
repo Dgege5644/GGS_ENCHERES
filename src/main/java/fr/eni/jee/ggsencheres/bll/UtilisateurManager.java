@@ -1,8 +1,6 @@
 package fr.eni.jee.ggsencheres.bll;
 
 
-import java.util.List;
-
 import fr.eni.jee.ggsencheres.bo.Utilisateur;
 import fr.eni.jee.ggsencheres.dal.DALException;
 import fr.eni.jee.ggsencheres.dal.DAOFactory;
