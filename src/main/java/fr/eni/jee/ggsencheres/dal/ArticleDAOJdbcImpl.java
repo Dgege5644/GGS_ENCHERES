@@ -272,8 +272,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	 * Et qui retourne une enchereUpdated de type Enchere ????? 
 	 * TODO passer la méthode en void ?????
 	 */
-	public Enchere updateEnchereEC(int montantEnchere, int noArticle, String pseudoEncherisseur, int creditEncherisseur) throws DALException {
-		Enchere enchereUpdated=null;
+	public void updateEnchereEC(int montantEnchere, int noArticle, String pseudoEncherisseur, int creditEncherisseur) throws DALException {
+		
 		try(Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pSt= cnx.prepareStatement(UPDATE_ENCHERE);
 			pSt.setInt(1, montantEnchere);
@@ -284,8 +284,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		}catch(SQLException e) {
 			throw new DALException("erreur de l'update de l'enchere");
 		}
-		return enchereUpdated;
+		
 	}
 
+	
 }
 	

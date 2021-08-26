@@ -145,20 +145,20 @@ public class ArticleManager {
 	 * @return
 	 * @throws BLLException
 	 */
-	public Enchere validerEnchere(int montantEnchere, int noArticle, String pseudoEncherisseur, int creditEncherisseur) throws BLLException {
-		Enchere enchereValidee=null;
+	public void validerEnchere(int montantEnchere, int noArticle, String pseudoEncherisseur, int creditEncherisseur) throws BLLException {
+		
 		// l'enchère ne peut être acceptée si elle est > au crédit de l'userEncherisseur
 		if(montantEnchere>creditEncherisseur) {
 			throw new BLLException("credit insuffisant, désolé!");
 		}
 		try {
 			// Si l'enchère est validée, on modifie les données renseignées en paramètres
-			enchereValidee=this.articleDAO.updateEnchereEC(montantEnchere,noArticle,pseudoEncherisseur,creditEncherisseur);
+			this.articleDAO.updateEnchereEC(montantEnchere,noArticle,pseudoEncherisseur,creditEncherisseur);
 		} catch (DALException e) {
 			e.printStackTrace();
 			throw new BLLException("erreur dans la validation de l'enchère");
 		}
-		return enchereValidee;
+		
 	}
 
 }
