@@ -250,7 +250,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				
 				
 				// On affecte à une variable userEncherisseur de type Utilisateur l'ensemble des infos dont on aura besoin en jsp
-				userEncherisseur 	= new Utilisateur(noUtilisateur, nomArticle, prenom, pseudo, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
+				userEncherisseur 	= new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
 				
 				// On affecte à une variable articleEC de type Article l'ensemble des infos dont on aura besoin en jsp
 				// le noArticle est récupéré dans le paramètres de la méthode (il arrive de la jsp)
@@ -273,8 +273,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	 * Et qui retourne une enchereUpdated de type Enchere ????? 
 	 * TODO passer la méthode en void ?????
 	 */
-	public Enchere updateEnchereEC(int montantEnchere, int noArticle, String pseudoEncherisseur, int creditEncherisseur) throws DALException {
-		Enchere enchereUpdated=null;
+	public void updateEnchereEC(int montantEnchere, int noArticle, String pseudoEncherisseur, int creditEncherisseur) throws DALException {
+		
 		try(Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pSt= cnx.prepareStatement(UPDATE_ENCHERE);
 			pSt.setInt(1, montantEnchere);
@@ -285,8 +285,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 		}catch(SQLException e) {
 			throw new DALException("erreur de l'update de l'enchere");
 		}
-		return enchereUpdated;
+		
 	}
 
+	
 }
 	

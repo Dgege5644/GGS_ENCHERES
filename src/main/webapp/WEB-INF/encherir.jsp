@@ -16,29 +16,27 @@
 	de la DAL, en partant de l'objet EnchereEC -->
 	<h2>${enchereEC.articleEC.nomArticle}</h2>
 	<label for="description">Description : </label>
-	<textarea name="description" id="description" cols="30" rows="10">"${enchereEC.articleEC.description}"</textarea>
+	<textarea name="description" id="description" cols="10" rows="3">${enchereEC.articleEC.description}</textarea><br />
 	
-	<label for="categorie">Catégorie :</label>
+	<label for="categorie">Catégorie :  </label><br />
 	
 	
-	<label for="enchereActuelle">Meilleure offre : </label>
+	<label for="enchereActuelle">Meilleure offre : ${enchereEC.montantEnchere} pts par ${enchereEC.userEncherisseur.pseudo}</label><br />
 	<!-- TODO Attention, ${enchereEC.userEncherisseur.pseudo} renvoie le 
 	nomArticle à l'affichage -->
-	<p>${enchereEC.montantEnchere} pts par ${enchereEC.userEncherisseur.pseudo}</p>
 	
-	<label for="prixInitial">Mise à prix :</label>
-	<p>${enchereEC.articleEC.prixInitial}</p>
-	<label for="finEnchere">Fin de l'enchère : </label>
-	<p>${enchereEC.articleEC.finEnchere}</p>
 	
-	<label for="retrait">Retrait : </label>
-	 <p>${enchereEC.articleEC.rue}</p>
-	 <p>${enchereEC.articleEC.codePostal} ${enchereEC.articleEC.ville}</p>
+	<label for="prixInitial">Mise à prix : ${enchereEC.articleEC.prixInitial}</label><br />
+	
+	<label for="finEnchere">Fin de l'enchère : ${enchereEC.articleEC.finEnchere}</label><br />
+	
+	
+	<label for="retrait">Retrait : ${enchereEC.articleEC.rue} <br /> ${enchereEC.articleEC.codePostal} ${enchereEC.articleEC.ville}</label><br />
+	
 	 
-	 <label for="vendeur">Vendeur : </label>
-	 <!-- TODO Attention, ${enchereEC.userEncherisseur.pseudo} renvoie le 
-	 nomArticle à l'affichage -->
-	 <p>${enchereEC.userEncherisseur.pseudo}</p>
+	 <label for="vendeur">Vendeur : ${enchereEC.articleEC.noUtilisateur}</label>
+	
+
 	 
 	 
 	<!--  Partie forulaire où on récupère la proposition d'enchère du userEncherisseur -->

@@ -77,14 +77,17 @@ public class EncherirServlet extends HttpServlet {
 		// de la BLL et transmettre les infos en paramètres
 		ArticleManager am = new ArticleManager();
 		try {
-			// j'appelle la méthode selectArtilceById
-			enchereEC = am.selectArticleById(noArticle);
+			
 			
 			// j'appelle la méthode validerEnchere
-			enchereEC = am.validerEnchere(montantEnchere,noArticle,pseudoEncherisseur,creditEncherisseur);
+			am.validerEnchere(montantEnchere,noArticle,pseudoEncherisseur,creditEncherisseur);
+			
+			// j'appelle la méthode selectArtilceById
+			enchereEC = am.selectArticleById(noArticle);
+						
 			// j'affecte la valeur d'enchereEC à l'attribut "enchereEC"
 			request.setAttribute("enchereEC", enchereEC);
-			
+			request.setAttribute("succesNouvelleEnchere", "Votre enchère a été prise en compte!");
 			
 			
 		} catch (BLLException e) {
