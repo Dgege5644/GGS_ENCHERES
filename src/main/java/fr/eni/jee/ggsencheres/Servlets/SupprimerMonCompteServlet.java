@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.jee.ggsencheres.bll.BLLException;
 import fr.eni.jee.ggsencheres.bll.ConnectionManager;
+import fr.eni.jee.ggsencheres.bll.UtilisateurManager;
 import fr.eni.jee.ggsencheres.bo.Utilisateur;
 
 /**
@@ -33,21 +34,30 @@ public class SupprimerMonCompteServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 3 - envoie le no_utilisateur à la BLL pour poursuite de la méthode de suppression
-		ConnectionManager cm = new ConnectionManager();
+		// 1 - envoie le no_utilisateur à la BLL pour poursuite de la méthode de suppression
+
+		int no_utilisateur = Integer.parseInt(request.getParameter("no_utilisateur"));
+		Utilisateur userASupprimer = null;
+		UtilisateurManager um = new UtilisateurManager();
 		
-		no_utilisateur = userConnected.getNo_utilisateur();
+		try {
+			
+			um.supprimerUtilisateur(no_utilisateur);
+			
+			// 2 - met fin à la session en cours et envoie le message de confirmation de suppression du compte utilisateur.
+			
+			request.getSession().invalidate();
+			request.setAttribute("suppressionCompte", true);
+			
+		}catch(BLLException e) {
+			request.setAttribute("erreur",e.getMessage());
+		}
 		
-		cm.deleteUtilisateur(no_utilisateur);
-		
-		// 1 - met fin à la session en cours
-		request.getSession().invalidate();
-				
-		// 2 - redirige vers l'accueil 
+		// 3 - redirige vers l'accueil 
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 		
 	
-		//TODO	Entourer d'un try/catch en cas d'erreur dans la méthode de suppression 
+		
 		
 	}
 

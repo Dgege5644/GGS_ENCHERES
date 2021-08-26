@@ -13,12 +13,11 @@
 <body>
 	<form action="${pageContext.request.contextPath}/SupprimerMonCompte" method="post">
 	
-		<h3>Supprimer votre compte?</h3>
+		<h2>Valider la suppression de votre compte?</h2>
 		
+		<input type="hidden" name="no_utilisateur" id="no_utilisateur" value="${userConnected.no_utilisateur}"><br />
 		
-		<input type="submit" value="Supprimer"/>
-		
-		
+		<input type="submit" value="Valider"/>
 		<button><a href="${pageContext.request.contextPath}/Accueil">Annuler</a></button>
 		
 	</form>
