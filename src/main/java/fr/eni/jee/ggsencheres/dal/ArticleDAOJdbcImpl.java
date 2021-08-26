@@ -26,7 +26,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			+ "WHERE ENCHERES.no_article = ?";
 
 
-	private static final String SELECT_ARTICLE_BY_ID = "SELECT ARTICLES_VENDUS.no_article as no_article, nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur as no_vendeur, etat_vente, image,ENCHERES.date_enchere as date_enchere, ENCHERES.montant_enchere as montant_enchere , CATEGORIES.no_categorie as no_categorie, CATEGORIES.libelle as libelle, UTILISATEURS.no_utilisateur as no_utilisateur, prenom, nom, UTILISATEURS.pseudo as pseudo_encherisseur, email, telephone, UTILISATEURS.rue as rue, UTILISATEURS.code_postal as code_postal, UTILISATEURS.ville as ville, mot_de_passe, credit, administrateur, RETRAITS.rue as retrue, RETRAITS.code_postal as retcode_postal, RETRAITS.ville as retville "
+	private static final String SELECT_ARTICLE_BY_ID = "SELECT ARTICLES_VENDUS.no_article as no_article, nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur as no_vendeur, etat_vente, image,ENCHERES.date_enchere as date_enchere, ENCHERES.montant_enchere as montant_enchere , CATEGORIES.no_categorie as no_categorie, CATEGORIES.libelle as libelle, UTILISATEURS.no_utilisateur as no_vendeur, prenom, nom, UTILISATEURS.pseudo as pseudo_vendeur, email, telephone, UTILISATEURS.rue as rue_v, UTILISATEURS.code_postal as code_postal_v, UTILISATEURS.ville as ville_v, mot_de_passe, credit_v, administrateur, RETRAITS.rue as retrue, RETRAITS.code_postal as retcode_postal, RETRAITS.ville as retville "
 														+ "FROM ARTICLES_VENDUS "
 														+ "LEFT OUTER JOIN ENCHERES ON ENCHERES.no_article = ARTICLES_VENDUS.no_article  "
 														+ "INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur "
@@ -201,10 +201,10 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	 * Ellle prend un noArticle (récupéré dans la jsp) en paramètre et retourne
 	 * une enchereEC de type Enchere qui sera utilisée dans la jsp
 	 */
-	public Enchere selectArticleById(int noArticle) throws DALException {
+	public Enchere selectArticleById(int noArticle,Utilisateur userEncherisseur) throws DALException {
 		Article articleEC = null;
 		Enchere enchereEC = null;
-		Utilisateur userEncherisseur = null;
+		Utilisateur userVendeur=null;
 		
 		try(Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pSt = cnx.prepareStatement(SELECT_ARTICLE_BY_ID);
@@ -214,20 +214,33 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			ResultSet rs = pSt.executeQuery();
 			
 			while (rs.next()) {
-				// TABLE UTILISATEURS
-				int noUtilisateur			= rs.getInt("no_utilisateur");
-				String pseudoEncherisseur	= rs.getString("pseudo_encherisseur");
-				String nom					= rs.getString("nom");
-				String prenom				= rs.getString("prenom");
-				String email				= rs.getString("email");
-				String telephone			= rs.getString("telephone");
-				String rue					= rs.getString("rue");
-				String codePostal			= rs.getString("code_postal");
-				String ville				= rs.getString("ville");
-				String motDePasse			= rs.getString("mot_de_passe");
-				int credit					= rs.getInt("credit");
+				// TABLE UTILISATEURS encherisseur
+				int noUtilisateurEC			= rs.getInt(userEncherisseur.getNo_utilisateur());
+				String pseudoEncherisseur	= rs.getString(userEncherisseur.getPseudo());
+				String nom					= rs.getString(userEncherisseur.getNom());
+				String prenom				= rs.getString(userEncherisseur.getPrenom());
+				String email				= rs.getString(userEncherisseur.getEmail());
+				String telephone			= rs.getString(userEncherisseur.getTelephone());
+				String rue					= rs.getString(userEncherisseur.getRue());
+				String codePostal			= rs.getString(userEncherisseur.getCodePostal());
+				String ville				= rs.getString(userEncherisseur.getVille());
+				String motDePasse			= rs.getString(userEncherisseur.getMotDePasse());
+				int credit					= rs.getInt(userEncherisseur.getCredit());
 				boolean administrateur		= rs.getBoolean("administrateur");
 				
+				//table utilisateur vendeur
+				int noUtilisateurVD			= rs.getInt("no_vendeur");
+				String pseudoVD	= rs.getString("pseudo_vendeur");
+				String nomV					= rs.getString("nom");
+				String prenomV				= rs.getString("prenom");
+				String emailV				= rs.getString("email");
+				String telephoneV			= rs.getString("telephone");
+				String rueV				    = rs.getString("rue_v");
+				String codePostalV			= rs.getString("code_postal_v");
+				String villeV				= rs.getString("ville_v");
+				String motDePasseV			= rs.getString("mot_de_passe");
+				int creditV					= rs.getInt("credit_v");
+				boolean administrateurV		= rs.getBoolean("administrateur");
 				//TABLE ARTICLES_VENDUS
 				String nomArticle				= rs.getString("nom_article");
 			    String description				= rs.getString("description");
@@ -254,7 +267,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				
 				
 				// On affecte à une variable userEncherisseur de type Utilisateur l'ensemble des infos dont on aura besoin en jsp
-				userEncherisseur 	= new Utilisateur(noUtilisateur, pseudoEncherisseur, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
+				userEncherisseur 	= new Utilisateur(noUtilisateurEC, pseudoEncherisseur, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
 				
 				// On affecte à une variable articleEC de type Article l'ensemble des infos dont on aura besoin en jsp
 				// le noArticle est récupéré dans le paramètres de la méthode (il arrive de la jsp)
@@ -263,6 +276,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				// On affecte à une variable enchereEC de type Enchere l'ensemble des infos dont on aura besoin en jsp
 				// elle reprend en paramètre les 2 objets créés précéndemment en plus de dateEnchere et montantEnchere
 				enchereEC			= new Enchere(userEncherisseur, articleEC, dateEnchere, montantEnchere);
+				
+				userVendeur			= new Utilisateur(noUtilisateurVD, pseudoVD, nomV, prenomV, emailV, telephoneV, rueV, codePostalV, villeV, motDePasseV, creditV, administrateurV);
 			}
 			
 		}catch(SQLException e) {

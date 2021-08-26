@@ -41,7 +41,7 @@
 	 
 	<!--  Partie forulaire où on récupère la proposition d'enchère du userEncherisseur -->
 	
-	<form action="${pageContext.request.contextPath}/Encherir">
+	<form action="${pageContext.request.contextPath}/Encherir" method="post">
 		<label for="proposition">Ma proposition :</label>
 		
 		<!-- S'il n'y a pas encore d'enchère sur le prix initial, la proposition doit au moins être supérieure au
@@ -54,12 +54,12 @@
 		<c:if test="${!empty enchereEC.montantEnchere}">
 		<input type="number" name="proposition" min="${enchereEC.montantEnchere+1}" value="${enchereEC.montantEnchere+1}" step="1"/>
 		</c:if>
-		
-		<input type="submit" name="encherir" value="Enchérir"/>
 		<!--  On met un input de type hidden pour récupérer le noArticle de l'enchereEC
 		dont on aura besoin dans le Servelt pour accéder à la DAL et récupérer les infos
 		sur l'articleEC et l'userEncherisseur -->
-		<input type="hidden" value="${enchereEC.articleEC.noArticle}"name="noArticle"/> 
+		<input type="hidden" value="${enchereEC.articleEC.noArticle}"name="noArticle"/>
+		<input type="submit" name="encherir" value="Enchérir"/>
+			 
 	</form>
 	<c:if test="${!empty succesEnchere}">
 		<p>Votre enchère a bien été prise en compte.</p>
