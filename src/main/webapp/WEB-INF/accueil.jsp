@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
-
+	<%@include file="header.html" %>
 	<!--  définition des messages à afficher selon les actions réalisées
 	1er test : si la mise en vente d'un article s'est bien passée -->
 	<c:if test="${!empty succesVendreUnArticle}"> L'article a bien été ajouté à vos articles à vendre!</c:if>

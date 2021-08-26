@@ -19,7 +19,7 @@
 	-->
 
 
-	<a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a>
+	<%@include file="header.html" %>
 
 	
 	
