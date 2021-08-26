@@ -10,12 +10,17 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
+
 	
 	<!--  cette version est à prioriser sur les inclusions dynamiques 
 	<jsp:include page="header.html">
 		<jsp:param value="12" name="visiteur"/>
 	</jsp:include>
 	-->
+
+
+	<a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a>
+
 	
 	
 	<!--  début du formulaire -->
@@ -56,8 +61,7 @@
 		</c:if>
 		
 		<button><a href="${pageContext.request.contextPath}/ModifierMonProfil">Modifier</a></button>
-		<a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a>
-		<a href="${pageContext.request.contextPath}/SupprimerMonCompte">Supprimer mon compte</a>
+		
 	</form>
 	
 	

@@ -21,6 +21,9 @@
 			</c:forEach>
 		</ul>
 	</c:if>
+	
+	<a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a>
+	
 	<form action="${pageContext.request.contextPath}/ModifierMonProfil" method="post">
 	
 		<label for="pseudo">Pseudo: </label>
@@ -60,7 +63,7 @@
 		<input type="number" name="credit" id="credit" readonly="readonly" value="${userConnected.credit}"/><br />
 			
 
-		<button><a href="${pageContext.request.contextPath}/Accueil">Annuler les modifications</a></button>
+		<input type="reset" value="Annuler les modifications"/>
 
 		<input type="submit" value="Enregistrer"/>
 		<button><a href="${pageContext.request.contextPath}/SupprimerMonCompte">Supprimer Mon compte</a></button>

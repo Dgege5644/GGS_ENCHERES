@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
+
 	<!--  définition des messages à afficher selon les actions réalisées
 	1er test : si la mise en vente d'un article s'est bien passée -->
 	<c:if test="${!empty succesVendreUnArticle}"> L'article a bien été ajouté à vos articles à vendre!</c:if>
@@ -22,6 +23,14 @@
 	
 	<!-- 3ème test : si la connexion avec identifiant et mot de passe s'est bien passée, affiche 
 	un lien S'inscrire- Se connecter dant de connexion -->
+
+	<c:if test="${!empty suppressionCompte}"> Votre compte a été correctement supprimé!<br /></c:if> <!-- Message réussite; le succès a été défini dans la servlet... -->
+	<c:if test="${!empty succesDeconnexion}"> Vous avez correctement été déconnecté(e)!<br /></c:if>
+	<c:if test="${!empty succesVendreUnArticle}"> L'article a bien été ajouté à vos articles à vendre!<br /></c:if>
+	<c:if test="${!empty succesModifProfil}"> Les modifications ont bien été enregistrées dans votre profil<br /></c:if>
+	
+	<!-- Adresse = servlet de connexion -->
+
 	<c:if test="${empty succes}"> <!-- l'utilsateur arrive à l'accueil pour la première fois   -->
 		<a href="${pageContext.request.contextPath}/Connexion">S'inscrire - Se connecter</a>
 	</c:if>
@@ -36,7 +45,9 @@
 			<a href="${pageContext.request.contextPath}/AfficherMonProfil">Mon Profil</a>
 			<a href="${pageContext.request.contextPath}/Deconnexion">Se Déconnecter</a>
 		</nav>
+		
 		<p>${userConnected.prenom} ${userConnected.nom} est connecté(e)</p> <!-- les prénom et nom de l'utilisateur sont récupérés en base de données   -->
+		
 	</c:if> 
 	 
 	<h1>Liste des enchères</h1>
@@ -47,6 +58,7 @@
 		<input type="search" placeholder="Le nom de l'article contient" /><br />
 		<label for="categorie">Catégorie : </label><br/>
 		<select name="categorie" id="categorie">
+		
 			<optgroup label ="catégories">
 				<option value ="Toutes">Toutes</option>
 				<option value ="Informatique">Informatique</option>
@@ -54,21 +66,25 @@
 				<option value ="Vetement">Vêtement</option>
 				<option value ="Sport&Loisirs">Sport et Loisirs</option>
 			</optgroup>
+			
 		</select>
 		<c:if test="${!empty succes}">
+		
 	<div>
-		<input type="radio" name="historique"/>Achats<br /> <!-- TODO créer des JRadioButton -->
-		<input type="checkbox" name="encheresouvertes"/>enchères ouvertes<br /><!-- TODO créer des JCheckbox -->
-		<input type="checkbox" name="mesencheres"/>mes enchères<br />
-		<input type="checkbox" name="mesencheresremportees"/>mes enchères remportées<br />
+		<input type="radio" name="historique" id="achats"/>Achats<br /> <!-- TODO créer des JRadioButton -->
+		<input type="checkbox" name="encheresouvertes" id="encheresouvertes"/>enchères ouvertes<br /><!-- TODO créer des JCheckbox -->
+		<input type="checkbox" name="mesencheres" id="mesencheres"/>mes enchères<br />
+		<input type="checkbox" name="mesencheresremportees" id="mesencheresremportees"/>mes enchères remportées<br />
 	</div>
+	
 	<div>
-		<input type="radio" name="historique"/>Mes ventes<br />
-		<input type="checkbox" name="mesventesencours"/>mes ventes en cours<br />
-		<input type="checkbox" name="ventesnondebutees"/>ventes non débutées<br />
-		<input type="checkbox" name="ventesterminees"/>ventes terminées<br />
+		<input type="radio" name="historique" id="mesventes"/>Mes ventes<br />
+		<input type="checkbox" name="mesventesencours" id="mesvenetesencours"/>mes ventes en cours<br />
+		<input type="checkbox" name="ventesnondebutees" id="ventesnondebutees"/>ventes non débutées<br />
+		<input type="checkbox" name="ventesterminees" id="ventesterminees"/>ventes terminées<br />
 	</div>
-</c:if>
+	
+	</c:if>
 		<input type="submit" value="Rechercher"/>
 
 	</form>
@@ -102,7 +118,7 @@
 				</li>
 			<c:if test="${!empty succes}">
 				<li>
-					Vendeur: <a href="${pageContext.request.contextPath}/AfficherProfilVendeur?no_utilisateur=${enchereEC.userEncherisseur.no_utilisateur}">${enchereEC.userEncherisseur.nom}</a> <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
+					Vendeur: <a href="${pageContext.request.contextPath}/AfficherProfilVendeur?no_utilisateur=${enchereEC.userEncherisseur.no_utilisateur}">${enchereEC.userEncherisseur.pseudo}</a> <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
 				</li>
 			</c:if>
 			<c:if test="${empty succes}">
