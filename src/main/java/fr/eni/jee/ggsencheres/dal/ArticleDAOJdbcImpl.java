@@ -249,7 +249,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				System.out.println("dateEnchere/Mise en ligne de l'article:" + dateDebutEnchere);	
 				
 				// On affecte à une variable userEncherisseur de type Utilisateur l'ensemble des infos dont on aura besoin en jsp
-				userEncherisseur 	= new Utilisateur(noUtilisateur, nomArticle, prenom, pseudo, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
+				userEncherisseur 	= new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
 				
 				// On affecte à une variable articleEC de type Article l'ensemble des infos dont on aura besoin en jsp
 				// le noArticle est récupéré dans le paramètres de la méthode (il arrive de la jsp)
