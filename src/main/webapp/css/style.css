@@ -26,3 +26,16 @@ h1{
 a{
 	color:black;
 }
+
+#logo {
+opacity:0.4;
+filter:alpha(opacity=50); /* For IE8 and earlier */
+}
+
+#header {
+	display : flex;
+}
+
+#lienLogo {
+	display : block;
+}

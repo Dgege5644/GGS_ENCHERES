@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
-
+<%@include file="header.html" %>
 <!-- S'il y a des erreurs à afficher, on parcours les messages -->
 	<c:if test="${!empty erreurs}">
 		<ul style="color: red;">
@@ -21,9 +21,9 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-	
-	<a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a>
-	
+	<!-- remplacé par le logo qui renvoie vers l'accueil
+	<a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a><br />
+	 -->
 	<form action="${pageContext.request.contextPath}/ModifierMonProfil" method="post">
 	
 		<label for="pseudo">Pseudo: </label>

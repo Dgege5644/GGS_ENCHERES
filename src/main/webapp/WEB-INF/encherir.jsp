@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
+<%@include file="header.html" %>
 	<h1>Détail vente</h1>
 	
 	<!-- Dans la première partie de la page on affiche les infos que l'on récupère 
@@ -18,7 +19,7 @@
 	<label for="description">Description : </label>
 	<textarea name="description" id="description" cols="10" rows="3">${articleEC.description}</textarea><br />
 	
-	<label for="categorie">Catégorie :  </label><br />
+	<label for="categorie">Catégorie : ${articleEC.libelle}</label><br />
 	
 	
 	<!-- S'il n'y a pas encore d'enchère sur le prix initial, on affiche le prixInitial -->
@@ -28,18 +29,18 @@
 	
 	<!-- S'il y a déjà eu une enchère sur le prix initial, c'est la dernière faite qui s'affiche -->
 	<c:if test="${!empty enchereEC.montantEnchere}">
-	<label for="enchereActuelle">Meilleure offre : ${articleEC.enchereEC.montantEnchere} pts par ${articleEC.enchereEC.noUserDetenteur}</label><br />
+	<label for="enchereActuelle">Meilleure offre : ${articleEC.enchereEC.montantEnchere} pts par ${articleEC.enchereEC.userAcheteur.pseudoAcheteur}</label><br />
 	</c:if>
 	
 	<label for="prixInitial">Mise à prix : ${articleEC.prixInitial}</label><br />
 	
-	<label for="finEnchere">Fin de l'enchère : ${articleEC.finEnchere}</label><br />
+	<label for="finEnchere">Fin de l'enchère : ${articleEC.dateFinEnchere}</label><br />
 	
 	
-	<label for="retrait">Retrait : ${articleEC.rue} <br /> ${articleEC.codePostal} ${articleEC.ville}</label><br />
+	<label for="retrait">Retrait : ${articleEC.rueRetrait} <br /> ${articleEC.codePostalRetrait} ${articleEC.villeRetrait}</label><br />
 	
 	 
-	 <label for="vendeur">Vendeur : ${articleEC.pseudoVD}</label>
+	 <label for="vendeur">Vendeur : ${articleEC.userVendeur.pseudoVD}</label>
 	
 
 	 

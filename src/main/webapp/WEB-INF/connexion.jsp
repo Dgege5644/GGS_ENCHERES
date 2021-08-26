@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
-
+<%@include file="header.html" %>
 	<c:if test="${!empty erreur}">
 	<p>${erreur} </p>
 	</c:if>

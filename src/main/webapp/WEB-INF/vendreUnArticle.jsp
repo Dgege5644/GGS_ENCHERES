@@ -10,9 +10,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
-
+<%@include file="header.html" %>
+<!-- 
 <a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a><br />
-
+ -->
 <h1>Nouvelle vente</h1>
 <form action="${pageContext.request.contextPath}/Vendre" method="post">
 

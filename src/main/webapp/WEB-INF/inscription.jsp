@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
-
+<%@include file="header.html" %>
 <h1>Mon profil</h1>
 
 <form action="./Inscription" method="post">

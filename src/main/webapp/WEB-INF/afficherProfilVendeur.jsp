@@ -8,10 +8,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
+<%@include file="header.html" %>
 	<form action="./AfficherProfilVendeur" method="get">
-	
+	<!-- remplacé par le logo qui renvoie vers l'accueil
 	<a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a><br />
-	
+	 -->
 		<label for="pseudo">Pseudo: </label>
 		
 		<input type="text" name="pseudo" id="pseudo" readonly="readonly" value="${userVendeur.pseudo}"/><br />

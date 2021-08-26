@@ -2,6 +2,8 @@ package fr.eni.jee.ggsencheres.bo;
 
 import java.time.LocalDateTime;
 
+
+
 public class Article {
 	 private int noArticle;
 	 private String nomArticle;
@@ -18,7 +20,9 @@ public class Article {
      private String rue;
      private String codePostal;
      private String ville;
-     Enchere enchereEc;
+     private Enchere enchereEc;
+     private Utilisateur userVendeur;
+	 private Utilisateur userAcheteur;
      
      
      
@@ -137,7 +141,7 @@ public class Article {
 	public Article(int noArticle, String nomArticle, String description, int noCategorie, String libelle,
 			int prixInitial, int prixVente, LocalDateTime dateDebutEnchere, LocalDateTime dateFinEnchere,
 			String etatVente, String fichierPhotoArticle, String rueRetrait, String codePostalRetrait,
-			String villeRetrait,Enchere enchereEC) {
+			String villeRetrait,Enchere enchereEC, Utilisateur userVendeur, Utilisateur userAcheteur) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -153,6 +157,8 @@ public class Article {
 		this.codePostal = codePostalRetrait;
 		this.ville = villeRetrait;
 		this.enchereEc = enchereEC;
+		this.userVendeur = userVendeur;
+		this.userAcheteur = userAcheteur;
 	}
 
 

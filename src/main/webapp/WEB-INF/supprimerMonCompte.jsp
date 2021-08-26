@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
+<%@include file="header.html" %>
 	<form action="${pageContext.request.contextPath}/SupprimerMonCompte" method="post">
 	
 		<h2>Valider la suppression de votre compte?</h2>
