@@ -365,12 +365,24 @@ public class UtilisateurManager {
 			userVendeur = utilisateurDAO.selectUserByID(no_utilisateur);
 			
 		}catch(DALException e) {
-			throw new BLLException("Erreur dans la méthode afficherEnchères. Note technique:" + e.getMessage()); 
+			throw new BLLException("Erreur dans la méthode afficherInfosVendeur. Note technique:" + e.getMessage()); 
 		}
 		return userVendeur;
 	}
 	
-	
+//	public void supprimerUtilisateur(int no_utilisateur) throws BLLException{
+//		Utilisateur userASupprimer = null;
+//	
+//		try {
+//			
+//		userASupprimer = utilisateurDAO.deleteUtilisateur(no_utilisateur);
+//		
+//		}catch(DALException e) {
+//			
+//			throw new BLLException("Erreur dans la méthode supprimerUtilisateur. Note technique:" + e.getMessage());
+//		}
+//		
+//	}
 	
 }
 

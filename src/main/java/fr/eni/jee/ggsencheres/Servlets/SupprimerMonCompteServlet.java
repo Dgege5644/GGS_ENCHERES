@@ -33,21 +33,21 @@ public class SupprimerMonCompteServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 3 - envoie le no_utilisateur à la BLL pour poursuite de la méthode de suppression
-		ConnectionManager cm = new ConnectionManager();
+		// 1 - envoie le no_utilisateur à la BLL pour poursuite de la méthode de suppression
+
 		
-		no_utilisateur = userConnected.getNo_utilisateur();
 		
-		cm.deleteUtilisateur(no_utilisateur);
 		
-		// 1 - met fin à la session en cours
+		
+		
+		// 2 - met fin à la session en cours
 		request.getSession().invalidate();
-				
-		// 2 - redirige vers l'accueil 
+		request.setAttribute("suppressionCompte", true);
+		// 3 - redirige vers l'accueil 
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 		
 	
-		//TODO	Entourer d'un try/catch en cas d'erreur dans la méthode de suppression 
+		
 		
 	}
 

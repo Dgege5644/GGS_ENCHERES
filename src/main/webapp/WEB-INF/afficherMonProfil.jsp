@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
-	
+
+	<a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a>
 	
 	<form action="./AfficherMonProfil" method="get">
 	
@@ -49,8 +50,7 @@
 		</c:if>
 		
 		<button><a href="${pageContext.request.contextPath}/ModifierMonProfil">Modifier</a></button>
-		<a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a>
-		<a href="${pageContext.request.contextPath}/SupprimerMonCompte">Supprimer mon compte</a>
+		
 	</form>
 	
 	

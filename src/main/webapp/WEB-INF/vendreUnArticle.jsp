@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
+
+<a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a><br />
+
 <h1>Nouvelle vente</h1>
 <form action="${pageContext.request.contextPath}/Vendre" method="post">
 
@@ -64,7 +67,7 @@
 		</ul>
 	</c:if>
 	<input type="submit" id="enregistrerArticle" value="Enregistrer"/>
-	<a href="${pageContext.request.contextPath}/Accueil" id="boutonAnnuler">Annuler</a>
+	<input type="reset" value="Annuler">
 	
 
 

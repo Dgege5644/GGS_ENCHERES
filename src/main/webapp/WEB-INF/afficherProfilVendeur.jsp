@@ -27,16 +27,7 @@
 		
 		<label for="telephone">Téléphone: </label>
 		<input type="text" name="telephone" id="telephone" readonly="readonly" value="${userVendeur.telephone}"/><br />
-		
-		<label for="rue">Rue: </label>
-		<input type="text" name="rue" id="rue" readonly="readonly" value="${userVendeur.rue}"/><br />
-		
-		<label for="cp">Code postal: </label>
-		<input type="text" name="cp" id="cp" readonly="readonly" value="${userVendeur.codePostal}"/><br />
-		
-		<label for="ville">Ville: </label>
-		<input type="text" name="ville" id="ville" readonly="readonly" value="${userVendeur.ville}"/><br />
-		
+			
 	</form>
 </body>
 </html>

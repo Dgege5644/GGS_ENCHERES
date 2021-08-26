@@ -29,7 +29,7 @@ public class DeconnexionServlet extends HttpServlet {
 		//TODO detruire la session => simuler la deconnexion
 		
 		 request.getSession().invalidate();
-		
+		 request.setAttribute("succesDeconnexion", true);
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 	}
 
