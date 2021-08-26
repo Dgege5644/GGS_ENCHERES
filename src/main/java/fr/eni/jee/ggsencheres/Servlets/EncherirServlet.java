@@ -35,8 +35,8 @@ public class EncherirServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// on crée une variable locale de type Enchere
-		Enchere enchereEC=null;
-		Utilisateur userEncherisseur = (Utilisateur)request.getSession().getAttribute("userConnected");
+		Article articleEC=null;
+		
 		// on récupère le noArticle grâce à l'input de type hidden
 		int noArticle=Integer.parseInt(request.getParameter("noArticle"));
 		// on crée une variable de type ArticleManager pour pouvoir appeler les méthodes
@@ -45,9 +45,9 @@ public class EncherirServlet extends HttpServlet {
 		try {
 			// on applique à notre variable de type Enchere, la méthode selsectArticleById avec le 
 			// noArticle en paramètre
-			enchereEC = am.selectArticleById(noArticle,userEncherisseur);
+			articleEC = am.selectArticleById(noArticle);
 			// on attribue les données récupérées dans enchereEC à "enchereEC" utilisée dans notre jsp
-			request.setAttribute("enchereEC", enchereEC);
+			request.setAttribute("enchereEC", articleEC);
 			
 			
 		} catch (BLLException e) {
@@ -74,30 +74,34 @@ public class EncherirServlet extends HttpServlet {
 		System.out.println(montantEnchere);
 		// je crée les variables locales dont je vais avoir besoin pour récupérer
 		// des infos de la DAL que je devrai afficher dans la jsp
+		/*
 		Enchere enchereEC = null;
 		String pseudoEncherisseur= userEncherisseur.getPseudo();
 		int noEncherisseur=userEncherisseur.getNo_utilisateur();
 		int creditEncherisseur = userEncherisseur.getCredit();
 		int prixInitial =0;
 		LocalDateTime dateEnchere=null;
+		*/
 		
 		// je crée une varaiable de type ArticleManager pour appeler des méthodes 
 		// de la BLL et transmettre les infos en paramètres
 		ArticleManager am = new ArticleManager();
 		
 	
-			
+			/*
 			enchereEC = am.selectArticleById(noArticle,userEncherisseur);
 			prixInitial=enchereEC.getArticleEC().getPrixInitial();
 			dateEnchere=enchereEC.getDateEnchere();
-			// j'appelle la méthode validerEnchere
-			am.validerEnchere(montantEnchere,noArticle,noEncherisseur,creditEncherisseur,prixInitial,dateEnchere);
+			*/
+			// j'appelle la méthode validerEnchere (etape zappée pour la présentation du projet
+			//am.validerEnchere(montantEnchere,noArticle,noEncherisseur,creditEncherisseur,prixInitial,dateEnchere);
 			
-			// j'appelle la méthode selectArtilceById
-			enchereEC = am.selectArticleById(noArticle,userEncherisseur);
-						
+			// j'appelle la méthode udpdate
+			//enchereEC = am.selectArticleById(noArticle,userEncherisseur);
+					
+			am.update(noArticle, userEncherisseur.getNo_utilisateur(), montantEnchere, LocalDateTime.now());
 			// j'affecte la valeur d'enchereEC à l'attribut "enchereEC"
-			request.setAttribute("enchereEC", enchereEC);
+			//request.setAttribute("enchereEC", articleEC);
 			request.setAttribute("succesNouvelleEnchere", "Votre enchère a été prise en compte!");
 			
 			
@@ -115,7 +119,7 @@ public class EncherirServlet extends HttpServlet {
 		// un message de succès sur encherir.jsp
 		request.setAttribute("succesEnchere", true);
 		// Je redirige vers encherir.jsp
-		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/encherir.jsp").forward(request, response);
 	}
 
 }

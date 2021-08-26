@@ -21,7 +21,7 @@
 	<label for="categorie">Catégorie :  </label><br />
 	
 	
-	<label for="enchereActuelle">Meilleure offre : ${enchereEC.montantEnchere} pts par ${enchereEC.userEncherisseur.pseudo}</label><br />
+	<label for="enchereActuelle">Meilleure offre : ${enchereEC.montantEnchere} pts par ${enchereEC.articleEC.noVendeur}</label><br />
 	<!-- TODO Attention, ${enchereEC.userEncherisseur.pseudo} renvoie le 
 	nomArticle à l'affichage -->
 	

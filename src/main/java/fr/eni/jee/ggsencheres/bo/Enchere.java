@@ -10,15 +10,57 @@ public class Enchere {
 	
 	Utilisateur userEncherisseur;
 	Article articleEC;
-	LocalDateTime dateEnchere;
-	int montantEnchere;
+	
+	
 	public Enchere(Utilisateur userEncherisseur, Article articleEC, LocalDateTime dateEnchere, int montantEnchere) {
 		super();
 		this.userEncherisseur = userEncherisseur;
 		this.articleEC = articleEC;
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
+		
 	}
+
+
+	public int getNoAcheteur() {
+		return noAcheteur;
+	}
+
+
+	
+	
+
+	public void setNoAcheteur(int noAcheteur) {
+		this.noAcheteur = noAcheteur;
+	}
+
+
+
+	public int getNoArticle() {
+		return noArticle;
+	}
+
+
+
+	public void setNoArticle(int noArticle) {
+		this.noArticle = noArticle;
+	}
+	LocalDateTime dateEnchere;
+	int montantEnchere;
+	int noAcheteur;
+	int noArticle;
+	
+	
+	public Enchere(int noAcheteur, int noArticle, LocalDateTime dateEnchere, int montantEnchere) {
+		super();
+		this.noAcheteur = noAcheteur;
+		this.noArticle = noArticle;
+		this.dateEnchere = dateEnchere;
+		this.montantEnchere = montantEnchere;
+	}
+	
+	
+
 	public Utilisateur getUserEncherisseur() {
 		return userEncherisseur;
 	}
