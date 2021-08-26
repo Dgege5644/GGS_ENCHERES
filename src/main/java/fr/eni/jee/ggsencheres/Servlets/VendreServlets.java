@@ -68,7 +68,7 @@ public class VendreServlets extends HttpServlet {
 		String codePostal = request.getParameter("cp");
 		String ville = request.getParameter("ville");
 		
-		System.out.println(ville);
+		
 		ArticleManager am = new ArticleManager();
 	
 		articleAVendre = am.creerAticleAVendre(noUtilisateur,nomArticle, description, categorie, fichierPhotoArticle, prixInitial, debutEnchere, finEnchere,rue,codePostal,ville);

@@ -35,8 +35,9 @@ public class SupprimerMonCompteServlet extends HttpServlet {
 		
 		// 3 - envoie le no_utilisateur à la BLL pour poursuite de la méthode de suppression
 		ConnectionManager cm = new ConnectionManager();
+		
 		no_utilisateur = userConnected.getNo_utilisateur();
-		System.out.println("no_utilisateur:" + no_utilisateur);
+		
 		cm.deleteUtilisateur(no_utilisateur);
 		
 		// 1 - met fin à la session en cours

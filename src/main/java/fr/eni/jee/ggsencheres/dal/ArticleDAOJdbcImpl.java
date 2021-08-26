@@ -147,7 +147,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 					String motDePasse			= rs.getString("mot_de_passe");
 					int credit					= rs.getInt("credit");
 					boolean administrateur		= rs.getBoolean("administrateur");
-					System.out.println("noUtilisateur:" + noUtilisateur);
+					
 				// TABLE ARTICLES_VENDUS
 					int noArticle 					= rs.getInt("no_article");
 					String nomArticle				= rs.getString("nom_article");
@@ -158,11 +158,11 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				    int prixVente					= rs.getInt("prix_vente");
 				    String etatVente				= rs.getString("etat_vente");
 				    String fichierPhotoArticle		= rs.getString("image");
-				    System.out.println("noArticle:" + noArticle);
+				    
 				 // TABLE CATEGORIES
 				    int noCategorie					= rs.getInt("no_categorie");
 				    String libelle					= rs.getString("libelle");
-				    System.out.println("libelle:" + libelle);
+				    
 				 // TABLE RETRAITS 
 				    String rueRetrait				= rs.getString("retrue");
 				    String codePostalRetrait		= rs.getString("retcode_postal");
@@ -177,7 +177,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 					userEncherisseur 	= new Utilisateur(noUtilisateur, nomArticle, prenom, pseudo, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
 					
 					articleEC 			= new Article(noArticle, nomArticle, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, noUtilisateur, noCategorie, etatVente, fichierPhotoArticle, rueRetrait, codePostalRetrait, villeRetrait);
-					System.out.println("TestRecup:" + articleEC.getNoUtilisateur());
+					
 					enchereEC			= new Enchere(userEncherisseur, articleEC, dateEnchere, montantEnchere);
 					
 					
@@ -224,6 +224,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				String motDePasse			= rs.getString("mot_de_passe");
 				int credit					= rs.getInt("credit");
 				boolean administrateur		= rs.getBoolean("administrateur");
+				
 				//TABLE ARTICLES_VENDUS
 				String nomArticle				= rs.getString("nom_article");
 			    String description				= rs.getString("description");
@@ -233,20 +234,20 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			    int prixVente					= rs.getInt("prix_vente");
 			    String etatVente				= rs.getString("etat_vente");
 			    String fichierPhotoArticle		= rs.getString("image");
-			    System.out.println("noArticle:" + noArticle);
+			       
 			    // TABLE CATEGORIES
 			    int noCategorie					= rs.getInt("no_categorie");
 			    String libelle					= rs.getString("libelle");
-			    System.out.println("libelle:" + libelle);
+			    
 			    // TABLE RETRAITS 
 			    String rueRetrait				= rs.getString("retrue");
 			    String codePostalRetrait		= rs.getString("retcode_postal");
 			    String villeRetrait				= rs.getString("retville");
 			    // TABLE ENCHERES   
 				int montantEnchere 				= rs.getInt("prix_initial"); //TODO Mettre le prix_initial? Si oui quelles conséquences pour les futures enchères?
-				System.out.println("montant_enchere/Mise en ligne de l'article:" + montantEnchere);
+				
 				LocalDateTime dateEnchere 		= LocalDateTime.of((rs.getDate("date_debut_enchere").toLocalDate()),rs.getTime("date_debut_enchere").toLocalTime());
-				System.out.println("dateEnchere/Mise en ligne de l'article:" + dateDebutEnchere);	
+				
 				
 				// On affecte à une variable userEncherisseur de type Utilisateur l'ensemble des infos dont on aura besoin en jsp
 				userEncherisseur 	= new Utilisateur(noUtilisateur, nomArticle, prenom, pseudo, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
