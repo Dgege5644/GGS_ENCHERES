@@ -1,6 +1,8 @@
 package fr.eni.jee.ggsencheres.Servlets;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -67,20 +69,29 @@ public class EncherirServlet extends HttpServlet {
 		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
 		// le montant de l'enchère de l'input nommée "proposition"
 		int montantEnchere= Integer.parseInt(request.getParameter("proposition"));
+		
+		
+		
 		// je crée les variables locales dont je vais avoir besoin pour récupérer
 		// des infos de la DAL que je devrai afficher dans la jsp
 		Enchere enchereEC = null;
 		String pseudoEncherisseur= userEncherisseur.getPseudo();
+		int noEncherisseur=userEncherisseur.getNo_utilisateur();
 		int creditEncherisseur = userEncherisseur.getCredit();
+		int prixInitial =0;
+		LocalDateTime dateEnchere=null;
 		
 		// je crée une varaiable de type ArticleManager pour appeler des méthodes 
 		// de la BLL et transmettre les infos en paramètres
 		ArticleManager am = new ArticleManager();
+		
 		try {
 			
-			
+			enchereEC = am.selectArticleById(noArticle);
+			prixInitial=enchereEC.getArticleEC().getPrixInitial();
+			dateEnchere=enchereEC.getDateEnchere();
 			// j'appelle la méthode validerEnchere
-			am.validerEnchere(montantEnchere,noArticle,pseudoEncherisseur,creditEncherisseur);
+			am.validerEnchere(montantEnchere,noArticle,noEncherisseur,creditEncherisseur,prixInitial,dateEnchere);
 			
 			// j'appelle la méthode selectArtilceById
 			enchereEC = am.selectArticleById(noArticle);

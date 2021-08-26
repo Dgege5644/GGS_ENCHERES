@@ -1,5 +1,6 @@
 package fr.eni.jee.ggsencheres.dal;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import fr.eni.jee.ggsencheres.bo.Article;
@@ -12,6 +13,7 @@ public interface ArticleDAO {
 	void addRetrait(Article articleAVendre)throws DALException;
 	List<Enchere> selectEncheresEC() throws DALException;
 	Enchere selectArticleById(int noArticle)throws DALException;
-	void updateEnchereEC(int montantEnchere, int noArticle, String pseudoEncherisseur, int creditEncherisseur) throws DALException;
+	void updateEnchereEC(int montantEnchere, int noArticle, int noEncherisseur, int creditEncherisseur) throws DALException;
+	void insertIntoEncheres(int noEncherisseur, int noArticle, LocalDateTime dateEnchere, int montantEnchere)throws DALException;
 
 }
