@@ -14,27 +14,32 @@
 	
 	<!-- Dans la première partie de la page on affiche les infos que l'on récupère 
 	de la DAL, en partant de l'objet EnchereEC -->
-	<h2>${enchereEC.articleEC.nomArticle}</h2>
+	<h2>${articleEC.nomArticle}</h2>
 	<label for="description">Description : </label>
-	<textarea name="description" id="description" cols="10" rows="3">${enchereEC.articleEC.description}</textarea><br />
+	<textarea name="description" id="description" cols="10" rows="3">${articleEC.description}</textarea><br />
 	
 	<label for="categorie">Catégorie :  </label><br />
 	
 	
-	<label for="enchereActuelle">Meilleure offre : ${enchereEC.montantEnchere} pts par ${enchereEC.userEncherisseur.pseudo}</label><br />
-	<!-- TODO Attention, ${enchereEC.userEncherisseur.pseudo} renvoie le 
-	nomArticle à l'affichage -->
+	<!-- S'il n'y a pas encore d'enchère sur le prix initial, on affiche le prixInitial -->
+	<!--<c:if test="${empty enchereEC.montantEnchere}">
+	<label for="enchereActuelle">Meilleure offre : ${articleEC.prixInitial} pts par ${articleEC.pseudoVD}</label><br />
+	</c:if>--!>
+	
+	<!-- S'il y a déjà eu une enchère sur le prix initial, c'est la dernière faite qui s'affiche -->
+	<c:if test="${!empty enchereEC.montantEnchere}">
+	<label for="enchereActuelle">Meilleure offre : ${articleEC.enchereEC.montantEnchere} pts par ${articleEC.enchereEC.noUserDetenteur}</label><br />
+	</c:if>
+	
+	<label for="prixInitial">Mise à prix : ${articleEC.prixInitial}</label><br />
+	
+	<label for="finEnchere">Fin de l'enchère : ${articleEC.finEnchere}</label><br />
 	
 	
-	<label for="prixInitial">Mise à prix : ${enchereEC.articleEC.prixInitial}</label><br />
-	
-	<label for="finEnchere">Fin de l'enchère : ${enchereEC.articleEC.finEnchere}</label><br />
-	
-	
-	<label for="retrait">Retrait : ${enchereEC.articleEC.rue} <br /> ${enchereEC.articleEC.codePostal} ${enchereEC.articleEC.ville}</label><br />
+	<label for="retrait">Retrait : ${articleEC.rue} <br /> ${articleEC.codePostal} ${articleEC.ville}</label><br />
 	
 	 
-	 <label for="vendeur">Vendeur : ${enchereEC.articleEC.noUtilisateur}</label>
+	 <label for="vendeur">Vendeur : ${articleEC.pseudoVD}</label>
 	
 
 	 

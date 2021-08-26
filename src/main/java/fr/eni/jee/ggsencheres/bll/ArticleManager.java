@@ -122,20 +122,19 @@ public class ArticleManager {
 	 * @return enchereEC de type Enchere
 	 * @throws BLLException
 	 */
-	public Enchere selectArticleById(int noArticle, Utilisateur userEncherisseur) throws BLLException {
-		Enchere enchereEC=null;
+	public Article selectArticleById(int noArticle) throws BLLException {
+		Article articleEC=null;
 		try {
-			enchereEC = this.articleDAO.selectArticleById(noArticle,userEncherisseur);
+			articleEC = this.articleDAO.selectArticleById(noArticle);
 		} catch (DALException e) {
 			e.printStackTrace();
 			throw new BLLException("erreur dans la recuperation de l'article");
 			
 		}
-		return enchereEC;
+		return articleEC;
 	}
 
-
-	/**
+	/** mise en attente pour validation du projet
 	 * Méthode qui permet de valider que l'enchère peut être acceptée
 	 * @param montantEnchere
 	 * @param noArticle
@@ -145,23 +144,37 @@ public class ArticleManager {
 	 * @return
 	 * @throws BLLException
 	 */
-	public void validerEnchere(int montantEnchere, int noArticle, int noEncherisseur, int creditEncherisseur,int prixInitial, LocalDateTime dateEnchere) throws BLLException {
-		
-		// l'enchère ne peut être acceptée si elle est > au crédit de l'userEncherisseur
-		if(montantEnchere>creditEncherisseur) {
-			throw new BLLException("credit insuffisant, désolé!");
-		}
+//	public void validerEnchere(int montantEnchere, int noArticle, int noEncherisseur, int creditEncherisseur,int prixInitial, LocalDateTime dateEnchere) throws BLLException {
+//		
+//		// l'enchère ne peut être acceptée si elle est > au crédit de l'userEncherisseur
+//		if(montantEnchere>creditEncherisseur) {
+//			throw new BLLException("credit insuffisant, désolé!");
+//		}
+//		try {
+//			if(montantEnchere==prixInitial) {
+//				this.articleDAO.insertIntoEncheres(noEncherisseur,noArticle,dateEnchere,montantEnchere);
+//			}
+//			// Si l'enchère est validée, on modifie les données renseignées en paramètres
+//			this.articleDAO.updateEnchereEC(montantEnchere,noArticle,noEncherisseur,creditEncherisseur);
+//		} catch (DALException e) {
+//			e.printStackTrace();
+//			throw new BLLException("erreur dans la validation de l'enchère");
+//		}
+//		
+//	}
+
+	public void update(int noArticle, int no_utilisateur, int montantEnchere, LocalDateTime now) throws BLLException {
 		try {
-			if(montantEnchere==prixInitial) {
-				this.articleDAO.insertIntoEncheres(noEncherisseur,noArticle,dateEnchere,montantEnchere);
-			}
-			// Si l'enchère est validée, on modifie les données renseignées en paramètres
-			this.articleDAO.updateEnchereEC(montantEnchere,noArticle,noEncherisseur,creditEncherisseur);
+			this.articleDAO.updateEnchereEC(no_utilisateur, noArticle, now, montantEnchere);
+		
 		} catch (DALException e) {
 			e.printStackTrace();
-			throw new BLLException("erreur dans la validation de l'enchère");
+			throw new BLLException("erreur dans l'enregistrement de l'enchère");
+			
 		}
 		
 	}
+
+	
 
 }

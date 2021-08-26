@@ -9,9 +9,20 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Accueil GGS Enchères</title>
+<!-- ${pageContext.request.contextPath} permet d'avoir un lien absolu vers ce qui est noté derrière.
+ Dans le cas suivant, cela cherche le /css/style.css dans tout le projet -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
+	<%@include file="header.html" %>
+	<!--  définition des messages à afficher selon les actions réalisées
+	1er test : si la mise en vente d'un article s'est bien passée -->
+	<c:if test="${!empty succesVendreUnArticle}"> L'article a bien été ajouté à vos articles à vendre!</c:if>
+	<!-- 2ème test : si la modification du prfil s'est bien passée -->
+	<c:if test="${!empty succesModifProfil}"> Les modifications ont bien été enregistrées dans votre profil</c:if>
+	
+	<!-- 3ème test : si la connexion avec identifiant et mot de passe s'est bien passée, affiche 
+	un lien S'inscrire- Se connecter dant de connexion -->
 
 	<c:if test="${!empty suppressionCompte}"> Votre compte a été correctement supprimé!<br /></c:if> <!-- Message réussite; le succès a été défini dans la servlet... -->
 	<c:if test="${!empty succesDeconnexion}"> Vous avez correctement été déconnecté(e)!<br /></c:if>
@@ -19,6 +30,7 @@
 	<c:if test="${!empty succesModifProfil}"> Les modifications ont bien été enregistrées dans votre profil<br /></c:if>
 	
 	<!-- Adresse = servlet de connexion -->
+
 	<c:if test="${empty succes}"> <!-- l'utilsateur arrive à l'accueil pour la première fois   -->
 		<a href="${pageContext.request.contextPath}/Connexion">S'inscrire - Se connecter</a>
 	</c:if>

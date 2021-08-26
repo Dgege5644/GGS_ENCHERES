@@ -2,17 +2,28 @@
     pageEncoding="UTF-8"%>
     
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
 
-	<a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a>
 	
+	<!--  cette version est à prioriser sur les inclusions dynamiques 
+	<jsp:include page="header.html">
+		<jsp:param value="12" name="visiteur"/>
+	</jsp:include>
+	-->
+
+
+	<%@include file="header.html" %>
+
+	
+	
+	<!--  début du formulaire -->
 	<form action="./AfficherMonProfil" method="get">
 	
 		<label for="pseudo">Pseudo: </label>

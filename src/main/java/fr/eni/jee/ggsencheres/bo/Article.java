@@ -18,6 +18,7 @@ public class Article {
      private String rue;
      private String codePostal;
      private String ville;
+     Enchere enchereEc;
      
      
      
@@ -131,6 +132,28 @@ public class Article {
 	}
 	
 	
+
+
+	public Article(int noArticle, String nomArticle, String description, int noCategorie, String libelle,
+			int prixInitial, int prixVente, LocalDateTime dateDebutEnchere, LocalDateTime dateFinEnchere,
+			String etatVente, String fichierPhotoArticle, String rueRetrait, String codePostalRetrait,
+			String villeRetrait,Enchere enchereEC) {
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.noCategorie = noCategorie;
+		this.debutEnchere = dateDebutEnchere;
+		this.finEnchere = dateFinEnchere;
+		this.libelle= libelle;
+		this.prixInitial = prixInitial;
+		this.prixVente = prixVente;
+		this.fichierPhotoArticle = fichierPhotoArticle;
+		this.etatVente = etatVente;
+		this.rue = rueRetrait;
+		this.codePostal = codePostalRetrait;
+		this.ville = villeRetrait;
+		this.enchereEc = enchereEC;
+	}
 
 
 	public String getLibelle() {
