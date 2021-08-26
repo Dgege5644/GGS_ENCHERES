@@ -229,8 +229,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				boolean administrateur		= rs.getBoolean("administrateur");
 				
 				//table utilisateur vendeur
-				int noUtilisateurVD			= rs.getInt("no_vendeur");
-				String pseudoVD	= rs.getString("pseudo_vendeur");
+				int noUtilisateurVD			= rs.getInt("no_vendeur");//TODO 
+				String pseudoVD				= rs.getString("pseudo_vendeur");
 				String nomV					= rs.getString("nom");
 				String prenomV				= rs.getString("prenom");
 				String emailV				= rs.getString("email");
@@ -244,7 +244,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				//TABLE ARTICLES_VENDUS
 				String nomArticle				= rs.getString("nom_article");
 			    String description				= rs.getString("description");
-			    int noVendeur					=rs.getInt("no_vendeur");
+			    int noVendeur					= rs.getInt("no_vendeur");// TODO 
 			    LocalDateTime dateDebutEnchere 	= LocalDateTime.of((rs.getDate("date_debut_enchere").toLocalDate()),rs.getTime("date_debut_enchere").toLocalTime()); //Le type DateTime (SQL) est converti en 2 variables: LocalDate et LocalTime
 			    LocalDateTime dateFinEnchere 	= LocalDateTime.of((rs.getDate("date_fin_enchere").toLocalDate()),rs.getTime("date_fin_enchere").toLocalTime());
 			    int prixInitial					= rs.getInt("prix_initial");
