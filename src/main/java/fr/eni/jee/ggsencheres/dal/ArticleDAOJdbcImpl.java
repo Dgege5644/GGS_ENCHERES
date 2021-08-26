@@ -177,7 +177,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 					LocalDateTime dateEnchere 		= LocalDateTime.of((rs.getDate("date_debut_enchere").toLocalDate()),rs.getTime("date_debut_enchere").toLocalTime());
 						
 					
-					userEncherisseur 	= new Utilisateur(noUtilisateur, nomArticle, prenom, pseudo, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
+					userEncherisseur 	= new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
 					
 					articleEC 			= new Article(noArticle, nomArticle, description, dateDebutEnchere, dateFinEnchere, prixInitial, prixVente, noUtilisateur, noCategorie, etatVente, fichierPhotoArticle, rueRetrait, codePostalRetrait, villeRetrait);
 					
@@ -191,7 +191,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			throw new DALException("Erreur de connexion avec la base de données. Note technique : " + e.getMessage());
 		}
 				return listeEncheres;
-		
 		
 	}
 	/**

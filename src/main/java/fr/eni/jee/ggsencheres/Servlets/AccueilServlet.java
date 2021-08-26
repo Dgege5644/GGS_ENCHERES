@@ -42,8 +42,11 @@ public class AccueilServlet extends HttpServlet {
 		listeEncheres = am.afficherEncheres();
 		
 		if(listeEncheres==null) {
+			
 			request.setAttribute("listeEncheresNulle", "Aucune enchère en cours, Revenez ultérieurement!");	
+			
 		}else {
+			
 			request.setAttribute("listeEncheres", listeEncheres);	
 		}
 	}catch(BLLException e) {
@@ -51,8 +54,7 @@ public class AccueilServlet extends HttpServlet {
 		e.printStackTrace(); //Indispensable pour obtenir les erreurs au lancement de l'application...
 		request.setAttribute("erreurListeEncheres", "Erreur lors de l'affichage de la liste");
 	}
-	
-		
+			
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 		
 	}

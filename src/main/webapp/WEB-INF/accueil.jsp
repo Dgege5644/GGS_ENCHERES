@@ -114,7 +114,7 @@
 					Prix: ${enchereEC.montantEnchere} <!-- TODO : Mettre la plus haute enchère en cours sinon le prix initial sur une autre ligne -->
 				</li>
 				<li>
-					Fin de l'enchere: ${enchereEC.dateEnchere} <!-- Mettre la date et l'heure de fin d'enchère sur une autre ligne  -->
+					Fin de l'enchere: ${enchereEC.articleEC.finEnchere} <!-- Mettre la date et l'heure de fin d'enchère sur une autre ligne  -->
 				</li>
 			<c:if test="${!empty succes}">
 				<li>
@@ -123,7 +123,7 @@
 			</c:if>
 			<c:if test="${empty succes}">
 				<li>
-					Vendeur: ${enchereEC.userEncherisseur.nom} <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
+					Vendeur: ${enchereEC.userEncherisseur.pseudo} <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
 				</li>
 			</c:if>
 			</ul>
