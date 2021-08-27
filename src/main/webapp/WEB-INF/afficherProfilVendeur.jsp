@@ -8,7 +8,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
-<%@include file="header.html" %>
+<header>
+	<%@include file="entete.html" %>
+</header>
+<main>
 	<form action="./AfficherProfilVendeur" method="get">
 	<!-- remplacé par le logo qui renvoie vers l'accueil
 	<a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a><br />
@@ -30,5 +33,10 @@
 		<input type="text" name="telephone" id="telephone" readonly="readonly" value="${userVendeur.telephone}"/><br />
 			
 	</form>
+</main>
+<footer>
+
+</footer>
+	
 </body>
 </html>

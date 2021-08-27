@@ -12,7 +12,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
-<%@include file="header.html" %>
+<header>
+	<%@include file="entete.html" %>
+</header>
+
 <!-- S'il y a des erreurs à afficher, on parcours les messages -->
 	<c:if test="${!empty erreurs}">
 		<ul style="color: red;">
@@ -24,6 +27,7 @@
 	<!-- remplacé par le logo qui renvoie vers l'accueil
 	<a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a><br />
 	 -->
+<main>
 	<form action="${pageContext.request.contextPath}/ModifierMonProfil" method="post">
 	
 		<label for="pseudo">Pseudo: </label>
@@ -69,7 +73,11 @@
 		<button><a href="${pageContext.request.contextPath}/SupprimerMonCompte">Supprimer Mon compte</a></button>
 		
 	</form>
-	
+</main>
+
+<footer>
+
+</footer>	
 </body>
 </html>
 

@@ -10,8 +10,13 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
-<%@include file="header.html" %>
-	<h1>Détail vente</h1>
+<header>
+	<%@include file="entete.html" %>
+</header>
+<main>
+
+
+	<h1>Détails vente</h1>
 	
 	<!-- Dans la première partie de la page on affiche les infos que l'on récupère 
 	de la DAL, en partant de l'objet EnchereEC -->
@@ -75,5 +80,10 @@
 	<c:if test ="${!empty erreurEnchere}">
 		${erreurEnchere}
 	</c:if>
+</main>
+
+<footer>
+
+</footer>
 </body>
 </html>

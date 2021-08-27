@@ -11,7 +11,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
-<%@include file="header.html" %>
+<header>
+	<%@include file="entete.html" %>
+</header>
+<main>
 	<form action="${pageContext.request.contextPath}/SupprimerMonCompte" method="post">
 	
 		<h2>Valider la suppression de votre compte?</h2>
@@ -22,7 +25,10 @@
 		<button><a href="${pageContext.request.contextPath}/Accueil">Annuler</a></button>
 		
 	</form>
-	
+</main>
+<footer>
+
+</footer>	
 
 </body>
 </html>

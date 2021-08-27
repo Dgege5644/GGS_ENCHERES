@@ -10,7 +10,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
-<%@include file="header.html" %>
+<header>
+	<%@include file="entete.html" %>
+</header>
+<main>
 <!-- 
 <a href="${pageContext.request.contextPath}/Accueil">Retour à l'accueil</a><br />
  -->
@@ -69,10 +72,11 @@
 	</c:if>
 	<input type="submit" id="enregistrerArticle" value="Enregistrer"/>
 	<input type="reset" value="Annuler">
-	
-
-
 
 </form>
+</main>
+<footer>
+
+</footer>
 </body>
 </html>
