@@ -162,6 +162,21 @@ public class Article {
 	}
 
 
+	public Enchere getEnchereEc() {
+		return enchereEc;
+	}
+
+
+	public Utilisateur getUserVendeur() {
+		return userVendeur;
+	}
+
+
+	public Utilisateur getUserAcheteur() {
+		return userAcheteur;
+	}
+
+
 	public String getLibelle() {
 		return libelle;
 	}

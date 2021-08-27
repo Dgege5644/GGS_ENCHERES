@@ -15,6 +15,20 @@ public class Utilisateur {
 	private int credit;
 	private boolean administrateur;
 	
+	private int no_Acheteur;
+	private String pseudoAcheteur;
+	private String nomAcheteur;
+	private String prenomAcheteur;
+	private String emailAcheteur;
+	private String telephoneAcheteur;
+	private String rueAcheteur;
+	private String codePostalAcheteur;
+	private String villeAcheteur;
+	private String motDePasseAcheteur;
+	private int creditAcheteur;
+	private boolean administrateurA;
+	
+	
 	
 	public Utilisateur(int no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
