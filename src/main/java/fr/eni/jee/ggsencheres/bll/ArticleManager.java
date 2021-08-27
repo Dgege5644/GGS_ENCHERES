@@ -88,6 +88,7 @@ public class ArticleManager {
 			
 			articleDAO.addArticle(articleAVendre);
 			articleDAO.addRetrait(articleAVendre);
+			articleDAO.addEnchere(articleAVendre);
 		}catch(DALException e) {
 			exceptions.addMessage(e.getMessage());
 			throw exceptions;
