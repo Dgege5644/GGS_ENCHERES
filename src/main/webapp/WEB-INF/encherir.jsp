@@ -50,8 +50,6 @@
 	
 	 
 	 <label for="vendeur">Vendeur : ${articleEC.userVendeur.pseudoVD}</label>
-	
-
 	 
 	 
 	<!--  Partie forulaire où on récupère la proposition d'enchère du userEncherisseur -->

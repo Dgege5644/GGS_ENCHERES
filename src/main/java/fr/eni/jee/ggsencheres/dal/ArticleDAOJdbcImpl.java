@@ -29,7 +29,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	private static final String SELECT_ARTICLE_BY_ID = "SELECT ARTICLES_VENDUS.no_article as no_article, nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur as no_vendeur, etat_vente, image,ENCHERES.date_enchere as date_enchere, ENCHERES.montant_enchere as montant_enchere ,ENCHERES.no_utilisateur as no_user_detenteur, CATEGORIES.no_categorie as no_categorie, CATEGORIES.libelle as libelle, UTILISATEURS.no_utilisateur as no_vendeur, UTILISATEURS.prenom as prenom_vendeur, UTILISATEURS.nom as nom_vendeur, UTILISATEURS.pseudo as pseudo_vendeur, UTILISATEURS.email as email_v, UTILISATEURS.telephone as telephone_v, UTILISATEURS.rue as rue_v, UTILISATEURS.code_postal as code_postal_v, UTILISATEURS.ville as ville_v, mot_de_passe_v, UTILISATEURS.credit as credit_v, administrateur, ACHETEURS.no_utilisateur as no_acheteur, ACHETEURS.prenom as prenom_acheteur, ACHETEURS.nom as nom_acheteur, ACHETEURS.pseudo as pseudo_acheteur, ACHETEURS.email as email_a, ACHETEURS.telephone as telephone_a, ACHETEURS.rue as rue_a, ACHETEURS.code_postal as code_postal_a, ACHETEURS.ville as ville_a, ACHETEURS.mot_de_passe_a, ACHETEURS.credit as credit_a, administrateur,RETRAITS.rue as retrue, RETRAITS.code_postal as retcode_postal, RETRAITS.ville as retville "
 														+ "FROM ARTICLES_VENDUS "
 														+ "LEFT OUTER JOIN ENCHERES ON ENCHERES.no_article = ARTICLES_VENDUS.no_article  "
-														+ "LEFT OUTER JOIN UTILISATEURS as acheteurs ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur  "
+														+ "LEFT OUTER JOIN UTILISATEURS as acheteurs ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur "
 														+ "INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur "
 														+ "INNER JOIN CATEGORIES ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie "
 														+ "INNER JOIN RETRAITS ON ARTICLES_VENDUS.no_article = RETRAITS.no_article  WHERE ARTICLES_VENDUS.no_article=?;";
@@ -295,20 +295,20 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	
 
 	
-//	public void updateEnchereEC(int montantEnchere, int noArticle, int noEncherisseur, int creditEncherisseur) throws DALException {
-//		
-//		try(Connection cnx = ConnectionProvider.getConnection()){
-//			PreparedStatement pSt= cnx.prepareStatement(UPDATE_ENCHERE);
-//			pSt.setInt(1, montantEnchere);
-//			pSt.setInt(2, noEncherisseur);
-//			pSt.setInt(3, creditEncherisseur);
-//			pSt.setInt(4, noArticle);
-//			pSt.executeUpdate();
-//		}catch(SQLException e) {
-//			throw new DALException("erreur de l'update de l'enchere");
-//		}
-//		
-//	}
+	public void insertIntoEnchereEC(int montantEnchere, int noArticle, int noEncherisseur, int creditEncherisseur) throws DALException {
+		
+		try(Connection cnx = ConnectionProvider.getConnection()){
+			PreparedStatement pSt= cnx.prepareStatement(UPDATE_ENCHERE);
+			pSt.setInt(1, montantEnchere);
+			pSt.setInt(2, noEncherisseur);
+			pSt.setInt(3, creditEncherisseur);
+			pSt.setInt(4, noArticle);
+			pSt.executeUpdate();
+		}catch(SQLException e) {
+			throw new DALException("erreur de l'update de l'enchere");
+		}
+		
+	}
 	/**
 	 * Méthode qui modifie les colonnes concernées avec ce qu'elle utilise en paramètre
 	 * Et qui retourne une enchereUpdated de type Enchere ????? 
