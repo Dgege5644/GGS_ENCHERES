@@ -37,6 +37,9 @@
 	<label for="enchereActuelle">Meilleure offre : ${articleEC.enchereEC.montantEnchere} pts par ${articleEC.userAcheteur.pseudoAcheteur}</label><br />
 	</c:if>
 	
+	<c:if test="${empty enchereEC.montantEnchere}">
+	<label for="enchereActuelle">Meilleure offre : ${articleEC.prixInitial} pts par ${articleEC.userVendeur.pseudoVendeur}</label><br />
+	</c:if>
 	<label for="prixInitial">Mise à prix : ${articleEC.prixInitial}</label><br />
 	
 	<label for="finEnchere">Fin de l'enchère : ${articleEC.dateFinEnchere}</label><br />

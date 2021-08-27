@@ -240,28 +240,28 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				String pseudoVD				= rs.getString("pseudo_vendeur");
 				String nomV					= rs.getString("nom_vendeur");
 				String prenomV				= rs.getString("prenom_vendeur");
-				String emailV				= rs.getString("email_venderu");
-				String telephoneV			= rs.getString("telephone_vendeur");
+				String emailV				= rs.getString("email_v");
+				String telephoneV			= rs.getString("telephone_v");
 				String rueV				    = rs.getString("rue_v");
 				String codePostalV			= rs.getString("code_postal_v");
 				String villeV				= rs.getString("ville_v");
-				String motDePasseV			= rs.getString("mot_de_passe");
+				String motDePasseV			= rs.getString("mot_de_passe_v");
 				int creditV					= rs.getInt("credit_v");
 				boolean administrateurV		= rs.getBoolean("administrateur");
 				
 				// TABLE UTILISATEURS as acheteurs
 				int noAcheteur				= rs.getInt("no_acheteur");
 				String pseudoAcheteur	= rs.getString("pseudo_acheteur");
-				String nom					= rs.getString("nom");
-				String prenom				= rs.getString("prenom");
-				String email				= rs.getString("email");
-				String telephone			= rs.getString("telephone");
-				String rue					= rs.getString("rue_v");
-				String codePostal			= rs.getString("code_postal_v");
-				String ville				= rs.getString("ville_v");
-				String motDePasse			= rs.getString("mot_de_passe");
-				int credit					= rs.getInt("credit_v");
-				boolean administrateur		= rs.getBoolean("administrateur");
+				String nomAcheteur			= rs.getString("nom");
+				String prenomAcheteur		= rs.getString("prenom");
+				String emailAcheteur		= rs.getString("email");
+				String telephoneAcheteur	= rs.getString("telephone");
+				String rueAcheteur			= rs.getString("rue_v");
+				String codePostalAcheteur	= rs.getString("code_postal_v");
+				String villeAcheteur		= rs.getString("ville_v");
+				String motDePasseAcheteur	= rs.getString("mot_de_passe");
+				int creditAcheteur			= rs.getInt("credit_v");
+				boolean administrateurA		= rs.getBoolean("administrateur");
 			
 			    // TABLE RETRAITS 
 			    String rueRetrait				= rs.getString("retrue");
@@ -274,7 +274,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				//userEncherisseur 	= new Utilisateur(noUtilisateurEC, pseudoEncherisseur, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
 			    userVendeur		= new Utilisateur(noUtilisateurVD, pseudoVD, nomV, prenomV, emailV, telephoneV, rueV, codePostalV, villeV, motDePasseV, creditV, administrateurV);
 				
-			    userAcheteur	= new Utilisateur(noAcheteur, pseudoAcheteur, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, credit, administrateur);
+			    userAcheteur	= new Utilisateur(noAcheteur, pseudoAcheteur, nomAcheteur, prenomAcheteur, emailAcheteur, telephoneAcheteur, rueAcheteur, codePostalAcheteur, villeAcheteur, motDePasseAcheteur, creditAcheteur, administrateurA);
 			    
 				// On affecte à une variable enchereEC de type Enchere l'ensemble des infos dont on aura besoin en jsp
 				// elle reprend en paramètre le noUserDetenteur et le noArticle en plus de dateEnchere et montantEnchere
