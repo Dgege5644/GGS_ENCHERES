@@ -53,7 +53,7 @@
 			</ul>
 		</c:if>
 		
-		<button><a href="${pageContext.request.contextPath}/ModifierMonProfil" class="lienbouton">Modifier</a></button>
+		<button><a href="${pageContext.request.contextPath}/ModifierMonProfil">Modifier</a></button>
 		
 	</form>
 	</main>

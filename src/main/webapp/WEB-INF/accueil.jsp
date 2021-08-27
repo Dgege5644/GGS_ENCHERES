@@ -33,7 +33,7 @@
 	<!-- Adresse = servlet de connexion -->
 
 	<c:if test="${empty succes}"> <!-- l'utilsateur arrive à l'accueil pour la première fois   -->
-		<a href="${pageContext.request.contextPath}/Connexion">S'inscrire - Se connecter</a>
+		<a href="${pageContext.request.contextPath}/Connexion" id="sinscrire">S'inscrire - Se connecter</a>
 	</c:if>
 	
 	<c:if test="${!empty erreur}">  <!-- Si utilisateur n'existe pas en base de données(après une tentative de connexion, utilisateur == null) alors on affiche un message d'erreur sur la page d'accueil  -->
@@ -87,7 +87,7 @@
 		</div>
 	</div>
 	</c:if>
-		<input type="submit" value="Rechercher" class="lienbouton"/>
+		<input type="submit" value="Rechercher"/>
 
 	</form>
 	
