@@ -14,5 +14,6 @@ public interface ArticleDAO {
 	List<Enchere> selectEncheresEC() throws DALException;
 	Article selectArticleById(int noArticle)throws DALException;
 	void updateEnchereEC(int no_utilisateur, int noArticle, LocalDateTime now, int montantEnchere)throws DALException;
+	void addEnchere(Article articleAVendre)throws DALException;
 	
 }
