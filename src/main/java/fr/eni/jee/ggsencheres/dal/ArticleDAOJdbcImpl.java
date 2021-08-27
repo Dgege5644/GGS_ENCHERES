@@ -278,11 +278,11 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			    
 				// On affecte à une variable enchereEC de type Enchere l'ensemble des infos dont on aura besoin en jsp
 				// elle reprend en paramètre le noUserDetenteur et le noArticle en plus de dateEnchere et montantEnchere
-				enchereEC		= new Enchere(noUserDetenteur, noArticle, dateEnchere, montantEnchere);
+				enchereEC		= new Enchere(noUserDetenteur, noUserDetenteur, dateEnchere, montantEnchere);
 				
 				// On affecte à une variable articleEC de type Article l'ensemble des infos dont on aura besoin en jsp
 				// le noArticle est récupéré dans le paramètres de la méthode (il arrive de la jsp)
-				articleEC 		= new Article(noArticle, nomArticle, description, noCategorie, libelle, prixInitial, prixVente, dateDebutEnchere, dateFinEnchere, etatVente, fichierPhotoArticle, rueRetrait, codePostalRetrait, villeRetrait, enchereEC, userVendeur, userAcheteur);
+				articleEC 		= new Article(noArticleEC, nomArticle, description, noCategorie, libelle, prixInitial, prixVente, dateDebutEnchere, dateFinEnchere, etatVente, fichierPhotoArticle, rueRetrait, codePostalRetrait, villeRetrait, enchereEC, userVendeur, userAcheteur);
 				
 				
 			}
