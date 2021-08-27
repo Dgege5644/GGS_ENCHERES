@@ -21,7 +21,7 @@
 <form action="${pageContext.request.contextPath}/Vendre" method="post">
 
 	<label for="article">Article: </label>
-	<input type="text" name="article" placeholder="nom de l'article" required="required"/><br />
+	<input type="text" name="article" placeholder="nom de l'article" required="required" autofocus="autofocus"/><br />
 	
 	<label for="description">Description: </label>
 	<textarea name="description" id="descriptionArticle" cols="30" rows="5"  placeholder="description de l'article" required="required"></textarea><br />
@@ -70,8 +70,8 @@
 			</c:forEach>
 		</ul>
 	</c:if>
-	<input type="submit" id="enregistrerArticle" value="Enregistrer"/>
-	<input type="reset" value="Annuler">
+	<input type="submit" id="enregistrerArticle" value="Enregistrer" class="lienbouton"/>
+	<input type="reset" value="Annuler" class="lienbouton">
 
 </form>
 </main>

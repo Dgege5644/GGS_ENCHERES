@@ -67,10 +67,10 @@
 		<input type="number" name="credit" id="credit" readonly="readonly" value="${userConnected.credit}"/><br />
 			
 
-		<input type="reset" value="Annuler les modifications"/>
+		<input type="reset" value="Annuler les modifications" class="lienbouton"/>
 
 		<input type="submit" value="Enregistrer"/>
-		<button><a href="${pageContext.request.contextPath}/SupprimerMonCompte">Supprimer Mon compte</a></button>
+		<button><a href="${pageContext.request.contextPath}/SupprimerMonCompte" class="lienbouton">Supprimer Mon compte</a></button>
 		
 	</form>
 </main>

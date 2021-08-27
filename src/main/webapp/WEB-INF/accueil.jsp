@@ -41,7 +41,7 @@
 	</c:if>
 	
 	<c:if test="${!empty succes}"> <!-- l'utilsateur existe en base de données et est connecté; il a alors accès aux autres fonctionnalités du site   -->
-		<nav>
+		<nav id="navigation">
 			<a href="${pageContext.request.contextPath}/Vendre">Vendre un article</a>
 			<a href="${pageContext.request.contextPath}/AfficherMonProfil">Mon Profil</a>
 			<a href="${pageContext.request.contextPath}/Deconnexion">Se Déconnecter</a>
@@ -54,7 +54,7 @@
 <main>	 
 	<h1>Liste des enchères</h1>
 	
-	<form action="/Accueil" method="POST">
+	<form action="./Accueil" method="POST">
 	
 		<label for="filtre">Filtres : </label><br />
 		<input type="search" placeholder="Le nom de l'article contient" /><br />
@@ -87,7 +87,7 @@
 		</div>
 	</div>
 	</c:if>
-		<input type="submit" value="Rechercher"/>
+		<input type="submit" value="Rechercher" class="lienbouton"/>
 
 	</form>
 	
