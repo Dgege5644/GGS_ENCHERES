@@ -99,7 +99,7 @@ public class EncherirServlet extends HttpServlet {
 			// j'appelle la méthode udpdate
 			//enchereEC = am.selectArticleById(noArticle,userEncherisseur);
 					
-			am.update(noArticle, userEncherisseur.getNo_utilisateur(), montantEnchere, LocalDateTime.now());
+			am.update(noArticle, userEncherisseur.getNo_utilisateur(), montantEnchere);
 			// j'affecte la valeur d'enchereEC à l'attribut "enchereEC"
 			//request.setAttribute("enchereEC", articleEC);
 			request.setAttribute("succesNouvelleEnchere", "Votre enchère a été prise en compte!");

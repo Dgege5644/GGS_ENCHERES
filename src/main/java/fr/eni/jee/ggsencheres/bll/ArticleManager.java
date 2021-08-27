@@ -164,9 +164,9 @@ public class ArticleManager {
 //		
 //	}
 
-	public void update(int noArticle, int no_utilisateur, int montantEnchere, LocalDateTime now) throws BLLException {
+	public void update(int noArticle, int no_utilisateur, int montantEnchere) throws BLLException {
 		try {
-			this.articleDAO.updateEnchereEC(no_utilisateur, noArticle, now, montantEnchere);
+			this.articleDAO.updateEnchereEC(no_utilisateur, noArticle, montantEnchere);
 		
 		} catch (DALException e) {
 			e.printStackTrace();
