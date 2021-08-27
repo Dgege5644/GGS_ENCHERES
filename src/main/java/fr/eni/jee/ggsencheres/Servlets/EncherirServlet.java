@@ -72,6 +72,7 @@ public class EncherirServlet extends HttpServlet {
 		System.out.println(noArticle);
 		int montantEnchere= Integer.parseInt(request.getParameter("proposition"));
 		System.out.println(montantEnchere);
+		int noUtilisateur=userEncherisseur.getNo_utilisateur();
 		// je crée les variables locales dont je vais avoir besoin pour récupérer
 		// des infos de la DAL que je devrai afficher dans la jsp
 		/*
@@ -99,7 +100,7 @@ public class EncherirServlet extends HttpServlet {
 			// j'appelle la méthode udpdate
 			//enchereEC = am.selectArticleById(noArticle,userEncherisseur);
 					
-			am.update(noArticle, userEncherisseur.getNo_utilisateur(), montantEnchere);
+			am.update(noArticle, noUtilisateur, montantEnchere);
 			// j'affecte la valeur d'enchereEC à l'attribut "enchereEC"
 			//request.setAttribute("enchereEC", articleEC);
 			request.setAttribute("succesNouvelleEnchere", "Votre enchère a été prise en compte!");

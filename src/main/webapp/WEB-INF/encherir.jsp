@@ -52,14 +52,12 @@
 		
 		<!-- S'il n'y a pas encore d'enchère sur le prix initial, la proposition doit au moins être supérieure au
 		prixInitial de 1 pt -->
-		<c:if test="${empty enchereEC.montantEnchere}">
-		<input type="number" name="proposition" min="${enchereEC.articleEC.prixInitial+1}" value="${enchereEC.articleEC.prixInitial+1}" step="1"/>
-		</c:if>
+		
+		<input type="number" name="proposition" min="${articleEC.enchereEc.montantEnchere+1}" value="${articleEC.enchereEc.montantEnchere+1}" step="1"/>
+		
 		<!-- S'il y a déjà une enchère sur le prix initial, la proposition doit au moins être supérieure à cette
 		enchère de 1 pt -->
-		<c:if test="${!empty enchereEC.montantEnchere}">
-		<input type="number" name="proposition" min="${enchereEC.montantEnchere+1}" value="${enchereEC.montantEnchere+1}" step="1"/>
-		</c:if>
+		
 		<!--  On met un input de type hidden pour récupérer le noArticle de l'enchereEC
 		dont on aura besoin dans le Servelt pour accéder à la DAL et récupérer les infos
 		sur l'articleEC et l'userEncherisseur -->
