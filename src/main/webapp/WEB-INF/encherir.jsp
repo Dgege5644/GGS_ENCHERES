@@ -34,7 +34,7 @@
 	
 	<!-- S'il y a déjà eu une enchère sur le prix initial, c'est la dernière faite qui s'affiche -->
 	<c:if test="${!empty enchereEC.montantEnchere}">
-	<label for="enchereActuelle">Meilleure offre : ${articleEC.enchereEC.montantEnchere} pts par ${articleEC.enchereEC.userAcheteur.pseudoAcheteur}</label><br />
+	<label for="enchereActuelle">Meilleure offre : ${articleEC.enchereEC.montantEnchere} pts par ${articleEC.userAcheteur.pseudoAcheteur}</label><br />
 	</c:if>
 	
 	<label for="prixInitial">Mise à prix : ${articleEC.prixInitial}</label><br />

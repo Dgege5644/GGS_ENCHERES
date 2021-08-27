@@ -26,10 +26,10 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			+ "WHERE ENCHERES.no_article = ?";
 
 
-	private static final String SELECT_ARTICLE_BY_ID = "SELECT ARTICLES_VENDUS.no_article as no_article, nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur as no_vendeur, etat_vente, image,ENCHERES.date_enchere as date_enchere, ENCHERES.montant_enchere as montant_enchere ,ENCHERES.no_utilisateur as no_user_detenteur, CATEGORIES.no_categorie as no_categorie, CATEGORIES.libelle as libelle, UTILISATEURS.no_utilisateur as no_vendeur, prenom, nom, UTILISATEURS.pseudo as pseudo_vendeur, email, telephone, UTILISATEURS.rue as rue_v, UTILISATEURS.code_postal as code_postal_v, UTILISATEURS.ville as ville_v, mot_de_passe, UTILISATEURS.credit as credit_v, administrateur, RETRAITS.rue as retrue, RETRAITS.code_postal as retcode_postal, RETRAITS.ville as retville "
+	private static final String SELECT_ARTICLE_BY_ID = "SELECT ARTICLES_VENDUS.no_article as no_article, nom_article, description, date_debut_enchere, date_fin_enchere, prix_initial, prix_vente, ARTICLES_VENDUS.no_utilisateur as no_vendeur, etat_vente, image,ENCHERES.date_enchere as date_enchere, ENCHERES.montant_enchere as montant_enchere ,ENCHERES.no_utilisateur as no_user_detenteur, CATEGORIES.no_categorie as no_categorie, CATEGORIES.libelle as libelle, UTILISATEURS.no_utilisateur as no_vendeur, UTILISATEURS.prenom as prenom_vendeur, UTILISATEURS.nom as nom_vendeur, UTILISATEURS.pseudo as pseudo_vendeur, UTILISATEURS.email as email_v, UTILISATEURS.telephone as telephone_v, UTILISATEURS.rue as rue_v, UTILISATEURS.code_postal as code_postal_v, UTILISATEURS.ville as ville_v, mot_de_passe_v, UTILISATEURS.credit as credit_v, administrateur, ACHETEURS.no_utilisateur as no_acheteur, ACHETEURS.prenom as prenom_acheteur, ACHETEURS.nom as nom_acheteur, ACHETEURS.pseudo as pseudo_acheteur, ACHETEURS.email as email_a, ACHETEURS.telephone as telephone_a, ACHETEURS.rue as rue_a, ACHETEURS.code_postal as code_postal_a, ACHETEURS.ville as ville_a, ACHETEURS.mot_de_passe_a, ACHETEURS.credit as credit_a, administrateur,RETRAITS.rue as retrue, RETRAITS.code_postal as retcode_postal, RETRAITS.ville as retville "
 														+ "FROM ARTICLES_VENDUS "
 														+ "LEFT OUTER JOIN ENCHERES ON ENCHERES.no_article = ARTICLES_VENDUS.no_article  "
-														+ "LEFT OUTER JOIN UTILISATEURS ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur  "
+														+ "LEFT OUTER JOIN UTILISATEURS as acheteurs ON ENCHERES.no_utilisateur = UTILISATEURS.no_utilisateur  "
 														+ "INNER JOIN UTILISATEURS ON ARTICLES_VENDUS.no_utilisateur = UTILISATEURS.no_utilisateur "
 														+ "INNER JOIN CATEGORIES ON ARTICLES_VENDUS.no_categorie = CATEGORIES.no_categorie "
 														+ "INNER JOIN RETRAITS ON ARTICLES_VENDUS.no_article = RETRAITS.no_article  WHERE ARTICLES_VENDUS.no_article=?;";
@@ -238,10 +238,10 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 				//table utilisateur vendeur
 				int noUtilisateurVD			= rs.getInt("no_vendeur");
 				String pseudoVD				= rs.getString("pseudo_vendeur");
-				String nomV					= rs.getString("nom");
-				String prenomV				= rs.getString("prenom");
-				String emailV				= rs.getString("email");
-				String telephoneV			= rs.getString("telephone");
+				String nomV					= rs.getString("nom_vendeur");
+				String prenomV				= rs.getString("prenom_vendeur");
+				String emailV				= rs.getString("email_venderu");
+				String telephoneV			= rs.getString("telephone_vendeur");
 				String rueV				    = rs.getString("rue_v");
 				String codePostalV			= rs.getString("code_postal_v");
 				String villeV				= rs.getString("ville_v");
@@ -278,7 +278,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 			    
 				// On affecte à une variable enchereEC de type Enchere l'ensemble des infos dont on aura besoin en jsp
 				// elle reprend en paramètre le noUserDetenteur et le noArticle en plus de dateEnchere et montantEnchere
-				enchereEC		= new Enchere(noUserDetenteur, noUserDetenteur, dateEnchere, montantEnchere);
+				enchereEC		= new Enchere(noUserDetenteur, noArticleEC, dateEnchere, montantEnchere);
 				
 				// On affecte à une variable articleEC de type Article l'ensemble des infos dont on aura besoin en jsp
 				// le noArticle est récupéré dans le paramètres de la méthode (il arrive de la jsp)
