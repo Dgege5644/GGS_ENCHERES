@@ -34,9 +34,13 @@
 	
 	<!-- S'il y a déjà eu une enchère sur le prix initial, c'est la dernière faite qui s'affiche -->
 	<c:if test="${!empty enchereEC.montantEnchere}">
-	<label for="enchereActuelle">Meilleure offre : ${articleEC.enchereEC.montantEnchere} pts par ${articleEC.enchereEC.userAcheteur.pseudoAcheteur}</label><br />
+	<label for="enchereActuelle">Meilleure offre : ${articleEC.enchereEC.montantEnchere} pts par ${articleEC.userAcheteur.pseudoAcheteur}</label><br />
 	</c:if>
-	
+	<!-- S'il n'y a pas encore d'enchère sur le prix initial, le montant est renseignée avec le prixInitial
+		 -->
+	<c:if test="${empty enchereEC.montantEnchere}">
+	<label for="enchereActuelle">Meilleure offre : ${articleEC.prixInitial} pts par ${articleEC.userVendeur.pseudoVendeur}</label><br />
+	</c:if>
 	<label for="prixInitial">Mise à prix : ${articleEC.prixInitial}</label><br />
 	
 	<label for="finEnchere">Fin de l'enchère : ${articleEC.dateFinEnchere}</label><br />
