@@ -25,7 +25,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 
 
 	private static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET no_utilisateur =?, montant_enchere=? "
-			+ "INNER JOIN UTILISATEURS ON ENCHERES.no_utilisateur= UTILISATEURS.no_utilisateur "
+			//+ "INNER JOIN UTILISATEURS ON ENCHERES.no_utilisateur= UTILISATEURS.no_utilisateur "
 			+ "WHERE ENCHERES.no_article = ?";
 
 
@@ -339,14 +339,15 @@ public void addEnchere(Article articleAVendre) throws DALException {
 	 * TODO passer la méthode en void ?????
 	 */
 	@Override
-	public void updateEnchereEC(int noEncherisseur, int noArticle, int montantEnchere)
+	public void updateEnchereEC(int noUtilisateur, int noArticle, int montantEnchere)
 			throws DALException {
 		try(Connection cnx = ConnectionProvider.getConnection()){
 			PreparedStatement pSt= cnx.prepareStatement(UPDATE_ENCHERE);
-			pSt.setInt(1, noEncherisseur);
-			pSt.setInt(2, noArticle);
+			pSt.setInt(1, noUtilisateur);
+			pSt.setInt(2, montantEnchere);
+			pSt.setInt(3, noArticle);
 			
-			pSt.setInt(3, montantEnchere);
+			
 			pSt.executeUpdate();
 		}catch(SQLException e) {
 			throw new DALException("erreur de l'update de l'enchere");
