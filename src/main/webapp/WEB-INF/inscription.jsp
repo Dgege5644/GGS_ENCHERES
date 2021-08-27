@@ -9,8 +9,12 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
-<%@include file="header.html" %>
-<h1>Mon profil</h1>
+<header>
+	<%@include file="entete.html" %>
+</header>
+
+<main>
+	<h1>Mon profil</h1>
 
 <form action="./Inscription" method="post">
 	<label for="pseudo">Pseudo: </label>
@@ -56,5 +60,10 @@
 	<a href="${pageContext.request.contextPath}/Accueil">Annuler</a>
 	
 </form>
+</main>
+<footer>
+
+</footer>
+
 </body>
 </html>

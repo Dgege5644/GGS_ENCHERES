@@ -10,20 +10,13 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
 <body>
-
+	<header>
+		<%@include file="entete.html" %>
+	</header>
 	
-	<!--  cette version est à prioriser sur les inclusions dynamiques 
-	<jsp:include page="header.html">
-		<jsp:param value="12" name="visiteur"/>
-	</jsp:include>
-	-->
-
-
-	<%@include file="header.html" %>
-
+	<main>
 	
-	
-	<!--  début du formulaire -->
+		<!--  début du formulaire -->
 	<form action="./AfficherMonProfil" method="get">
 	
 		<label for="pseudo">Pseudo: </label>
@@ -63,6 +56,13 @@
 		<button><a href="${pageContext.request.contextPath}/ModifierMonProfil">Modifier</a></button>
 		
 	</form>
+	</main>
+	
+	<footer>
+	</footer>
+	
+	
+	
 	
 	
 </body>

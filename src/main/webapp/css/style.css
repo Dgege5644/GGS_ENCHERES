@@ -1,41 +1,68 @@
-body{
+@media screen and (max-width:1280px) {
+	
+}
+
+*{
+	font-family: "Comic sans MS";
+	color: black;
+	margin: 5px;
+	padding: 5px;
+/*	background-color: #83A697; */
+
+}
+
+header{
+	background-color: #83A697; 
+}
+
+main{
+/*	background-color: #83A697; */
+}
+
+footer{
 	background-color: #83A697;
-	font-family: "Comic Sans MS";
 }
-input{
-	background-color: #fcd697;
-	border-radius: 10px;
-	color:black ;
+
+#sinscrire{
+
 }
-select{
-	background-color: #fcd697;
-	border-radius: 10px;
-	color:black;
-}
-label{
-	font-weight: bold;
-	color:white;
-}
-placeholder{
-	color:black;
-}
+
 h1{
-	font-weight:bold;
-	color:white;
-}
-a{
-	color:black;
+	text-align: center;
 }
 
-#logo {
-opacity:0.4;
-filter:alpha(opacity=50); /* For IE8 and earlier */
+#categorie{
+
 }
 
-#header {
-	display : flex;
+input {
+
 }
 
-#lienLogo {
-	display : block;
+#affichagelisteencheres{
+	display: flex;	
+	flex-wrap:wrap;
+}
+
+ul{
+	padding:10px;
+	list-style:none;
+	border-style: solid;
+	width:25%;
+	height: auto;
+	background-color: white;
+}
+li{
+	background-color: white;
+}
+
+form{
+	
+}
+
+#choixrecherche{
+	display:flex;
+	margin:5px;
+	padding:5px;
+	/* border: solid; */
 }
