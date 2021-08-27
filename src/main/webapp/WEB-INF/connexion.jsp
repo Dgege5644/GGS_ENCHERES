@@ -33,7 +33,7 @@
 	<div id="options">
 		
 		
-		<input type="checkbox" name="ssdm" />
+		<input type="checkbox" name="ssdm" id="ssdm"/>
 		<label for="ssdm">Se souvenir de moi</label><br />
 		
 		<a href="#">Mot de passe oublié</a>
