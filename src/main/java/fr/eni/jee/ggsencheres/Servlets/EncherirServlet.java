@@ -47,7 +47,7 @@ public class EncherirServlet extends HttpServlet {
 			// noArticle en paramètre
 			articleEC = am.selectArticleById(noArticle);
 			// on attribue les données récupérées dans enchereEC à "enchereEC" utilisée dans notre jsp
-			request.setAttribute("enchereEC", articleEC);
+			request.setAttribute("articleEC", articleEC);
 			
 			
 		} catch (BLLException e) {
