@@ -7,6 +7,7 @@
 	color: black;
 	margin: 5px;
 	padding: 5px;
+	border-radius: 10px;
 /*	background-color: #83A697; */
 
 }
@@ -25,7 +26,7 @@ footer{
 }
 
 #sinscrire{
-
+	border-right: 0px;
 }
 
 h1{
@@ -66,13 +67,4 @@ form{
 	margin:5px;
 	padding:5px;
 	/* border: solid; */
-}
-
-.lienbouton{
-	text-decoration: none;
-	padding: 10px;
-	background-color:#83A697;
-	color: white;
-	font-size: 20px;
-	border: solid; 
 }
