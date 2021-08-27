@@ -8,8 +8,13 @@ public class Enchere {
 	
 	// Se référer aux constituants de la table de jointure(Les 2 clés primaires) pour créer la classe
 	
-	Utilisateur userEncherisseur;
-	Article articleEC;
+	private Utilisateur userEncherisseur;
+	private Article articleEC;
+	private int montantEnchere;
+	private LocalDateTime dateEnchere;
+	
+	private int noAcheteur;
+	private int noArticle;
 	
 	
 	public Enchere(Utilisateur userEncherisseur, Article articleEC, LocalDateTime dateEnchere, int montantEnchere) {
@@ -45,10 +50,7 @@ public class Enchere {
 	public void setNoArticle(int noArticle) {
 		this.noArticle = noArticle;
 	}
-	LocalDateTime dateEnchere;
-	int montantEnchere;
-	int noAcheteur;
-	int noArticle;
+
 	
 	
 	public Enchere(int noAcheteur, int noArticle, LocalDateTime dateEnchere, int montantEnchere) {
