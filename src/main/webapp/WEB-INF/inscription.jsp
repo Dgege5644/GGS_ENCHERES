@@ -18,7 +18,7 @@
 
 <form action="./Inscription" method="post">
 	<label for="pseudo">Pseudo: </label>
-	<input type="text" name="pseudo" id="pseudo" required="required"/>
+	<input type="text" name="pseudo" id="pseudo" required="required" autofocus="autofocus"/>
 	
 	<label for="nom">Nom: </label>
 	<input type="text" name="nom" id="nom" required="required"/><br/>
@@ -36,7 +36,7 @@
 	<input type="text" name="rue" id="rue" required="required"/><br />
 	
 	<label for="cp">Code postal: </label>
-	<input type="text" name="cp" id="cp" required="required"/>
+	<input type="text" name="cp" id="cp" required="required" maxlength="5"/>
 	
 	<label for="ville">Ville: </label>
 	<input type="text" name="ville" id="ville" required="required"/><br />
@@ -56,8 +56,8 @@
 		</ul>
 	</c:if>
 	
-	<input type="submit" value="Créer"/>
-	<a href="${pageContext.request.contextPath}/Accueil">Annuler</a>
+	<input type="submit" value="Créer" class="lienbouton"/>
+	<a href="${pageContext.request.contextPath}/Accueil" class="lienbouton">Annuler</a>
 	
 </form>
 </main>

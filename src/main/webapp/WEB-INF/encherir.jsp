@@ -71,7 +71,7 @@
 		dont on aura besoin dans le Servelt pour accéder à la DAL et récupérer les infos
 		sur l'articleEC et l'userEncherisseur -->
 		<input type="hidden" value="${enchereEC.articleEC.noArticle}"name="noArticle"/>
-		<input type="submit" name="encherir" value="Enchérir"/>
+		<input type="submit" name="encherir" value="Enchérir" class="lienbouton"/>
 			 
 	</form>
 	<c:if test="${!empty succesEnchere}">

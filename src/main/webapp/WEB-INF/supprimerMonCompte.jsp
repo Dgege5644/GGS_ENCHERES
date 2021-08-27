@@ -21,8 +21,8 @@
 		
 		<input type="hidden" name="no_utilisateur" id="no_utilisateur" value="${userConnected.no_utilisateur}"><br />
 		
-		<input type="submit" value="Valider"/>
-		<button><a href="${pageContext.request.contextPath}/Accueil">Annuler</a></button>
+		<input type="submit" value="Valider" class="lienbouton"/>
+		<button><a href="${pageContext.request.contextPath}/Accueil" class="lienbouton">Annuler</a></button>
 		
 	</form>
 </main>

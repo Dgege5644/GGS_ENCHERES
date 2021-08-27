@@ -13,6 +13,7 @@
 
 header{
 	background-color: #83A697; 
+	display: flex;
 }
 
 main{
@@ -31,7 +32,7 @@ h1{
 	text-align: center;
 }
 
-#categorie{
+#navigation{
 
 }
 
@@ -65,4 +66,13 @@ form{
 	margin:5px;
 	padding:5px;
 	/* border: solid; */
+}
+
+.lienbouton{
+	text-decoration: none;
+	padding: 10px;
+	background-color:#83A697;
+	color: white;
+	font-size: 20px;
+	border: solid; 
 }

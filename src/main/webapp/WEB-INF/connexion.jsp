@@ -23,12 +23,12 @@
 <main>
 	<form action="./Connexion" method="post">
 	<label for="identifiant">Identifiant: </label>
-	<input type="text" name="identifiant" id="identifiant" placeholder="Pseudo ou email"/><br />
+	<input type="text" name="identifiant" id="identifiant" placeholder="Pseudo ou email" autofocus="autofocus"/><br />
 	
 	<label for="mdp">Mot de passe: </label>
 	<input type="password" name="mdp" id="mdp" placeholder="Mot de passe"/><br />
 	
-	<input type="submit" value="Connexion" id="boutonConnexion"/>
+	<input type="submit" value="Connexion" id="boutonConnexion" class="lienbouton"/>
 	
 	<div id="options">
 		
@@ -39,7 +39,7 @@
 		<a href="#">Mot de passe oublié</a>
 	</div>
 	
-	<a href="${pageContext.request.contextPath}/Inscription" id="boutonCompte">Creer un compte</a>
+	<a href="${pageContext.request.contextPath}/Inscription" id="boutonCompte" class="lienbouton">Creer un compte</a>
 </form>
 	
 </main>
