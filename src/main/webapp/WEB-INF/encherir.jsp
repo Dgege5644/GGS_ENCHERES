@@ -53,11 +53,11 @@
 		<!-- S'il n'y a pas encore d'enchère sur le prix initial, la proposition doit au moins être supérieure au
 		prixInitial de 1 pt -->
 		<c:if test="${empty enchereEC.montantEnchere}">
-		<input type="number" name="proposition" min="${enchereEC.articleEC.prixInitial+1}" value="${enchereEC.articleEC.prixInitial+1}" step="1"/>
+		<input type="number" name="proposition" min="${articleEC.prixInitial+1}" value="${articleEC.prixInitial+1}" step="1"/>
 		</c:if>
 		<!-- S'il y a déjà une enchère sur le prix initial, la proposition doit au moins être supérieure à cette
 		enchère de 1 pt -->
-		<c:if test="${!empty enchereEC.montantEnchere}">
+		<c:if test="${!empty articleEC.encherEc.montantEnchere}">
 		<input type="number" name="proposition" min="${enchereEC.montantEnchere+1}" value="${enchereEC.montantEnchere+1}" step="1"/>
 		</c:if>
 		<!--  On met un input de type hidden pour récupérer le noArticle de l'enchereEC
