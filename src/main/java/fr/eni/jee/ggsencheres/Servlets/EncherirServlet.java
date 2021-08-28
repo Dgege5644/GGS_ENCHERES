@@ -103,8 +103,10 @@ public class EncherirServlet extends HttpServlet {
 			am.update(noArticle, noUtilisateur, montantEnchere);
 			// j'affecte la valeur d'enchereEC à l'attribut "enchereEC"
 			//request.setAttribute("enchereEC", articleEC);
-			request.setAttribute("succesNouvelleEnchere", "Votre enchère a été prise en compte!");
-			
+			//request.setAttribute("succesNouvelleEnchere", "Votre enchère a été prise en compte!");
+			// j'affecte la valeur true à l'attribut "succesEnchere", qui permettre d'afficher
+			// un message de succès sur encherir.jsp
+			request.setAttribute("succesEnchere", true);
 			
 		} catch (BLLException e) {
 			// en cas d'erreur, j'affecte le message "enchere impossible" à l'attribut
@@ -116,11 +118,10 @@ public class EncherirServlet extends HttpServlet {
 		}
 		//am.enregistrerEnchere(pseudoEncherisseur,montantEnchere,creditEncherisseur);
 		
-		// j'affecte la valeur true à l'attribut "succesEnchere", qui permettre d'afficher
-		// un message de succès sur encherir.jsp
-		request.setAttribute("succesEnchere", true);
-		// Je redirige vers encherir.jsp
-		request.getRequestDispatcher("/WEB-INF/encherir.jsp").forward(request, response);
+		
+		// Je redirige vers le servlet Accueil pour réaffichage de l 'accueil.jsp mise
+		// à jour
+		request.getRequestDispatcher("/Accueil").forward(request, response);
 	}
 
 }

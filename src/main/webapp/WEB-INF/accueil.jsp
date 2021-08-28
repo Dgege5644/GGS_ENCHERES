@@ -36,28 +36,30 @@
 			<a href="${pageContext.request.contextPath}/Deconnexion">Se Déconnecter</a>
 		</nav>
 	</c:if> 
-	<hr />
-
+</header>
+<main>	 
 	<!--test : si la mise en vente d'un article s'est bien passée -->
-	<c:if test="${!empty succesVendreUnArticle}"> L'article a bien été ajouté à vos articles à vendre!</c:if>
-	
+	<c:if test="${!empty succesVendreUnArticle}"><h2> L'article a bien été ajouté à vos articles à vendre!</h2></c:if>
 	<!--test : si la modification du prfil s'est bien passée -->
-	<c:if test="${!empty succesModifProfil}"> Les modifications ont bien été enregistrées dans votre profil</c:if>
+	<c:if test="${!empty succesModifProfil}"><h2>Les modifications ont bien été enregistrées dans votre profil</h2></c:if>
 	
 	<!--test : si la suppression du prfil s'est bien passée -->
-	<c:if test="${!empty suppressionCompte}"> Votre compte a été correctement supprimé!<br /></c:if> 
+	<c:if test="${!empty suppressionCompte}"><h2>Votre compte a été correctement supprimé!</h2></c:if> 
 	
 	<!--test : si la déconnexion du profil s'est bien passée -->
-	<c:if test="${!empty succesDeconnexion}"> Vous avez correctement été déconnecté(e)!<br /></c:if>
+	<c:if test="${!empty succesDeconnexion}"><h2>Vous avez correctement été déconnecté(e)!</h2></c:if>
 	
+	<!--test : si l'enchère s'est bien passée-->
+	<c:if test="${!empty succesEnchere}">
+		<h2>Votre enchère a bien été prise en compte!</h2>
+		<p id = "texteEnchere">Vous serez peut- être bientôt l'heureux propriétaire de cet article</p>
+	</c:if>
 	
 	<c:if test="${!empty erreur}"><!-- Si utilisateur n'existe pas en base de données(après une tentative de connexion, utilisateur == null) alors on affiche un message d'erreur sur la page d'accueil  -->  
 		<p>${erreur}</p>
 	</c:if>
-	
-	
-</header>
-<main>	 
+
+
 	<h1>Liste des enchères</h1>
 	
 	<form action="./Accueil" method="POST">
@@ -76,69 +78,72 @@
 			</optgroup>
 			
 		</select>
-		<c:if test="${!empty succes}">
-	<div id="choixrecherche">	
-		<div>
-			<input type="radio" name="historique" id="achats"/>Achats<br /> <!-- TODO créer des JRadioButton -->
-			<input type="checkbox" name="encheresouvertes" id="encheresouvertes"/>enchères ouvertes<br /><!-- TODO créer des JCheckbox -->
-			<input type="checkbox" name="mesencheres" id="mesencheres"/>mes enchères<br />
-			<input type="checkbox" name="mesencheresremportees" id="mesencheresremportees"/>mes enchères remportées<br />
-		</div>
 		
-		<div>
-			<input type="radio" name="historique" id="mesventes"/>Mes ventes<br />
-			<input type="checkbox" name="mesventesencours" id="mesvenetesencours"/>mes ventes en cours<br />
-			<input type="checkbox" name="ventesnondebutees" id="ventesnondebutees"/>ventes non débutées<br />
-			<input type="checkbox" name="ventesterminees" id="ventesterminees"/>ventes terminées<br />
-		</div>
-	</div>
-	</c:if>
-		<input type="submit" value="Rechercher"/>
-
+		<c:if test="${!empty succes}">
+			<div id="choixrecherche">	
+				<div>
+					<input type="radio" name="historique" id="achats"/>Achats<br /> <!-- TODO créer des JRadioButton -->
+					<input type="checkbox" name="encheresouvertes" id="encheresouvertes"/>enchères ouvertes<br /><!-- TODO créer des JCheckbox -->
+					<input type="checkbox" name="mesencheres" id="mesencheres"/>mes enchères<br />
+					<input type="checkbox" name="mesencheresremportees" id="mesencheresremportees"/>mes enchères remportées<br />
+				</div>
+			
+				<div>
+					<input type="radio" name="historique" id="mesventes"/>Mes ventes<br />
+					<input type="checkbox" name="mesventesencours" id="mesvenetesencours"/>mes ventes en cours<br />
+					<input type="checkbox" name="ventesnondebutees" id="ventesnondebutees"/>ventes non débutées<br />
+					<input type="checkbox" name="ventesterminees" id="ventesterminees"/>ventes terminées<br />
+				</div>
+			</div>
+		</c:if>
+			<input type="submit" value="Rechercher"/>
+		
 	</form>
 	
 		<c:if test="${!empty listeEncheres}"> <!-- Si la liste créée des (articles mis en vente) n'est pas vide,...   -->
 		
-		<p>Il y a ${listeEncheres.size()} enchères en cours, Bonne chance!</p> <!-- Affiche la taille de la variable "listeEncheres" -->
+			<p>Il y a ${listeEncheres.size()} enchères en cours, Bonne chance!</p> <!-- Affiche la taille de la variable "listeEncheres" -->
 		
-		<div id="affichagelisteencheres">
-		
-	 		<c:forEach var="enchereEC" items ="${listeEncheres}"> <!-- pour chaque enchère présente dans la liste des enchères   -->
-				<ul>
-				
-				<c:if test="${!empty succes}">
-					<li>
-						<a href="${pageContext.request.contextPath}/Encherir?noArticle=${enchereEC.articleEC.noArticle}">${enchereEC.articleEC.nomArticle}</a>  <!-- Mettre le  lien qui conduira vers le détail de l'enchère lorsque l'utilisateur acheteur sera connecté-->
-					</li>
-				</c:if>
-				
-				<c:if test="${empty succes}">
-					<li>
-						${enchereEC.articleEC.nomArticle} <!-- Mettre le nom de l'article sur une ligne, puis transformer en un lien qui conduira vers le détail de l'enchère lorsque l'utilisateur acheteur sera connecté--> 
-					</li>
-				</c:if>
-				
-					<li>
-						Prix: ${enchereEC.montantEnchere} <!-- TODO : Mettre la plus haute enchère en cours sinon le prix initial sur une autre ligne -->
-					</li>
-					<li>
-						Fin de l'enchere: ${enchereEC.articleEC.finEnchere} <!-- Mettre la date et l'heure de fin d'enchère sur une autre ligne  -->
-					</li>
-				<c:if test="${!empty succes}">
-					<li>
-						Vendeur: <a href="${pageContext.request.contextPath}/AfficherProfilVendeur?no_utilisateur=${enchereEC.userEncherisseur.no_utilisateur}">${enchereEC.userEncherisseur.pseudo}</a> <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
-					</li>
-				</c:if>
-				<c:if test="${empty succes}">
-					<li>
-						Vendeur: ${enchereEC.userEncherisseur.pseudo} <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
-					</li>
-				</c:if>
-				</ul>
-			</c:forEach> 
-		</c:if>
-	</div>
+			<div id="affichagelisteencheres">
+			
+		 		<c:forEach var="enchereEC" items ="${listeEncheres}"> <!-- pour chaque enchère présente dans la liste des enchères   -->
+					<ul>
 	
+					<c:if test="${!empty succes}">
+						<li>
+							<a href="${pageContext.request.contextPath}/Encherir?noArticle=${enchereEC.articleEC.noArticle}">${enchereEC.articleEC.nomArticle}</a>  <!-- Mettre le  lien qui conduira vers le détail de l'enchère lorsque l'utilisateur acheteur sera connecté-->
+						</li>
+					</c:if>
+					
+					<c:if test="${empty succes}">
+						<li>
+							${enchereEC.articleEC.nomArticle} <!-- Mettre le nom de l'article sur une ligne, puis transformer en un lien qui conduira vers le détail de l'enchère lorsque l'utilisateur acheteur sera connecté--> 
+						</li>
+					</c:if>
+					
+						<li>
+							Prix: ${enchereEC.montantEnchere} <!-- TODO : Mettre la plus haute enchère en cours sinon le prix initial sur une autre ligne -->
+						</li>
+						<li>
+							Fin de l'enchere: ${enchereEC.articleEC.finEnchere} <!-- Mettre la date et l'heure de fin d'enchère sur une autre ligne  -->
+						</li>
+					<c:if test="${!empty succes}">
+						<li>
+							Vendeur: <a href="${pageContext.request.contextPath}/AfficherProfilVendeur?no_utilisateur=${enchereEC.userEncherisseur.no_utilisateur}">${enchereEC.userEncherisseur.pseudo}</a> <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
+						</li>
+					</c:if>
+					<c:if test="${empty succes}">
+						<li>
+							Vendeur: ${enchereEC.userEncherisseur.pseudo} <!-- et mettre sur une ligne le nom du propriétaire puis transformer en un lien qui conduira vers le détail de l'utilisateur vendeur lorsque l'utilisateur vendeur sera connecté -->
+						</li>
+					</c:if>
+				</ul>
+				</c:forEach> 
+			
+			</c:if>
+		</div>
+		
+		
 	<c:if test="${!empty listeEncheresNulle}"> <!-- Si la liste créée des (articles mis en vente) est vide, ...   -->
 	
 		${listeEncheresNulle} <!-- Affiche le message défini dans la servlet "Aucune enchère en cours, Revenez ultérieurement!"   -->

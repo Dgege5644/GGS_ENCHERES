@@ -26,20 +26,16 @@ public class AfficherProfilVendeurServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 				Utilisateur userVendeur = null;
-				
 				int no_utilisateur = Integer.parseInt(request.getParameter("no_utilisateur"));
-				
 				UtilisateurManager um = new UtilisateurManager();
 				
 				try {
-					
 					userVendeur = um.afficherInfosVendeur(no_utilisateur);
 					
 					request.setAttribute("userVendeur", userVendeur);
 					
 					
 				} catch (BLLException e) {
-					
 					request.setAttribute("erreurUserVendeur", "userVendeur introuvable");
 					e.printStackTrace();
 				}

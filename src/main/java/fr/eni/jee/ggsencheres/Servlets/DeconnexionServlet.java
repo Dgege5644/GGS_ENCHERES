@@ -19,7 +19,7 @@ public class DeconnexionServlet extends HttpServlet {
      */
     public DeconnexionServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**

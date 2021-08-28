@@ -38,15 +38,12 @@ public class AccueilServlet extends HttpServlet {
 	
 	
 	try {
-		
 		listeEncheres = am.afficherEncheres();
 		
 		if(listeEncheres==null) {
-			
 			request.setAttribute("listeEncheresNulle", "Aucune enchère en cours, Revenez ultérieurement!");	
 			
-		}else {
-			
+		}else {			
 			request.setAttribute("listeEncheres", listeEncheres);	
 		}
 	}catch(BLLException e) {
@@ -56,12 +53,9 @@ public class AccueilServlet extends HttpServlet {
 	}
 			
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
-		
 	}
-	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
-		
 	}
 }

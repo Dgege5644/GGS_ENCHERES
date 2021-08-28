@@ -73,13 +73,13 @@ public class VendreServlets extends HttpServlet {
 	
 		articleAVendre = am.creerAticleAVendre(noUtilisateur,nomArticle, description, categorie, fichierPhotoArticle, prixInitial, debutEnchere, finEnchere,rue,codePostal,ville);
 		request.setAttribute("succesVendreUnArticle", true);
-		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+		
 		}catch(BLLException e) {
 			request.setAttribute("erreurs",e.getMessages());
 			request.getRequestDispatcher("/WEB-INF/vendreUnArticle.jsp").forward(request, response);
 	
 		}
-		
+	request.getRequestDispatcher("/Accueil").forward(request, response);
 	}
 
 }

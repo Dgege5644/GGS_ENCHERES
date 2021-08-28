@@ -25,6 +25,19 @@ footer{
 	background-color: #83A697;
 }
 
+h2{
+	text-align : center;
+	font-size : 0.8;
+	color : #83A697; 
+	font-weight: bold;
+}
+#texteEnchere{
+	text-align : center;
+	font-size : 0.2;
+	color : #83A697; 
+	font-weight: bold;
+}
+
 #sinscrire{
 	border-right: 0px;
 }
