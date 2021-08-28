@@ -16,40 +16,46 @@
 <body>
 <header>
 	<%@include file="entete.html" %>
-	<!--  définition des messages à afficher selon les actions réalisées
-	1er test : si la mise en vente d'un article s'est bien passée -->
-	<c:if test="${!empty succesVendreUnArticle}"> L'article a bien été ajouté à vos articles à vendre!</c:if>
-	<!-- 2ème test : si la modification du prfil s'est bien passée -->
-	<c:if test="${!empty succesModifProfil}"> Les modifications ont bien été enregistrées dans votre profil</c:if>
+	<!--  définition des messages à afficher selon les actions réalisées--!>
 	
-	<!-- 3ème test : si la connexion avec identifiant et mot de passe s'est bien passée, affiche 
-	un lien S'inscrire- Se connecter dant de connexion -->
-
-	<c:if test="${!empty suppressionCompte}"> Votre compte a été correctement supprimé!<br /></c:if> <!-- Message réussite; le succès a été défini dans la servlet... -->
-	<c:if test="${!empty succesDeconnexion}"> Vous avez correctement été déconnecté(e)!<br /></c:if>
-	<c:if test="${!empty succesVendreUnArticle}"> L'article a bien été ajouté à vos articles à vendre!<br /></c:if>
-	<c:if test="${!empty succesModifProfil}"> Les modifications ont bien été enregistrées dans votre profil<br /></c:if>
-	
-	<!-- Adresse = servlet de connexion -->
-
-	<c:if test="${empty succes}"> <!-- l'utilsateur arrive à l'accueil pour la première fois   -->
-		<a href="${pageContext.request.contextPath}/Connexion" id="sinscrire">S'inscrire - Se connecter</a>
+	<!-- test : l'utilsateur arrive à l'accueil pour la première fois   -->
+	<c:if test="${empty succes}"> 
+		<a href="${pageContext.request.contextPath}/Connexion" id="sinscrire">S'inscrire - Se connecter</a><!-- Adresse = servlet de connexion -->
 	</c:if>
 	
-	<c:if test="${!empty erreur}">  <!-- Si utilisateur n'existe pas en base de données(après une tentative de connexion, utilisateur == null) alors on affiche un message d'erreur sur la page d'accueil  -->
-		<p>${erreur}</p>
-	</c:if>
+	<!-- test : si la connexion avec identifiant et mot de passe s'est bien passée -->
+	<c:if test="${!empty succes}"> 
 	
-	<c:if test="${!empty succes}"> <!-- l'utilsateur existe en base de données et est connecté; il a alors accès aux autres fonctionnalités du site   -->
+		<!-- affichage du message : prénom nom de l'utilisateur (récupérés en BDD) est connecté(e)   -->
+		<p>${userConnected.prenom} ${userConnected.nom} est connecté(e)</p>
+		
+		<!-- affichage des autres fonctionnalités du site organisées dans un volet de navigation   -->
 		<nav id="navigation">
 			<a href="${pageContext.request.contextPath}/Vendre">Vendre un article</a>
 			<a href="${pageContext.request.contextPath}/AfficherMonProfil">Mon Profil</a>
 			<a href="${pageContext.request.contextPath}/Deconnexion">Se Déconnecter</a>
 		</nav>
-		
-		<p>${userConnected.prenom} ${userConnected.nom} est connecté(e)</p> <!-- les prénom et nom de l'utilisateur sont récupérés en base de données   -->
-		
 	</c:if> 
+	<hr />
+
+	<!--test : si la mise en vente d'un article s'est bien passée -->
+	<c:if test="${!empty succesVendreUnArticle}"> L'article a bien été ajouté à vos articles à vendre!</c:if>
+	
+	<!--test : si la modification du prfil s'est bien passée -->
+	<c:if test="${!empty succesModifProfil}"> Les modifications ont bien été enregistrées dans votre profil</c:if>
+	
+	<!--test : si la suppression du prfil s'est bien passée -->
+	<c:if test="${!empty suppressionCompte}"> Votre compte a été correctement supprimé!<br /></c:if> 
+	
+	<!--test : si la déconnexion du profil s'est bien passée -->
+	<c:if test="${!empty succesDeconnexion}"> Vous avez correctement été déconnecté(e)!<br /></c:if>
+	
+	
+	<c:if test="${!empty erreur}"><!-- Si utilisateur n'existe pas en base de données(après une tentative de connexion, utilisateur == null) alors on affiche un message d'erreur sur la page d'accueil  -->  
+		<p>${erreur}</p>
+	</c:if>
+	
+	
 </header>
 <main>	 
 	<h1>Liste des enchères</h1>
@@ -90,8 +96,6 @@
 		<input type="submit" value="Rechercher"/>
 
 	</form>
-	
-	
 	
 		<c:if test="${!empty listeEncheres}"> <!-- Si la liste créée des (articles mis en vente) n'est pas vide,...   -->
 		
