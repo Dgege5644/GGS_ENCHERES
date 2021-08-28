@@ -20,7 +20,7 @@
 	
 	<!-- Dans la première partie de la page on affiche les infos que l'on récupère 
 	de la DAL, en partant de l'objet EnchereEC -->
-	<h2>${articleEC.nomArticle}</h2>
+	<h2 id="nomArticle">${articleEC.nomArticle}</h2>
 	<label for="description">Description : </label>
 	<textarea name="description" id="description" cols="10" rows="3">${articleEC.description}</textarea><br />
 	

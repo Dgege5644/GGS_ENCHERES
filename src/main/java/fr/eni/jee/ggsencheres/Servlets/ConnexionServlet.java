@@ -17,9 +17,7 @@ import fr.eni.jee.ggsencheres.bo.Utilisateur;
 @WebServlet("/Connexion")
 public class ConnexionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String identifiant;
-	private String motDePasse;
-	private Utilisateur userConnected;
+	
 	
     public ConnexionServlet() {
         super();
@@ -33,7 +31,9 @@ public class ConnexionServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String identifiant;
+		String motDePasse;
+		Utilisateur userConnected;
 		try {
 			 identifiant = request.getParameter("identifiant");
 			 motDePasse = request.getParameter("mdp");

@@ -31,6 +31,12 @@ h2{
 	color : #83A697; 
 	font-weight: bold;
 }
+
+#nomArticle{
+	text-align : center;
+	color : #83A697; 
+	font-weight: bold;
+}
 #texteEnchere{
 	text-align : center;
 	font-size : 0.2;

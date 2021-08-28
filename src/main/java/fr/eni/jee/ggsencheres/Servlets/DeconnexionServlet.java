@@ -30,7 +30,7 @@ public class DeconnexionServlet extends HttpServlet {
 		
 		 request.getSession().invalidate();
 		 request.setAttribute("succesDeconnexion", true);
-		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+		request.getRequestDispatcher("/Accueil").forward(request, response);
 	}
 
 	

@@ -47,7 +47,9 @@
 	<c:if test="${!empty suppressionCompte}"><h2>Votre compte a été correctement supprimé!</h2></c:if> 
 	
 	<!--test : si la déconnexion du profil s'est bien passée -->
-	<c:if test="${!empty succesDeconnexion}"><h2>Vous avez correctement été déconnecté(e)!</h2></c:if>
+	<c:if test="${!empty succesDeconnexion}">
+		<h2>Vous êtes désormais déconnecté(e). A bientôt !</h2>
+	</c:if>
 	
 	<!--test : si l'enchère s'est bien passée-->
 	<c:if test="${!empty succesEnchere}">
