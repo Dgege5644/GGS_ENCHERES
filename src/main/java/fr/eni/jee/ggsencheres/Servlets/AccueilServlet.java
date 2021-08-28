@@ -28,7 +28,7 @@ public class AccueilServlet extends HttpServlet {
     }
 
 	/**
-	 * La Servlet envoie l'utilisateur vers la page d'accueil
+	 * La méthode doGet() de la Servlet envoie l'utilisateur vers la page d'accueil
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -54,7 +54,13 @@ public class AccueilServlet extends HttpServlet {
 			
 		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
 	}
-	@Override
+	
+	/**
+	 * La méthode doPost() de la Servlet renvoie l'utilisateur vers la page accueil.jsp
+	 * On le prévoit aisni pour que les Servlets qui redirigent vers la page d'accueil 
+	 * puisent le faire via la Servlet et avoir ainsi un affichage toujours à jour avec 
+	 * les actions réalisées précédemment
+	 */
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doGet(req, resp);
 	}

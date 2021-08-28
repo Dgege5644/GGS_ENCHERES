@@ -18,7 +18,7 @@ import fr.eni.jee.ggsencheres.bo.Utilisateur;
 @WebServlet("/Inscription")
 public class InscriptionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Utilisateur userAcreer;
+	
        
     /**
      * 
@@ -39,30 +39,25 @@ public class InscriptionServlet extends HttpServlet {
 	 * 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
+		Utilisateur userAcreer;	
 		try {
 			// Je récupère  les infos saisies dans les champs du formulaire
-		String pseudo = request.getParameter("pseudo");
-		String prenom = request.getParameter("prenom");
-		String nom = request.getParameter("nom");
-		String email = request.getParameter("email");
-		String telephone = request.getParameter("telephone");
-		String rue = request.getParameter("rue");
-		String codePostal = request.getParameter("cp");
-		String ville = request.getParameter("ville");
-		String motDePasse = request.getParameter("mdpasse");
-		String confirmation = request.getParameter("repeat");
-		
-
-		
-
-		UtilisateurManager im = new UtilisateurManager();
+			String pseudo = request.getParameter("pseudo");
+			String prenom = request.getParameter("prenom");
+			String nom = request.getParameter("nom");
+			String email = request.getParameter("email");
+			String telephone = request.getParameter("telephone");
+			String rue = request.getParameter("rue");
+			String codePostal = request.getParameter("cp");
+			String ville = request.getParameter("ville");
+			String motDePasse = request.getParameter("mdpasse");
+			String confirmation = request.getParameter("repeat");
+	
+			UtilisateurManager im = new UtilisateurManager();
 			
-		
-		
-		// j'applique la méthode de création d'un utilisateur définie dans InscriptionManager
+			// j'applique la méthode de création d'un utilisateur définie dans InscriptionManager
 			userAcreer = im.creerNouvelUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, confirmation );
-		
+			
 			request.setAttribute("succes",true);
 			request.getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
 			
